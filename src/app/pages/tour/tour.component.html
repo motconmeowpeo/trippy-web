@@ -1,0 +1,46 @@
+<ng-container *ngIf="!(tours$ |async)">
+  <div class="w-full m-auto h-96 flex items-center justify-center">
+    <app-loading></app-loading>
+  </div>
+</ng-container>
+<div class="bg-slate-100 pb-20">
+  <app-banner text="Tour List"></app-banner>
+  <ng-container *ngIf="tours$ | async as tours">
+    <div class="max-w-7xl w-full m-auto ">
+      <ul class="list-none flex mt-20 flex-wrap">
+        <li *ngFor="let item of tours" class="h-[500px] shadow-full m-4 rounded-3xl bg-white relative cursor-pointer">
+          <img class="h-1/2 rounded-3xl"
+            src="https://demo2.pavothemes.com/triply/wp-content/uploads/2020/11/5c2e340c508523a216a4bba3_02-10-copy-820x520.jpg"
+            alt="">
+          <div class="h-1/2 p-4 flex flex-col justify-around relative">
+            <span class="block mt-5 font-bold text-xl">7 day bla bla</span>
+            <span class="text-base text-globaltext">
+              <fa-icon [icon]="faLocationDot"></fa-icon>
+              Cambodia
+            </span>
+            <div class="w-full flex justify-between ">
+              <div>
+                <span>From</span>
+                <span class="text-primary font-bold block text-2xl">$123</span>
+              </div>
+              <button
+                class="w-40 h-11 text-secondary font-bold hover:text-primary bg-primary hover:bg-secondary transition-all duration-300 rounded-lg">Explore</button>
+            </div>
+            <div class=" w-full h-14  bg-white z-10 rounded-xl shadow-full flex items-center justify-between p-4">
+              <div>
+                <fa-icon class="text-primary text-lg" [icon]="faCalendar"></fa-icon>
+                <span class="text-base ml-2">30 days</span>
+              </div>
+              <div>
+                <fa-icon class="text-primary text-lg" [icon]="faUser"></fa-icon>
+                <span class="text-base ml-2">30</span>
+              </div>
+
+            </div>
+          </div>
+
+        </li>
+      </ul>
+    </div>
+  </ng-container>
+</div>

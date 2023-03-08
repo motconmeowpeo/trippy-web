@@ -1,0 +1,24 @@
+<!-- <ng-container *ngIf="!(tours$ |async)">
+  <div class="w-full m-auto h-96 flex items-center justify-center">
+    <app-loading></app-loading>
+  </div>
+</ng-container>
+<ng-container *ngIf="tours$ | async as tours">
+  <li *ngFor="let item of tours">
+    <h1>{{item.name}}</h1>
+    <h1>{{item.des}}</h1>
+  </li>
+</ng-container> -->
+<ng-container>
+  <app-banner text="Destination List"></app-banner>
+  <div class="mt-20 w-full max-w-7xl m-auto flex flex-wrap relative h-fit">
+    <div *ngFor="let item of destination" class="w-{{item.width}} {{item.radius?'rounded-1/2':'rounded-xl'}} h-100 p-8 flex items-center overflow-hidden box-border justify-center cursor-pointer
+      " [attr.data-aos]="item.dataaos">
+      <span class="absolute z-10 text-white font-bold text-3xl">{{item.name}}</span>
+      <img src="assets/background/{{item.img}}"
+        class="w-full h-full object-cover {{item.radius?'rounded-1/2':'rounded-lg'}} hover:scale-105 transition-all duration-300 "
+        alt="">
+    </div>
+  </div>
+  <app-bannerBot></app-bannerBot>
+</ng-container>

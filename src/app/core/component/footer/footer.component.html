@@ -1,0 +1,52 @@
+<div class="w-full bg-secondary ">
+  <div class="flex max-w-7xl w-full m-auto">
+    <div class="w-1/4 p-4">
+      <span class="text-xl leading-9 text-white">
+        Subscribe to the free newsletter and stay up to date
+      </span>
+      <div class="mt-5">
+        <input class="w-60 h-11 p-4 text-base rounded-md border-none shadow-lg outline-primary" type="email"
+          placeholder="example@email.com" />
+        <button
+          class="h-11 border-none bg-primary font-bold text-xl text-white p-2 rounded-md w-32 mt-5 cursor-pointer transition-all duration-300 hover:bg-primaryhover">Subscribe</button>
+      </div>
+      <div class="flex justify-between mt-5 text-3xl">
+        <span class="text-primary flex justify-center items-center cursor-pointer w-9 rounded-lg">
+          <fa-icon class="hover:text-blue-500 hover:bg-white" [icon]='faFacebook' />
+        </span>
+        <span class="text-primary flex justify-center items-center cursor-pointer w-9 rounded-lg">
+          <fa-icon class="hover:text-blue-500 hover:bg-white" [icon]='faTwitter' />
+        </span>
+        <span class="text-primary flex justify-center items-center cursor-pointer w-9 rounded-lg">
+          <fa-icon class="hover:text-white hover:bg-red-500" [icon]='faInstagram' />
+        </span>
+        <span class="text-primary flex justify-center items-center cursor-pointer w-9 rounded-lg">
+          <fa-icon class="hover:text-blue-500 hover:bg-white" [icon]='faLinkedin' />
+        </span>
+      </div>
+    </div>
+    <div class="w-1/4 p-4">
+      <ul class="list-none">
+        <li *ngFor="let item of this.SERVICES"
+          class="text-globaltext text-xl p-3 cursor-pointer hover:text-primaryhover">{{item}}</li>
+      </ul>
+    </div>
+    <div class="w-1/4 p-4">
+      <ul class="list-none">
+        <li *ngFor="let item of this.EXPLORES"
+          class="text-globaltext text-xl p-3 cursor-pointer hover:text-primaryhover">{{item}}</li>
+
+      </ul>
+    </div>
+    <div class="w-1/4 p-4">
+      <span class="text-globaltext text-xl">Nisi ut aliquip ex ea commodo consequatute irure dolor in reprehenderit in
+        voluptatevelit esse cillum dolore
+        eu fugiat nulla excepteur pariatur.</span>
+      <button
+        class="w-full h-11 cursor-pointer border-none bg-primary text-white rounded-md mt-5 transition-all duration-300 text-xl hover:bg-primaryhover">View
+        Map</button>
+    </div>
+  </div>
+
+
+</div>
