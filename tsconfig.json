@@ -24,8 +24,8 @@
       "dom"
     ],
     "paths": {
-      "@core/*": ["src/app/core/*/index.ts"],
-      "@pages/*": ["src/app/pages/*/index.ts"]
+      "@core/*": ["src/libs/core/*/index.ts"],
+      "@pages/*": ["src/libs/pages/*/index.ts"]
       
     }
   },

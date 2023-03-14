@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DescriptionComponent } from './destination.component';
+import { DestinationDetailComponent } from './destinationDetail.component';
 import { Routes, RouterModule } from '@angular/router';
 import { LoadingModule } from '@core/component/loading';
 import { BannerModule } from '@core/component/banner';
 import { BannerBotModule } from '@core/component/bannerBot';
-
+import { TourItemModule } from '@core/component/tourItem';
+import { URL_TOURDETAIL } from '@core/constants';
 
 const routes: Routes = [
   {
     path: '',
-    component: DescriptionComponent
-  }
-]
+    component: DestinationDetailComponent,
+  },
+];
 @NgModule({
   imports: [
     RouterModule.forChild(routes),
@@ -20,8 +21,8 @@ const routes: Routes = [
     LoadingModule,
     BannerModule,
     BannerBotModule,
-
+    TourItemModule,
   ],
-  declarations: [DescriptionComponent]
+  declarations: [DestinationDetailComponent],
 })
-export class DescriptionModule { }
+export class DestinationDetailModule {}

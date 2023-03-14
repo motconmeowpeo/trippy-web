@@ -9,16 +9,15 @@ import * as AOS from 'aos';
   selector: 'app-destination',
   templateUrl: './destination.component.html',
 })
-export class DescriptionComponent implements OnInit {
-  tours$: Observable<ITour[]> = this.service.getAll()
-  destination: IDestination[] = DESTINATION_LIST
-  constructor(private service: TourService) { }
+export class DestinationComponent implements OnInit {
+  tours$: Observable<ITour[]> = this.service.getAll();
+  destination: IDestination[] = DESTINATION_LIST;
+  constructor(private service: TourService) {}
 
   ngOnInit() {
     AOS.init({
       duration: 1500,
-      once: true
+      once: true,
     });
   }
-
 }
