@@ -30,6 +30,7 @@
         <li 
           class="text-global text-xl p-3 font-bold ">Service</li>
         <li *ngFor="let item of this.SERVICES"
+        routerLink="{{item}}"
           class="text-globaltext text-xl p-3 cursor-pointer hover:text-primaryhover">{{item|titlecase}}</li>
       </ul>
     </div>
@@ -38,6 +39,7 @@
         <li 
         class="text-global text-xl p-3  font-bold ">Explore</li>
         <li *ngFor="let item of this.EXPLORES"
+        [routerLink]="['destination',item]" routerLinkActive="router-link-active"  
           class="text-globaltext text-xl p-3 cursor-pointer hover:text-primaryhover">{{item|titlecase}}</li>
 
       </ul>

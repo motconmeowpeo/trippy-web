@@ -7,6 +7,7 @@ import { BannerModule } from '@core/component/banner';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TourItemModule } from '@core/component/tourItem';
 import { SearchbarModule } from '@core/component/searchbar';
+import { BannerBotModule } from '@core/component/bannerBot';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
     FontAwesomeModule,
     TourItemModule,
     SearchbarModule,
+    BannerBotModule,
   ],
   declarations: [TourComponent],
 })

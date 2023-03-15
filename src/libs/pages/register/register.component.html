@@ -1,14 +1,17 @@
 <app-banner text="Register"></app-banner>
-<div class="mt-20 max-w-[500px] w-full m-auto h-10 pb-20 flex justify-center">
-  <form>
-    <span
-      >If you have an account,
-      <a
-        class="font-semibold text-lg text-blue-400"
-        [routerLink]="['/login']"
-        routerLinkActive="router-link-active"
-        >Sign in</a
-      >
-    </span>
+<div class="mt-20 max-w-[500px] w-full m-auto p-5 pb-20 flex justify-center">
+  <form class="bg-slate-100 p-10 w-full" nz-form>
+    <div class="w-full flex justify-center">
+      <span
+        >If you have an account,
+        <span
+          class="font-semibold text-lg text-primary cursor-pointer"
+          [routerLink]="['/login']"
+          routerLinkActive="router-link-active"
+          >Sign in</span
+        >
+      </span>
+    </div>
   </form>
 </div>
+<app-bannerBot></app-bannerBot>

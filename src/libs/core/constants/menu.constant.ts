@@ -1,8 +1,8 @@
 export const MENU = {};
 export const SERVICES = [
   'home',
-  'tours',
-  'destiination',
+  'tour',
+  'destination',
   'blog',
   'page',
   'contact',

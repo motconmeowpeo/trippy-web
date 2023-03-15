@@ -1,13 +1,13 @@
 <!-- LOading -->
 <app-banner text="Tour List"></app-banner>
-<ng-container *ngIf="!(tours$ | async)">
-  <div class="w-full m-auto h-96 flex items-center justify-center">
-    <app-loading></app-loading>
-  </div>
-</ng-container>
 
 <!-- Content -->
 <div class="bg-slate-100 pb-20">
+  <ng-container *ngIf="!(tours$ | async)">
+    <div class="w-full m-auto h-96 flex items-center justify-center">
+      <app-loading></app-loading>
+    </div>
+  </ng-container>
   <ng-container *ngIf="tours$ | async as tours">
     <app-searchbar></app-searchbar>
     <div class="max-w-7xl w-full m-auto">
@@ -28,3 +28,4 @@
     </div>
   </ng-container>
 </div>
+<app-bannerBot></app-bannerBot>

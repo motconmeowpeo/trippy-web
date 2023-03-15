@@ -17,6 +17,10 @@ const publicRoute = [
     loadChildren: () => import('@pages/home').then((page) => page.HomeModule),
   },
   {
+    path: ' ',
+    loadChildren: () => import('@pages/home').then((page) => page.HomeModule),
+  },
+  {
     path: URL_TOUR,
     loadChildren: () => import('@pages/tour').then((page) => page.TourModule),
   },

@@ -1,12 +1,12 @@
 <ng-container>
   <app-banner text="{{ this.name | titlecase }}"></app-banner>
 
-  <ng-container *ngIf="!(tours$ | async)">
-    <div class="w-full m-auto h-96 flex items-center justify-center">
-      <app-loading></app-loading>
-    </div>
-  </ng-container>
   <div class="bg-slate-100 pb-20">
+    <ng-container *ngIf="!(tours$ | async)">
+      <div class="w-full m-auto h-96 flex items-center justify-center">
+        <app-loading></app-loading>
+      </div>
+    </ng-container>
     <div class="max-w-7xl m-auto w-full pt-20 p-4">
       <ng-container *ngIf="tours$ | async as tours">
         <div

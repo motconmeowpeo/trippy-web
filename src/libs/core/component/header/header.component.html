@@ -18,9 +18,11 @@
     <ul class="h-full w-full flex items-center justify-between">
       <div
         *ngFor="let item of this.MENUS"
+        routerLink="{{ item.path }}"
+        routerLinkActive="active"
         class="text-black text-xl p-6 flex items-center cursor-pointer hover:text-primaryhover"
       >
-        <li routerLink="{{ item.path }}" routerLinkActive="active">
+        <li>
           {{ item.name }}
         </li>
         <fa-icon class="text-sm ml-1 text-primary" [icon]="faPlus"></fa-icon>

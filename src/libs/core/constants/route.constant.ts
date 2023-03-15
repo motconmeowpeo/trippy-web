@@ -1,4 +1,4 @@
-const URL_HOME = '';
+const URL_HOME = 'home';
 const URL_TOUR = 'tour';
 const URL_TOURDETAIL = 'tour/:id';
 const URL_DESTINATION = 'destination';
