@@ -1,2 +1,14 @@
 <app-banner text="Login Your Account"></app-banner>
-<div class="mt-20 max-w-[500px] w-full m-auto h-10 pb-20"></div>
+<div class="mt-20 max-w-[500px] w-full m-auto h-10 pb-20 flex justify-center">
+  <form>
+    <span
+      >If you don't have account,
+      <a
+        class="font-semibold text-lg text-blue-400"
+        [routerLink]="['/register']"
+        routerLinkActive="router-link-active"
+        >Sign up</a
+      >
+    </span>
+  </form>
+</div>
