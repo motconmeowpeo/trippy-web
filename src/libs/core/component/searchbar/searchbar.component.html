@@ -1,0 +1,155 @@
+<div
+  class="w-full max-w-7xl m-auto -mt-10 p-5 h-20 bg-white relative flex rounded-xl items-center"
+>
+  <div
+    nz-dropdown
+    nzTrigger="click"
+    [nzDropdownMenu]="menu"
+    class="relative border-r-2 border-solid border-r-globaltext flex items-center flex-1 px-5 justify-between cursor-pointer"
+  >
+    <!-- <div class="flex items-center">
+      <fa-icon
+        class="text-primary text-xl mr-5"
+        [icon]="faLocationDot"
+      ></fa-icon>
+      <div class="flex flex-col">
+        <span class="font-bold text-lg">Destination</span>
+        <span class="text-global text-base">{{
+          this.destinationValue | titlecase
+        }}</span>
+      </div>
+    </div>
+    <fa-icon
+      class="text-primary text-base mr-5 cursor-pointer"
+      [icon]="faChevronDow"
+    ></fa-icon> -->
+
+    <div class="flex items-center">
+      <fa-icon
+        class="text-primary text-xl mr-5"
+        [icon]="faLocationDot"
+      ></fa-icon>
+      <div class="flex flex-col">
+        <span class="font-bold text-lg">Destination</span>
+        <span class="text-global text-base">{{
+          this.destinationValue | titlecase
+        }}</span>
+      </div>
+    </div>
+    <fa-icon
+      class="text-primary text-base mr-5 cursor-pointer"
+      [icon]="faChevronDow"
+    ></fa-icon>
+
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu>
+        <li
+          nz-menu-item
+          (click)="destinationValue = item"
+          class="p-1 pl-10 hover:text-primary hover:bg-gray-200 text-globaltext"
+          *ngFor="let item of explore"
+        >
+          {{ item | titlecase }}
+        </li>
+      </ul>
+    </nz-dropdown-menu>
+  </div>
+  <div
+    class="border-r-2 border-solid border-r-globaltext flex items-center flex-1 px-5 justify-between"
+  >
+    <div class="flex items-center justify-center">
+      <fa-icon class="text-primary text-xl mr-5" [icon]="faCalendar"></fa-icon>
+      <div class="flex flex-col justify-center">
+        <span class="font-bold text-lg">When</span>
+        <input
+          class="outline-none text-global text-base"
+          min="{{ this.minDate }}"
+          type="date"
+          [(ngModel)]="dateValue"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    class="flex items-center flex-1 px-5 justify-between relative cursor-pointer"
+  >
+    <div
+      class="flex items-center justify-between w-full"
+      (click)="toggleShowGuests()"
+    >
+      <div class="flex items-center justify-center">
+        <fa-icon class="text-primary text-xl mr-5" [icon]="faUser"></fa-icon>
+        <div class="flex flex-col">
+          <span class="font-bold text-lg">Guests</span>
+          <span class="text-global text-base">{{
+            this.adultNumber + this.youthNumber + this.childrenNumber
+          }}</span>
+        </div>
+      </div>
+
+      <fa-icon
+        class="text-primary text-base mr-5"
+        [icon]="faChevronDow"
+      ></fa-icon>
+    </div>
+
+    <div
+      *ngIf="isShowGuests"
+      class="absolute bg-white w-full z-50 top-12 left-0 animate-display"
+    >
+      <div class="flex p-5 items-center">
+        <span class="flex-1">{{ this.adultNumber }}</span>
+        <span class="flex-1 text-base font-semibold">Adult</span>
+        <button
+          class="border-r-0 hover:bg-primary hover:text-white flex-1 max-w-[80px] rounded-l border border-solid border-global font-bold text-lg"
+          (click)="handleAdult(false)"
+        >
+          -
+        </button>
+        <button
+          class="border-l-0 hover:bg-primary hover:text-white flex-1 max-w-[80px] rounded-r border border-solid border-global font-bold text-lg"
+          (click)="handleAdult(true)"
+        >
+          +
+        </button>
+      </div>
+      <div class="flex p-5 items-center">
+        <span class="flex-1">{{ this.childrenNumber }}</span>
+        <span class="flex-1 text-base font-semibold">Children</span>
+        <button
+          class="border-r-0 hover:bg-primary hover:text-white flex-1 max-w-[80px] rounded-l border border-solid border-global font-bold text-lg"
+          (click)="handleChildren(false)"
+        >
+          -
+        </button>
+        <button
+          class="border-l-0 hover:bg-primary hover:text-white flex-1 max-w-[80px] rounded-r border border-solid border-global font-bold text-lg"
+          (click)="handleChildren(true)"
+        >
+          +
+        </button>
+      </div>
+      <div class="flex p-5 items-center">
+        <span class="flex-1">{{ this.youthNumber }}</span>
+        <span class="flex-1 text-base font-semibold">Youth</span>
+        <button
+          class="border-r-0 hover:bg-primary hover:text-white flex-1 max-w-[80px] rounded-l border border-solid border-global font-bold text-lg"
+          (click)="handleYouth(false)"
+        >
+          -
+        </button>
+        <button
+          class="border-l-0 hover:bg-primary hover:text-white flex-1 max-w-[80px] rounded-r border border-solid border-global font-bold text-lg"
+          (click)="handleYouth(true)"
+        >
+          +
+        </button>
+      </div>
+    </div>
+  </div>
+  <button
+    class="h-full bg-primary cursor-pointer flex flex-1 items-center justify-center rounded-md p-5 text-white font-bold hover:bg-primaryhover max-w-[150px]"
+  >
+    Search
+  </button>
+</div>

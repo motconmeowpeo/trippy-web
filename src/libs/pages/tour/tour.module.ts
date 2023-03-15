@@ -6,14 +6,14 @@ import { LoadingModule } from '@core/component/loading';
 import { BannerModule } from '@core/component/banner';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TourItemModule } from '@core/component/tourItem';
-
+import { SearchbarModule } from '@core/component/searchbar';
 
 const routes: Routes = [
   {
     path: '',
-    component: TourComponent
+    component: TourComponent,
   },
-]
+];
 @NgModule({
   imports: [
     RouterModule.forChild(routes),
@@ -21,8 +21,9 @@ const routes: Routes = [
     LoadingModule,
     BannerModule,
     FontAwesomeModule,
-    TourItemModule
+    TourItemModule,
+    SearchbarModule,
   ],
-  declarations: [TourComponent]
+  declarations: [TourComponent],
 })
-export class TourModule { }
+export class TourModule {}

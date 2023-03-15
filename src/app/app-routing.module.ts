@@ -6,6 +6,8 @@ import {
   URL_TOURDETAIL,
   URL_DESTINATION,
   URL_DESTINATIONDETAIL,
+  URL_LOGIN,
+  URL_REGISTER,
 } from '@core/constants';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -35,17 +37,21 @@ const publicRoute = [
         (page) => page.DestinationDetailModule
       ),
   },
-];
-const privateRoute = [
   {
-    path: URL_HOME,
-    loadChildren: () => import('@pages/home').then((page) => page.HomeModule),
+    path: URL_LOGIN,
+    loadChildren: () => import('@pages/login').then((page) => page.LoginModule),
+  },
+  {
+    path: URL_REGISTER,
+    loadChildren: () =>
+      import('@pages/register').then((page) => page.RegisterModule),
   },
 ];
-const routes: Routes = [...publicRoute, ...privateRoute];
+const privateRoute = [];
+const routes: Routes = [...publicRoute];
 
 @NgModule({
-  imports: [RouterModule.forRoot(publicRoute)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

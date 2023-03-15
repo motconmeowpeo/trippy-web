@@ -25,6 +25,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.3.0",
     "aos": "^2.3.4",
     "font-awesome": "^4.7.0",
+    "ng-zorro-antd": "^15.0.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

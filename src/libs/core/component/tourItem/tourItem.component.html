@@ -1,4 +1,4 @@
-<li>
+<li [routerLink]="['/tour', id]" routerLinkActive="router-link-active">
   <img
     class="h-1/2 relative -bottom-4 z-10 rounded-3xl"
     src="{{ imgSrc }}"
@@ -20,9 +20,10 @@
         >
       </div>
       <button
-        class="w-40 h-11 text-secondary font-bold hover:text-primary bg-primary hover:bg-secondary transition-all duration-300 rounded-lg"
+        class="min-w-[100px] h-11 flex items-center text-secondary font-bold hover:text-primary transition-all duration-300 rounded-lg"
       >
         Explore
+        <fa-icon class="text-primary ml-2" [icon]="faRight"></fa-icon>
       </button>
     </div>
     <div

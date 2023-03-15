@@ -1,31 +1,47 @@
-<div class='h-24 w-full flex sticky z-50 items-center top-0 justify-between px-5 py-5 bg-white shadow-lg'>
+<div
+  class="h-24 w-full flex sticky z-50 items-center top-0 justify-between px-5 py-5 bg-white shadow-lg"
+>
   <!-- LOGO -->
   <div>
     <a routeLink="/" routerLinkActive="active">
-      <img routeLink="/" routerLinkActive="active" class='w-36 object-cover cursor-pointer' src='assets/logo/logo.svg'
-        alt="logo" />
+      <img
+        routeLink="/"
+        routerLinkActive="active"
+        class="w-36 object-cover cursor-pointer"
+        src="assets/logo/logo.svg"
+        alt="logo"
+      />
     </a>
   </div>
   <!-- NAV_MENU -->
-  <div class='h-full w-4/6 flex items-center'>
-    <ul class='h-full w-full flex items-center justify-between'>
-      <div *ngFor="let item of this.MENUS"
-        class="text-black text-xl p-6 flex items-center cursor-pointer hover:text-primaryhover">
-        <a routerLink="{{item.path}}" routerLinkActive="active">{{item.name}}</a>
+  <div class="h-full w-4/6 flex items-center">
+    <ul class="h-full w-full flex items-center justify-between">
+      <div
+        *ngFor="let item of this.MENUS"
+        class="text-black text-xl p-6 flex items-center cursor-pointer hover:text-primaryhover"
+      >
+        <li routerLink="{{ item.path }}" routerLinkActive="active">
+          {{ item.name }}
+        </li>
         <fa-icon class="text-sm ml-1 text-primary" [icon]="faPlus"></fa-icon>
       </div>
     </ul>
-
   </div>
   <!-- CONTACT -->
-  <div class='flex items-center'>
-    <div class='text-xl mr-5'>
-      <fa-icon class="text-2xl ml-5 text-primary mr-5" [icon]="faPhoneVolume"></fa-icon>
+  <div class="flex items-center">
+    <div class="text-xl mr-5">
+      <fa-icon
+        class="text-2xl ml-5 text-primary mr-5"
+        [icon]="faPhoneVolume"
+      ></fa-icon>
       <span>0334829504</span>
     </div>
     <div
-      class="text-xl ml-5 cursor-pointer relative hover:text-primaryhover after:content-[' '] after:absolute after:w-1px after:h-6 after:bg-black after:-left-4 after:z-10 after:cursor-default">
-      <fa-icon [icon]="faUser"></fa-icon>
+      routerLink="login"
+      routerLinkActive="active"
+      class="text-xl ml-5 cursor-pointer relative hover:text-primaryhover after:content-[' '] after:absolute after:w-1px after:h-6 after:bg-black after:-left-4 after:z-10 after:cursor-default"
+    >
+      <fa-icon [icon]="faUser" nz-tooltip nzTooltipTitle="Account"></fa-icon>
     </div>
   </div>
 </div>

@@ -6,9 +6,10 @@
   </div>
 </ng-container>
 
-//Content
+<!-- Content -->
 <div class="bg-slate-100 pb-20">
   <ng-container *ngIf="tours$ | async as tours">
+    <app-searchbar></app-searchbar>
     <div class="max-w-7xl w-full m-auto">
       <!-- TourItem -->
       <ul class="list-none flex pt-20 flex-wrap">
@@ -20,8 +21,8 @@
           tourPeople="30"
           imgSrc="https://demo2.pavothemes.com/triply/wp-content/uploads/2020/11/5c486ea739c52128a578315e_DSC04947-copy-820x520.jpg"
           tourDays="30"
-          routerLink="{{ item.id }}"
-          routerLinkActive="active"
+          tourLocation="Abcdzz"
+          id="{{ item.id }}"
         ></app-tourItem>
       </ul>
     </div>

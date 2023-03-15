@@ -3,39 +3,21 @@ import {
   faFacebook,
   faTwitter,
   faInstagram,
-  faLinkedin
+  faLinkedin,
 } from '@fortawesome/free-brands-svg-icons';
+import { EXPLORES, SERVICES } from '@core/constants';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
 })
 export class FooterComponent implements OnInit {
+  faFacebook = faFacebook;
+  faTwitter = faTwitter;
+  faInstagram = faInstagram;
+  faLinkedin = faLinkedin;
+  readonly SERVICES = SERVICES;
+  readonly EXPLORES = EXPLORES;
+  constructor() {}
 
-  faFacebook = faFacebook
-  faTwitter = faTwitter
-  faInstagram = faInstagram
-  faLinkedin = faLinkedin
-  readonly SERVICES = [
-    "Services",
-    "Home",
-    "Tours",
-    "Destiination",
-    "Blog",
-    "Page",
-    "Contact",
-  ]
-  readonly EXPLORES = [
-    "Explores",
-    "United State",
-    "Canada",
-    "Asia",
-    "Africa",
-    "Cambodia",
-    "Europe",
-  ]
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
