@@ -56,8 +56,9 @@ export class RegisterComponent implements OnInit {
       if (passwordController.errors?.['required']) {
         this.passwordMessage = 'is required field';
       } else {
-        if (PASSWORD_REG_EXP.test(value)) {
-          this.passwordMessage = 'is invalid';
+        if (!PASSWORD_REG_EXP.test(value)) {
+          this.passwordMessage =
+            'at least eight characters, one letter, one number';
         } else {
           this.passwordMessage = '';
         }
