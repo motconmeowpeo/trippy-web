@@ -7,13 +7,24 @@
   <div
     class="h-1/2 p-4 flex flex-col justify-around relative bg-white rounded-b-xl"
   >
-    <span class="block mt-5 font-bold text-xl">{{ tourName }}</span>
-    <span class="text-base text-globaltext">
+    <span
+      nz-tooltip
+      nzTooltipTitle="Tour name"
+      nzTooltipPlacement="left"
+      class="block mt-5 font-bold text-xl"
+      >{{ tourName }}</span
+    >
+    <span
+      nz-tooltip
+      nzTooltipTitle="Tour location"
+      nzTooltipPlacement="left"
+      class="text-base text-globaltext"
+    >
       <fa-icon [icon]="faLocationDot"></fa-icon>
       {{ tourLocation }}
     </span>
     <div class="w-full flex justify-between">
-      <div>
+      <div nz-tooltip nzTooltipTitle="Tour price" nzTooltipPlacement="left">
         <span>From</span>
         <span class="text-primary font-bold block text-2xl"
           >${{ tourPrice }}</span
@@ -29,11 +40,11 @@
     <div
       class="w-full h-14 bg-white z-10 rounded-md shadow-full flex items-center justify-between p-4"
     >
-      <div>
+      <div nz-tooltip nzTooltipTitle="Tour days" nzTooltipPlacement="left">
         <fa-icon class="text-primary text-lg" [icon]="faCalendar"></fa-icon>
         <span class="text-base ml-2">{{ tourDays }} days</span>
       </div>
-      <div>
+      <div nz-tooltip nzTooltipTitle="Tour peoples" nzTooltipPlacement="right">
         <fa-icon class="text-primary text-lg" [icon]="faUser"></fa-icon>
         <span class="text-base ml-2">{{ tourPeople }}</span>
       </div>

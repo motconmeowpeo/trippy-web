@@ -1,8 +1,52 @@
 <app-banner text="Log in"></app-banner>
 <div class="mt-20 max-w-[500px] w-full m-auto p-5 pb-20 flex justify-center">
   <form class="bg-slate-100 p-10 w-full" nz-form>
-    <div class="w-full flex justify-center">
-      <span
+    <div class="w-full flex justify-center flex-col">
+      <span class="font-bold text-2xl block m-auto">Login</span>
+      <div class="flex flex-col">
+        <label class="mt-5 text-xl flex items-start" for=""
+          >Email
+          <fa-icon
+            class="text-[5px] text-red-600 fill-red-600 ml-2"
+            [icon]="faStarOfLife"
+          ></fa-icon>
+        </label>
+        <input
+          (blur)="handleValidate(email.value, 'email')"
+          class="mt-2 h-11 p-2 rounded-md outline-primary"
+          type="email"
+          #email
+          placeholder="Email"
+        />
+        <span class="text-xs text-red-500" *ngIf="emailMessage">
+          Email {{ emailMessage }}
+        </span>
+      </div>
+      <div class="flex flex-col">
+        <label class="mt-5 text-xl flex items-start" for=""
+          >Password
+          <fa-icon
+            class="text-[5px] text-red-600 fill-red-600 ml-2"
+            [icon]="faStarOfLife"
+          ></fa-icon>
+        </label>
+        <input
+          (blur)="handleValidate(password.value, 'password')"
+          class="mt-2 h-11 p-2 rounded-md outline-primary"
+          type="password"
+          #password
+          placeholder="Password"
+        />
+        <span class="text-xs text-red-500" *ngIf="passwordMessage">
+          Password {{ passwordMessage }}
+        </span>
+      </div>
+      <button
+        class="m-auto min-w-[100px] hover:bg-primaryhover duration-300 transition-all h-10 text-lg bg-primary text-white font-semibold rounded-lg mt-5"
+      >
+        Sign up
+      </button>
+      <span class="block mt-4"
         >If you don't have account,
         <span
           class="font-semibold text-lg text-primary cursor-pointer"

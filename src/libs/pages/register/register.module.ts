@@ -7,6 +7,8 @@ import { BannerModule } from '@core/component/banner';
 import { Routes, RouterModule } from '@angular/router';
 import { BannerBotModule } from '@core/component/bannerBot';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 const routes: Routes = [
   {
     path: '',
@@ -22,6 +24,8 @@ const routes: Routes = [
     NzInputModule,
     BannerModule,
     BannerBotModule,
+    FontAwesomeModule,
+    FormsModule,
   ],
   declarations: [RegisterComponent],
 })

@@ -1,13 +1,25 @@
 <div class="relative w-full flex min-h-banner">
-  <div class="relative w-1/3 bg-bannerLeft bg-no-repeat bg-cover" data-aos="fade-right">
-
-  </div>
-  <div class="relative w-2/3 float-right bg-bannerRight bg-no-repeat bg-cover" data-aos="fade-left"></div>
+  <div
+    class="relative w-1/3 bg-bannerLeft bg-no-repeat bg-cover"
+    data-aos="fade-right"
+  ></div>
+  <div
+    class="relative w-2/3 float-right bg-bannerRight bg-no-repeat bg-cover"
+    data-aos="fade-left"
+  ></div>
   <div class="absolute left-1/4 top-1/4 z-10" data-aos="fade-up">
-    <span class="block font-dancing text-4xl text-primary mt-5">Natural beauty</span>
-    <span class="block text-6xl w-10 font-extrabold">Discover the most engaging places</span>
+    <span class="block font-dancing text-4xl text-primary mt-5"
+      >Natural beauty</span
+    >
+    <span class="block text-6xl w-10 font-extrabold"
+      >Discover the most engaging places</span
+    >
     <button
-      class="hover:bg-secondaryhover mt-5 h-14 w-40 text-white bg-secondary border-none rounded-md py-1 px-2 cursor-pointer transition-all duration-300 text-base font-bold">Explore
-      Now</button>
+      [routerLink]="['/tour']"
+      routerLinkActive="router-link-active"
+      class="hover:bg-secondaryhover mt-5 h-14 w-40 text-white bg-secondary border-none rounded-md py-1 px-2 cursor-pointer transition-all duration-300 text-base font-bold"
+    >
+      Explore Now
+    </button>
   </div>
 </div>

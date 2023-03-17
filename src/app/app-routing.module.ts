@@ -13,11 +13,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 const publicRoute = [
   {
-    path: URL_HOME,
+    path: '',
+
     loadChildren: () => import('@pages/home').then((page) => page.HomeModule),
   },
   {
-    path: ' ',
+    path: URL_HOME,
     loadChildren: () => import('@pages/home').then((page) => page.HomeModule),
   },
   {
