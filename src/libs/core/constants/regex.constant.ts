@@ -5,6 +5,6 @@ export const EMAIL_REG_EXP = new RegExp(
   '^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,10}$'
 );
 export const PASSWORD_REG_EXP = new RegExp(
-  '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*W)(?!.* ).{8,16}$'
+  '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.)(?!.* ).{8,16}'
 );
 export const USER_REG_EXP = new RegExp('^[a-zA-Z0-9-]{6,}$');
