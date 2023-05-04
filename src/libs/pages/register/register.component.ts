@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit {
       } else {
         if (!PASSWORD_REG_EXP.test(value)) {
           this.passwordMessage =
-            'at least eight characters, one letter, one number';
+            'at least eight characters, one uppercase letter, one number';
         } else {
           this.passwordMessage = '';
         }

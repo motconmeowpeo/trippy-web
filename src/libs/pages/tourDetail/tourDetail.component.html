@@ -1,3 +1,63 @@
-<p>
-  tourDetail works!
-</p>
+<!-- Carousel -->
+<div class="h-500px">
+  <nz-carousel nzEnableSwipe nzAutoPlay [nzEffect]="'fade'">
+    <div nz-carousel-content *ngFor="let index of slides">
+      <img class="w-full h-full object-cover" [src]="index.img" alt="" />
+    </div>
+  </nz-carousel>
+</div>
+<!-- content -->
+<div class="w-full max-w-7xl m-auto mt-10">
+  <!-- Head -->
+  <div class="flex items-center justify-between">
+    <!-- Price -->
+    <div class="flex items-center">
+      <div class="flex flex-col">
+        <span class="text-lg font-semibold">Price</span>
+        <span class="text-globaltext">From $90</span>
+      </div>
+    </div>
+    <!-- Duration -->
+    <div class="flex items-center">
+      <fa-icon class="text-3xl text-primary mr-2" [icon]="faClock"></fa-icon>
+      <div class="flex flex-col">
+        <span class="text-lg font-semibold">Duration</span>
+        <span class="text-globaltext">12 days</span>
+      </div>
+    </div>
+    <!-- Max people -->
+    <div class="flex items-center">
+      <fa-icon class="text-3xl text-primary mr-2" [icon]="faUsers"></fa-icon>
+      <div class="flex flex-col">
+        <span class="text-lg font-semibold">Max people</span>
+        <span class="text-globaltext">40</span>
+      </div>
+    </div>
+    <div class="flex items-center">
+      <fa-icon class="text-3xl text-primary mr-2" [icon]="faUser"></fa-icon>
+      <div class="flex flex-col">
+        <span class="text-lg font-semibold">Min age</span>
+        <span class="text-globaltext">12</span>
+      </div>
+    </div>
+  </div>
+  <!-- Tabs -->
+  <nz-tabset>
+    <nz-tab nzTitle="Tab Eagerly 1">
+      <span>Content 1</span>
+    </nz-tab>
+    <nz-tab nzTitle="Tab Eagerly 2">
+      <span>Content 1</span>
+    </nz-tab>
+    <nz-tab nzTitle="Tab Lazy 1">
+      <ng-template nz-tab>
+        <span>Content 1</span>
+      </ng-template>
+    </nz-tab>
+    <nz-tab nzTitle="Tab Lazy 2">
+      <ng-template nz-tab>
+        <span>Content 1</span>
+      </ng-template>
+    </nz-tab>
+  </nz-tabset>
+</div>
