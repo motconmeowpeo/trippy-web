@@ -3,6 +3,9 @@ import { FormControl, Validators } from '@angular/forms';
 import { EMAIL_REG_EXP, USER_REG_EXP } from '@core/constants';
 import { faStarOfLife } from '@fortawesome/free-solid-svg-icons';
 import { PASSWORD_REG_EXP } from '../../core/constants/regex.constant';
+import { RoleFacade } from '@core/services';
+import { tap } from 'rxjs';
+import { RoleCode } from 'src/libs/core/enum/role-code.enum';
 
 @Component({
   selector: 'app-register',
@@ -14,9 +17,14 @@ export class RegisterComponent implements OnInit {
   emailMessage: string = '';
   passwordMessage: string = '';
   confirmPasswordMessage: string = ' ';
-  constructor() {}
+  roles$ = this.roleFacade.roles$;
+  RoleCode = RoleCode;
 
-  ngOnInit() {}
+  constructor(private roleFacade: RoleFacade) {}
+
+  ngOnInit() {
+    this.roleFacade.getAllRole().subscribe();
+  }
   handleValidate(value: string, field: string) {
     if (field === 'username') {
       const userNameController = new FormControl(value, [
@@ -65,6 +73,7 @@ export class RegisterComponent implements OnInit {
       }
     }
   }
+
   confirmPwd(passWord: string, confirm: string) {
     if (passWord !== confirm) {
       this.confirmPasswordMessage = 'Confirm password invalid';

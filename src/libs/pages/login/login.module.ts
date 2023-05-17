@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BannerModule } from '@core/component/banner';
 import { BannerBotModule } from '../../core/component/bannerBot/bannerBot.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
   {
     path: '',
@@ -19,6 +20,7 @@ const routes: Routes = [
     BannerModule,
     BannerBotModule,
     FontAwesomeModule,
+    ReactiveFormsModule,
   ],
   declarations: [LoginComponent],
 })

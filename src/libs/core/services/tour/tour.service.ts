@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
-import { ITour } from './tour.interface';
+import { ITour } from '../../model/tour.model';
 
 @Injectable({ providedIn: 'root' })
 export class TourService {

@@ -23,6 +23,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.3.0",
     "@fortawesome/free-regular-svg-icons": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
+    "@nestjs/mapped-types": "*",
     "aos": "^2.3.4",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.4",
@@ -31,7 +32,11 @@
     "rxjs": "~7.8.0",
     "slick-carousel": "^1.8.1",
     "tslib": "^2.3.0",
-    "zone.js": "~0.12.0"
+    "zone.js": "~0.12.0",
+    "ngx-strongly-typed-forms": "8.0.1",
+    "@ngneat/elf": "2.1.0",
+    "@ngneat/elf-devtools": "1.2.1",
+    "@ngneat/elf-entities": "4.4.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.2.0",

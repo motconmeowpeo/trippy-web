@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { faStarOfLife } from '@fortawesome/free-solid-svg-icons';
 import { Validators, FormControl } from '@angular/forms';
 import { EMAIL_REG_EXP, PASSWORD_REG_EXP, USER_REG_EXP } from '@core/constants';
+import { of, tap } from 'rxjs';
+import { RoleFacade } from 'src/libs/core/services/role/role.facade';
 
 @Component({
   selector: 'app-login',

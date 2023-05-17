@@ -42,22 +42,79 @@
     </div>
   </div>
   <!-- Tabs -->
-  <nz-tabset>
-    <nz-tab nzTitle="Tab Eagerly 1">
-      <span>Content 1</span>
-    </nz-tab>
-    <nz-tab nzTitle="Tab Eagerly 2">
-      <span>Content 1</span>
-    </nz-tab>
-    <nz-tab nzTitle="Tab Lazy 1">
-      <ng-template nz-tab>
-        <span>Content 1</span>
-      </ng-template>
-    </nz-tab>
-    <nz-tab nzTitle="Tab Lazy 2">
-      <ng-template nz-tab>
-        <span>Content 1</span>
-      </ng-template>
-    </nz-tab>
-  </nz-tabset>
+  <div class="card-container mt-10 pb-10 w-[70%]">
+    <nz-tabset nzType="card">
+      <nz-tab nzTitle="DESCRIPTION">
+        <div class="flex flex-col">
+          <span class="font-semibold text-xl text-black pt-4">Overview</span>
+          <span class="pt-4 text-lg"
+            >Tour Argentina´s glaciers, hike Chalten, Patagonia´s mountain
+            trails and kayak Tierra del Fuego National Park. From Buenos Aires´
+            tango shows and eclectic neighborhoods to the surreal, southern city
+            of Ushuaia, heed the call of the wild and visit Argentina for a
+            taste of adventure! Let us guide you through some of the most
+            interesting and dynamic cities, and pristine, captivating landscapes
+            of the world.</span
+          >
+          <span class="font-semibold text-xl text-black pt-8"
+            >Included/Excluded</span
+          >
+          <div class="flex mt-4">
+            <div class="flex flex-col text-lg">
+              <span class="flex items-center">
+                <fa-icon class="text-green-400" [icon]="faCheck"></fa-icon>
+                <span class="ml-1">Specialized bilingual guide</span>
+              </span>
+              <span class="flex items-center">
+                <fa-icon class="text-green-400" [icon]="faCheck"></fa-icon>
+                <span class="ml-1">Specialized bilingual guide</span>
+              </span>
+              <span class="flex items-center">
+                <fa-icon class="text-green-400" [icon]="faCheck"></fa-icon>
+                <span class="ml-1">Specialized bilingual guide</span>
+              </span>
+              <span class="flex items-center">
+                <fa-icon class="text-green-400" [icon]="faCheck"></fa-icon>
+                <span class="ml-1">Specialized bilingual guide</span>
+              </span>
+              <span class="flex items-center">
+                <fa-icon class="text-green-400" [icon]="faCheck"></fa-icon>
+                <span class="ml-1">Specialized bilingual guide</span>
+              </span>
+            </div>
+            <div class="flex flex-col ml-10 text-lg">
+              <span class="flex items-center">
+                <fa-icon class="text-red-500" [icon]="faClose"></fa-icon>
+                <span class="ml-1">Specialized bilingual guide</span>
+              </span>
+              <span class="flex items-center">
+                <fa-icon class="text-red-500" [icon]="faClose"></fa-icon>
+                <span class="ml-1">Specialized bilingual guide</span>
+              </span>
+              <span class="flex items-center">
+                <fa-icon class="text-red-500" [icon]="faClose"></fa-icon>
+                <span class="ml-1">Specialized bilingual guide</span>
+              </span>
+              <span class="flex items-center">
+                <fa-icon class="text-red-500" [icon]="faClose"></fa-icon>
+                <span class="ml-1">Specialized bilingual guide</span>
+              </span>
+              <span class="flex items-center">
+                <fa-icon class="text-red-500" [icon]="faClose"></fa-icon>
+                <span class="ml-1">Specialized bilingual guide</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </nz-tab>
+      <nz-tab nzTitle="TOUR PLAN">
+        <span>Content 2</span>
+      </nz-tab>
+      <nz-tab nzTitle="REVIEWS">
+        <ng-template nz-tab>
+          <span>Content 3</span>
+        </ng-template>
+      </nz-tab>
+    </nz-tabset>
+  </div>
 </div>

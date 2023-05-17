@@ -1,2 +1,2 @@
-export * from './tour.interface'
-export * from './tour.service'
+export * from '../../model/tour.model';
+export * from './tour.service';

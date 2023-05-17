@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { faClock, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
+import {
+  faClock,
+  faUser,
+  faUsers,
+  faCheck,
+  faClose,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-tourDetail',
@@ -10,6 +16,8 @@ export class TourDetailComponent implements OnInit {
   faClock = faClock;
   faUser = faUser;
   faUsers = faUsers;
+  faCheck = faCheck;
+  faClose = faClose;
   slides = [
     { img: 'https://via.placeholder.com/600.png/09f/fff' },
     { img: 'https://via.placeholder.com/600.png/021/fff' },

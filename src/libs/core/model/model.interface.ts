@@ -7,5 +7,6 @@ export interface IDestination {
 }
 export interface IAuthCredential {
   username: string;
+  email: string;
   password: string;
 }
