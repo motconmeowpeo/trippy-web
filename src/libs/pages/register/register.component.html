@@ -1,26 +1,42 @@
 <app-banner text="Register"></app-banner>
 <div class="mt-20 max-w-[500px] w-full m-auto p-5 pb-20 flex justify-center">
-  <form class="bg-slate-100 p-10 w-full" nz-form>
+  <form
+    class="bg-slate-100 p-10 w-full"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    *ngIf="!isLoading; else loading"
+  >
     <div class="w-full flex justify-center flex-col">
       <span class="font-bold text-2xl block m-auto">Register</span>
       <!-- Username -->
       <div class="flex flex-col">
         <label class="mt-5 text-xl flex items-start" for=""
-          >User name
+          >Username
           <fa-icon
             class="text-[5px] text-red-600 fill-red-600 ml-2"
             [icon]="faStarOfLife"
           ></fa-icon>
         </label>
         <input
-          (blur)="handleValidate(username.value, 'username')"
           class="mt-2 h-11 p-2 rounded-md outline-primary"
           type="text"
           #username
-          placeholder="Username"
+          placeholder="Username..."
+          formControlName="username"
         />
-        <span class="text-xs text-red-500" *ngIf="userNameMessage">
-          Username {{ userNameMessage }}
+        <span
+          class="text-xs text-red-500"
+          *ngIf="this.form.controls.username.errors?.['required']"
+        >
+          Username is required field
+        </span>
+        <span
+          class="text-xs text-red-500"
+          *ngIf="this.form.controls.username.status === 'INVALID'
+          &&
+          !this.form.controls.username.errors?.['required']"
+        >
+          Username include letters and numbers, at least 6 letter
         </span>
       </div>
 
@@ -34,15 +50,27 @@
           ></fa-icon>
         </label>
         <input
-          (blur)="handleValidate(email.value, 'email')"
           class="mt-2 h-11 p-2 rounded-md outline-primary"
           type="email"
           #email
           placeholder="Email"
+          formControlName="email"
         />
       </div>
-      <span class="text-xs text-red-500" *ngIf="emailMessage">
-        Email {{ emailMessage }}
+      <span
+        class="text-xs text-red-500"
+        *ngIf="this.form.controls.email.errors?.['required']"
+      >
+        Email is required field
+      </span>
+
+      <span
+        class="text-xs text-red-500"
+        *ngIf="this.form.controls.email.status === 'INVALID'
+          &&
+          !this.form.controls.email.errors?.['required']"
+      >
+        Email is invalid
       </span>
 
       <!-- Password -->
@@ -55,14 +83,25 @@
           ></fa-icon>
         </label>
         <input
-          (blur)="handleValidate(password.value, 'password')"
           class="mt-2 h-11 p-2 rounded-md outline-primary"
           type="password"
           #password
           placeholder="Password"
+          formControlName="password"
         />
-        <span class="text-xs text-red-500" *ngIf="passwordMessage">
-          Password {{ passwordMessage }}
+        <span
+          class="text-xs text-red-500"
+          *ngIf="this.form.controls.password.errors?.['required']"
+        >
+          Password is required field
+        </span>
+        <span
+          class="text-xs text-red-500"
+          *ngIf="this.form.controls.password.status === 'INVALID'
+          &&
+          !this.form.controls.password.errors?.['required']"
+        >
+          Password at least eight characters, one uppercase letter, one number
         </span>
       </div>
 
@@ -78,45 +117,37 @@
         <input
           class="mt-2 h-11 p-2 rounded-md outline-primary"
           type="password"
-          (blur)="confirmPwd(password.value, confirmPassword.value)"
           #confirmPassword
           placeholder="Confirm password"
         />
-        <span class="text-xs text-red-500" *ngIf="confirmPasswordMessage">
-          {{ confirmPasswordMessage }}
+        <span
+          class="text-xs text-red-500"
+          *ngIf="password.value !== confirmPassword.value"
+        >
+          Confirm password invalid
         </span>
       </div>
       <!-- Role -->
-      <section *ngIf="roles$ | async as roles">
-        <div *ngFor="let role of roles">
-          <div *ngIf="role.code !== RoleCode.ADMIN">
-            <input type="radio" name="role" />
-            <label>{{ role.name | titlecase }}</label>
+      <section *ngIf="roles$ | async as roles" class="mt-2">
+        <div *ngFor="let role of roles" class="flex items-center">
+          <div *ngIf="role.code !== RoleCode.ADMIN" class="flex items-center">
+            <input type="radio" [value]="role?.id" formControlName="roleId" />
+            <label class="ml-2">{{ role.name | titlecase }}</label>
           </div>
         </div>
       </section>
 
       <button
-        *ngIf="
-          !userNameMessage &&
-            !emailMessage &&
-            !passwordMessage &&
-            !confirmPasswordMessage;
-          else blockButton
+        [disabled]="form.invalid || isLoadingCreate"
+        [ngClass]="
+          form.invalid || isLoadingCreate
+            ? 'cursor-no-drop border-black border border-solid text-black'
+            : 'hover:bg-primaryhover bg-primary cursor-pointer text-white'
         "
-        class="m-auto min-w-[100px] hover:bg-primaryhover duration-300 transition-all h-10 text-lg bg-primary text-white font-semibold rounded-lg mt-5"
+        class="m-auto min-w-[100px] duration-300 transition-all h-10 text-lg font-semibold rounded-lg mt-5"
       >
         Sign up
       </button>
-
-      <ng-template #blockButton>
-        <button
-          disabled
-          class="m-auto min-w-[100px] cursor-no-drop h-10 text-lg border border-solid border-black text-black font-semibold rounded-lg mt-5"
-        >
-          Sign up
-        </button>
-      </ng-template>
 
       <span class="mt-4"
         >If you have an account,
@@ -129,5 +160,10 @@
       </span>
     </div>
   </form>
+  <ng-template #loading>
+    <div class="w-full m-auto h-96 flex items-center justify-center">
+      <app-loading></app-loading>
+    </div>
+  </ng-template>
 </div>
 <app-bannerBot></app-bannerBot>

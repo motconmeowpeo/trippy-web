@@ -8,7 +8,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { BannerBotModule } from '@core/component/bannerBot';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoadingModule } from '@core/component/loading';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { ToastNotificationService } from '@core/services';
 const routes: Routes = [
   {
     path: '',
@@ -20,12 +23,13 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CommonModule,
     NzButtonModule,
-    NzFormModule,
     NzInputModule,
     BannerModule,
     BannerBotModule,
+    LoadingModule,
     FontAwesomeModule,
-    FormsModule,
+
+    ReactiveFormsModule,
   ],
   declarations: [RegisterComponent],
 })

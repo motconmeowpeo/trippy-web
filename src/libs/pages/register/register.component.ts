@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, ɵɵtrustConstantResourceUrl } from '@angular/core';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { EMAIL_REG_EXP, USER_REG_EXP } from '@core/constants';
 import { faStarOfLife } from '@fortawesome/free-solid-svg-icons';
 import { PASSWORD_REG_EXP } from '../../core/constants/regex.constant';
-import { RoleFacade } from '@core/services';
-import { tap } from 'rxjs';
+import { RoleFacade, ToastNotificationService } from '@core/services';
 import { RoleCode } from 'src/libs/core/enum/role-code.enum';
+import { IRegisterForm } from './register.form';
+import { UserFacade } from '@core/services/user';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -13,72 +15,62 @@ import { RoleCode } from 'src/libs/core/enum/role-code.enum';
 })
 export class RegisterComponent implements OnInit {
   faStarOfLife = faStarOfLife;
-  userNameMessage: string = '';
-  emailMessage: string = '';
-  passwordMessage: string = '';
-  confirmPasswordMessage: string = ' ';
   roles$ = this.roleFacade.roles$;
   RoleCode = RoleCode;
-
-  constructor(private roleFacade: RoleFacade) {}
+  form!: FormGroup<IRegisterForm>;
+  isLoading = false;
+  isLoadingCreate = false;
+  constructor(
+    private roleFacade: RoleFacade,
+    private userFacade: UserFacade,
+    private notifiService: ToastNotificationService
+  ) {}
 
   ngOnInit() {
-    this.roleFacade.getAllRole().subscribe();
-  }
-  handleValidate(value: string, field: string) {
-    if (field === 'username') {
-      const userNameController = new FormControl(value, [
-        Validators.required,
-        Validators.pattern(USER_REG_EXP),
-      ]);
-
-      if (userNameController.errors?.['required']) {
-        this.userNameMessage = 'is required field';
-      } else {
-        if (userNameController.status === 'INVALID') {
-          this.userNameMessage =
-            'include letters and numbers, at least 6 letter';
-        } else {
-          this.userNameMessage = '';
-        }
-      }
-    } else if (field === 'email') {
-      const emailController = new FormControl(value, [
-        Validators.required,
-        Validators.pattern(EMAIL_REG_EXP),
-      ]);
-      if (emailController.errors?.['required']) {
-        this.emailMessage = 'is required field';
-      } else {
-        if (emailController.status === 'INVALID') {
-          this.emailMessage = 'is invalid';
-        } else {
-          this.emailMessage = '';
-        }
-      }
-    } else if (field === 'password') {
-      const passwordController = new FormControl(value, [
-        Validators.required,
-        Validators.pattern(PASSWORD_REG_EXP),
-      ]);
-      if (passwordController.errors?.['required']) {
-        this.passwordMessage = 'is required field';
-      } else {
-        if (!PASSWORD_REG_EXP.test(value)) {
-          this.passwordMessage =
-            'at least eight characters, one uppercase letter, one number';
-        } else {
-          this.passwordMessage = '';
-        }
-      }
-    }
+    this.isLoading = true;
+    this.roleFacade
+      .getAllRole()
+      .pipe(tap(() => (this.isLoading = false)))
+      .subscribe();
+    this.createForm();
   }
 
-  confirmPwd(passWord: string, confirm: string) {
-    if (passWord !== confirm) {
-      this.confirmPasswordMessage = 'Confirm password invalid';
-    } else {
-      this.confirmPasswordMessage = '';
-    }
+  private createForm() {
+    this.form = new FormGroup({
+      username: new FormControl('', {
+        nonNullable: true,
+        validators: [Validators.required, Validators.pattern(USER_REG_EXP)],
+        updateOn: 'change',
+      }),
+      email: new FormControl('', {
+        nonNullable: true,
+        validators: [Validators.required, Validators.pattern(EMAIL_REG_EXP)],
+        updateOn: 'change',
+      }),
+      roleId: new FormControl('', {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
+      password: new FormControl('', {
+        nonNullable: true,
+        validators: [Validators.required, Validators.pattern(PASSWORD_REG_EXP)],
+        updateOn: 'change',
+      }),
+      active: new FormControl(true, { nonNullable: true }),
+    });
+  }
+
+  onSubmit() {
+    this.isLoadingCreate = true;
+    this.userFacade
+      .createUser(this.form.value)
+      .pipe(
+        tap(() => {
+          this.isLoadingCreate = false;
+          this.notifiService.success('Success', 'Created user');
+          this.form.reset();
+        })
+      )
+      .subscribe();
   }
 }

@@ -7,8 +7,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterModule } from '@core/component/footer';
 import { HeaderModule } from '@core/component/header';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { ErrorMessageInterceptor } from '@core/services';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,8 +24,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NzNotificationModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorMessageInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
