@@ -4,3 +4,4 @@ export * from './destination.constant';
 export * from './regex.constant';
 export * from './url.constant';
 export * from './role.constant';
+export * from './base.constant';

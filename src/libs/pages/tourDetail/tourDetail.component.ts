@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TourFacade } from '@core/services';
 import {
   faClock,
   faUser,
   faUsers,
   faCheck,
   faClose,
+  faLocationDot,
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -18,15 +21,19 @@ export class TourDetailComponent implements OnInit {
   faUsers = faUsers;
   faCheck = faCheck;
   faClose = faClose;
-  slides = [
-    { img: 'https://via.placeholder.com/600.png/09f/fff' },
-    { img: 'https://via.placeholder.com/600.png/021/fff' },
-    { img: 'https://via.placeholder.com/600.png/321/fff' },
-    { img: 'https://via.placeholder.com/600.png/422/fff' },
-    { img: 'https://via.placeholder.com/600.png/654/fff' },
-  ];
-  slideConfig = { slidesToShow: 2, slidesToScroll: 2 };
-  constructor() {}
+  faLocationDot = faLocationDot;
+  tour$ = this.tourFacade.tour$;
+  isLoading = false;
 
-  ngOnInit() {}
+  slideConfig = { slidesToShow: 2, slidesToScroll: 2 };
+  constructor(private tourFacade: TourFacade, private router: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.isLoading = true;
+    const tourId = this.router.snapshot.paramMap.get('id');
+    if (tourId)
+      this.tourFacade
+        .getTourById(tourId)
+        .subscribe(() => (this.isLoading = false));
+  }
 }

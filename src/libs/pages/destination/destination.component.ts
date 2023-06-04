@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DESTINATION_LIST } from '@core/constants';
 import { IDestination } from '@core/model';
-import { TourService, ITour } from '@core/services/tour';
+import { TourFacade } from '@core/services/tour';
 import { Observable } from 'rxjs';
 import * as AOS from 'aos';
 
@@ -10,9 +10,9 @@ import * as AOS from 'aos';
   templateUrl: './destination.component.html',
 })
 export class DestinationComponent implements OnInit {
-  tours$: Observable<ITour[]> = this.service.getAll();
+  tours$ = this.tourFacade.getAll();
   destination: IDestination[] = DESTINATION_LIST;
-  constructor(private service: TourService) {}
+  constructor(private tourFacade: TourFacade) {}
 
   ngOnInit() {
     AOS.init({

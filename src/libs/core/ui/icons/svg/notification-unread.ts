@@ -1,0 +1,4 @@
+export const notificationUnreadIcon = {
+    data: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 10C20 8.4087 19.3679 6.88258 18.2426 5.75736C17.1174 4.63214 15.5913 4 14 4C12.4087 4 10.8826 4.63214 9.75736 5.75736C8.63214 6.88258 8 8.4087 8 10C8 17 5 19 5 19H23C23 19 20 17 20 10Z" stroke="#0F0F0F" stroke-opacity="0.8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.73 23C15.5542 23.3031 15.3019 23.5547 14.9982 23.7295C14.6946 23.9044 14.3504 23.9965 14 23.9965C13.6496 23.9965 13.3054 23.9044 13.0018 23.7295C12.6982 23.5547 12.4458 23.3031 12.27 23" stroke="#0F0F0F" stroke-opacity="0.8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="6" r="3" fill="#FF6384"/></svg>`,
+    name: 'notification-unread'
+};

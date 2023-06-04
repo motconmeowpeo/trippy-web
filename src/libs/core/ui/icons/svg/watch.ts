@@ -1,0 +1,4 @@
+export const watchIcon = {
+    data: `<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1948_41836)"><path d="M10.5 18.3337C15.1024 18.3337 18.8333 14.6027 18.8333 10.0003C18.8333 5.39795 15.1024 1.66699 10.5 1.66699C5.89762 1.66699 2.16666 5.39795 2.16666 10.0003C2.16666 14.6027 5.89762 18.3337 10.5 18.3337Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.5 5V10L13.8333 11.6667" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></g><defs><clipPath id="clip0_1948_41836"><rect width="20" height="20" fill="white" transform="translate(0.5)"/></clipPath></defs></svg>`,
+    name: 'watch'
+};

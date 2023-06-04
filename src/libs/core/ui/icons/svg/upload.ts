@@ -1,0 +1,4 @@
+export const uploadIcon = {
+    data: `<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1925_40904)"><path d="M2.5 8L2.5 4.66667C2.5 4.22464 2.67559 3.80072 2.98816 3.48816C3.30072 3.1756 3.72464 3 4.16667 3L15.8333 3C16.2754 3 16.6993 3.1756 17.0118 3.48816C17.3244 3.80072 17.5 4.22464 17.5 4.66667L17.5 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.1667 12.167L10 8.00033L5.83337 12.167" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 8L10 18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></g><defs><clipPath id="clip0_1925_40904"><rect width="20" height="20" fill="white" transform="translate(0 0.5)"/></clipPath></defs></svg>`,
+    name: 'upload'
+};

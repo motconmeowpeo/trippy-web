@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DESTINATION_LIST } from '@core/constants';
 import { IDestination } from '@core/model';
-import { TourService, ITour } from '@core/services/tour';
+import { TourFacade } from '@core/services/tour';
 import { Observable } from 'rxjs';
 import * as AOS from 'aos';
 import { ActivatedRoute } from '@angular/router';
@@ -11,10 +11,10 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './destinationDetail.component.html',
 })
 export class DestinationDetailComponent implements OnInit {
-  tours$: Observable<ITour[]> = this.service.getAll();
+  tours$ = this.tourFacade.getAll();
   name: string | null;
   constructor(
-    private service: TourService,
+    private tourFacade: TourFacade,
     private activatedRoute: ActivatedRoute
   ) {
     this.name = this.activatedRoute.snapshot.paramMap.get('name');

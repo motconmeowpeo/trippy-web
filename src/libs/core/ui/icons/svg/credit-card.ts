@@ -1,0 +1,4 @@
+export const creditCardIcon = {
+    data: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.0002 4H3.00024C1.89567 4 1.00024 4.89543 1.00024 6V18C1.00024 19.1046 1.89567 20 3.00024 20H21.0002C22.1048 20 23.0002 19.1046 23.0002 18V6C23.0002 4.89543 22.1048 4 21.0002 4Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M1.00024 10H23.0002" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    name: 'credit-card'
+};

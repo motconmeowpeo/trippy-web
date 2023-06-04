@@ -3,29 +3,31 @@
 
 <!-- Content -->
 <div class="bg-slate-100 pb-20">
-  <ng-container *ngIf="!(tours$ | async)">
+  <ng-container *ngIf="isLoading; else tours">
     <div class="w-full m-auto h-96 flex items-center justify-center">
       <app-loading></app-loading>
     </div>
   </ng-container>
-  <ng-container *ngIf="tours$ | async as tours">
-    <app-searchbar></app-searchbar>
-    <div class="max-w-7xl w-full m-auto">
-      <!-- TourItem -->
-      <ul class="list-none flex pt-20 flex-wrap">
-        <app-tourItem
-          class="h-[500px] w-1/3 rounded-3xl bg-transparent p-4 relative cursor-pointer"
-          *ngFor="let item of tours"
-          tourName="{{ item.name }}"
-          tourPrice="30"
-          tourPeople="30"
-          imgSrc="https://demo2.pavothemes.com/triply/wp-content/uploads/2020/11/5c486ea739c52128a578315e_DSC04947-copy-820x520.jpg"
-          tourDays="30"
-          tourLocation="Abcdzz"
-          id="{{ item.id }}"
-        ></app-tourItem>
-      </ul>
-    </div>
-  </ng-container>
+  <ng-template #tours>
+    <section *ngIf="tours$ | async as tours">
+      <app-searchbar></app-searchbar>
+      <div class="max-w-7xl w-full m-auto">
+        <!-- TourItem -->
+        <ul class="list-none flex pt-20 flex-wrap">
+          <app-tourItem
+            class="h-[500px] w-1/3 rounded-3xl bg-transparent p-4 relative cursor-pointer"
+            *ngFor="let tour of tours"
+            [tourName]="tour.name"
+            tourPrice="30"
+            [tourPeople]="tour.maxPeople"
+            [imgSrc]="tour.preview"
+            [tourDays]="tour.totalDays"
+            [tourLocation]="tour.location.name"
+            [id]="tour.id"
+          ></app-tourItem>
+        </ul>
+      </div>
+    </section>
+  </ng-template>
 </div>
 <app-bannerBot></app-bannerBot>

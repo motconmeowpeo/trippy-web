@@ -1,0 +1,115 @@
+<div
+  class="input relative flex flex-col text-surface-100 border-b border-outline h-full"
+  [class]="readonly ? 'cursor-not-allowed' : ''"
+  [ngClass]="className"
+>
+  <!-- Label -->
+  <label *ngIf="label" class="px-3 text-xs font-bold mb-1">
+    {{ label }}
+    <span *ngIf="required" class="text-pink-300">*</span>
+  </label>
+
+  <!-- Input Box -->
+  <app-menu
+    #menu
+    position="full"
+    [ngClass]="readonly ? 'pointer-events-none' : ''"
+  >
+    <div
+      class="flex items-center justify-between px-3 h-full relative z-1"
+      [ngClass]="menuClasses"
+      menuTrigger
+    >
+      <!-- Input -->
+      <input
+        #inputText
+        type="text"
+        [value]="text"
+        [placeholder]="placeholder || ''"
+        class="pr-3.5 focus:outline-none w-full flex-1 bg-transparent text-sm cursor-pointer truncate"
+        [ngClass]="{ 'text-surface-50 cursor-not-allowed': !!readonly }"
+        [readonly]="readonly"
+        (input)="filterSelect(inputText.value)"
+        (blur)="onBlur()"
+        (focus)="onFocus()"
+        (keydown.arrowup)="pressArrowUp()"
+        (keydown.arrowdown)="pressArrowDown()"
+        (keydown.enter)="pressEnter()"
+        (keydown.tab)="pressTab()"
+      />
+    </div>
+
+    <!-- Select List -->
+    <ul
+      class="flex flex-col bg-white shadow-base p-1 rounded text-xs max-h-32 overflow-y-auto"
+      menuContent
+    >
+      <li
+        class="inline-flex items-center px-3 py-2 cursor-pointer rounded hover:bg-background-2 relative"
+        *ngFor="let select of showSelect; index as i"
+        (click)="onSelect(select)"
+        [ngClass]="{
+          'bg-background-2 hover:bg-white': i === keyboardSelect,
+          'opacity-50 line-through': select?.disabled
+        }"
+      >
+        <div class="overflow-hidden truncate w-full">
+          <span
+            class="whitespace-nowrap mr-3"
+            [ngClass]="{
+              'text-primary-600 font-bold ': select.value === value
+            }"
+            >{{ select.name }}
+          </span>
+          <svg-icon
+            *ngIf="select.value === value"
+            class="left-full align-middle items-center text-primary-600"
+            fontSize="16px"
+            key="check"
+          ></svg-icon>
+        </div>
+      </li>
+      <!-- When show unless data -->
+      <div
+        *ngIf="!showSelect.length"
+        class="w-full text-md py-1 text-surface-25 flex items-center justify-center capitalize text-center"
+      >
+        {{ 'noDataFound' }}
+      </div>
+    </ul>
+  </app-menu>
+
+  <!-- Error -->
+  <span
+    *ngIf="error"
+    class="absolute top-full mt-1 ml-3 text-xs font-light whitespace-nowrap text-pink-500"
+    [innerHTML]="error"
+  >
+  </span>
+
+  <!-- Hint -->
+  <span
+    *ngIf="hint"
+    class="absolute top-full mt-1 ml-3 text-xs w-full font-light truncate text-surface-50"
+  >
+    <ng-content select="[hint]"></ng-content>
+  </span>
+
+  <!-- Icon -->
+  <div
+    (click)="menu.openMenu()"
+    class="absolute group right-2 top-1/-y-1/2 w-5 h-5 z-0"
+  >
+    <ng-container *ngIf="!loading; else iconLoading">
+      <svg-icon
+        class="text-surface-50 w-5"
+        [ngClass]="readonly ? 'text-surface-15 opacity-0' : ''"
+        [key]="suffixIcon"
+        fontSize="20px"
+      ></svg-icon>
+    </ng-container>
+    <ng-template #iconLoading>
+      <app-loading></app-loading>
+    </ng-template>
+  </div>
+</div>

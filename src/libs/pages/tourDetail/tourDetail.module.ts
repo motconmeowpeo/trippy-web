@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LoadingModule } from '@core/component/loading';
 const routes: Routes = [
   {
     path: '',
@@ -18,6 +19,7 @@ const routes: Routes = [
     NzCarouselModule,
     FontAwesomeModule,
     NzTabsModule,
+    LoadingModule,
   ],
   declarations: [TourDetailComponent],
 })

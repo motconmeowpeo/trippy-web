@@ -1,0 +1,4 @@
+export const infoIcon = {
+    data: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20.5716C16.7339 20.5716 20.5714 16.734 20.5714 12.0001C20.5714 7.26627 16.7339 3.42871 12 3.42871C7.26615 3.42871 3.42859 7.26627 3.42859 12.0001C3.42859 16.734 7.26615 20.5716 12 20.5716Z" stroke="#0F0F0F" stroke-opacity="0.8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15.4286V12" stroke="#0F0F0F" stroke-opacity="0.8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8.57129H12.0086" stroke="#0F0F0F" stroke-opacity="0.8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    name: 'info'
+};

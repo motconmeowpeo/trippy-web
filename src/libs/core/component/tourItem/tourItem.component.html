@@ -1,6 +1,10 @@
-<li [routerLink]="['/tour', id]" routerLinkActive="router-link-active">
+<li
+  class="h-full"
+  [routerLink]="['/tour', id]"
+  routerLinkActive="router-link-active"
+>
   <img
-    class="h-1/2 relative -bottom-4 z-10 rounded-3xl"
+    class="h-1/2 relative -bottom-4 z-10 object-cover rounded-3xl"
     src="{{ imgSrc }}"
     alt=""
   />
@@ -11,7 +15,7 @@
       nz-tooltip
       nzTooltipTitle="Tour name"
       nzTooltipPlacement="left"
-      class="block mt-5 font-bold text-xl"
+      class="mt-5 font-bold text-xl inline-block min-h-[56px]"
       >{{ tourName }}</span
     >
     <span
@@ -23,31 +27,29 @@
       <fa-icon [icon]="faLocationDot"></fa-icon>
       {{ tourLocation }}
     </span>
-    <div class="w-full flex justify-between">
-      <div nz-tooltip nzTooltipTitle="Tour price" nzTooltipPlacement="left">
-        <span>From</span>
-        <span class="text-primary font-bold block text-2xl"
-          >${{ tourPrice }}</span
+    <div class="w-full">
+      <div
+        class="w-full h-14 bg-white z-10 rounded-md shadow-full flex items-center justify-between p-4"
+      >
+        <div nz-tooltip nzTooltipTitle="Tour days" nzTooltipPlacement="left">
+          <fa-icon class="text-primary text-lg" [icon]="faCalendar"></fa-icon>
+          <span class="text-base ml-2">{{ tourDays }} days</span>
+        </div>
+        <div
+          nz-tooltip
+          nzTooltipTitle="Tour peoples"
+          nzTooltipPlacement="right"
         >
+          <fa-icon class="text-primary text-lg" [icon]="faUser"></fa-icon>
+          <span class="text-base ml-2">{{ tourPeople }}</span>
+        </div>
       </div>
       <button
-        class="min-w-[100px] h-11 flex items-center text-secondary font-bold hover:text-primary transition-all duration-300 rounded-lg"
+        class="min-w-[100px] h-11 flex float-right items-center text-secondary font-bold hover:text-primary transition-all duration-300 rounded-lg"
       >
         Explore
         <fa-icon class="text-primary ml-2" [icon]="faRight"></fa-icon>
       </button>
-    </div>
-    <div
-      class="w-full h-14 bg-white z-10 rounded-md shadow-full flex items-center justify-between p-4"
-    >
-      <div nz-tooltip nzTooltipTitle="Tour days" nzTooltipPlacement="left">
-        <fa-icon class="text-primary text-lg" [icon]="faCalendar"></fa-icon>
-        <span class="text-base ml-2">{{ tourDays }} days</span>
-      </div>
-      <div nz-tooltip nzTooltipTitle="Tour peoples" nzTooltipPlacement="right">
-        <fa-icon class="text-primary text-lg" [icon]="faUser"></fa-icon>
-        <span class="text-base ml-2">{{ tourPeople }}</span>
-      </div>
     </div>
   </div>
 </li>

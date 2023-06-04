@@ -1,0 +1,4 @@
+export const warningCircleIcon = {
+    data: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1_19825)"><circle cx="14" cy="14" r="14" fill="#FFF3E0"/><path d="M14 24C19.5228 24 24 19.5228 24 14C24 8.47715 19.5228 4 14 4C8.47715 4 4 8.47715 4 14C4 19.5228 8.47715 24 14 24Z" stroke="red" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 18V14" stroke="red" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 10H14.01" stroke="red" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></g><defs><clipPath id="clip0_1_19825"><rect width="28" height="28" fill="white"/></clipPath></defs></svg>`,
+    name: 'warning-circle'
+};
