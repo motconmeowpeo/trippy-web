@@ -8,6 +8,8 @@ const URL_REGISTER = 'register';
 const URL_BLOG = 'blog';
 const URL_PAGE = 'page';
 const URL_CONTACT = 'contact';
+const URL_MANAGER = 'manager';
+
 export {
   URL_HOME,
   URL_TOUR,
@@ -19,4 +21,5 @@ export {
   URL_LOGIN,
   URL_REGISTER,
   URL_DESTINATIONDETAIL,
+  URL_MANAGER,
 };

@@ -38,12 +38,58 @@
       ></fa-icon>
       <span>0334829504</span>
     </div>
-    <div
-      routerLink="login"
-      routerLinkActive="active"
-      class="text-xl ml-5 cursor-pointer relative hover:text-primaryhover after:content-[' '] after:absolute after:w-1px after:h-6 after:bg-black after:-left-4 after:z-10 after:cursor-default"
-    >
-      <fa-icon [icon]="faUser" nz-tooltip nzTooltipTitle="Account"></fa-icon>
+    <div class="text-xl ml-5 relative">
+      <fa-icon
+        *ngIf="!isAuthorized; else user"
+        routerLink="login"
+        routerLinkActive="active"
+        [icon]="faUser"
+        nz-tooltip
+        nzTooltipTitle="Login"
+        class="hover:text-primaryhover cursor-pointer"
+      ></fa-icon>
+      <ng-template #user>
+        <div #menu class="w-10 h-10 relative">
+          <img
+            class="w-full h-full object-cover cursor-pointer"
+            src="assets/avatar/defaultAvt2.png"
+            alt=""
+            (click)="toggleMenu()"
+          />
+          <div
+            class="absolute animate-display shadow-md top-full right-0 w-fit min-w-[150px]"
+            *ngIf="isMenuShown"
+          >
+            <ul class="overflow-hidden bg-white rounded-md">
+              <li
+                class="text-sm cursor-pointer hover:opacity-80 border-b border-gray-200 p-2 whitespace-nowrap bg-white"
+              >
+                My Profile
+              </li>
+              <li
+                class="text-sm cursor-pointer hover:opacity-80 border-b border-gray-200 px-2 py-3 whitespace-nowrap bg-white"
+              >
+                My Invoice
+              </li>
+
+              <li
+                *permissions="[PermissionCode.ADMIN, PermissionCode.BUSINESS]"
+                routerLink="manager"
+                routerLinkActive="active"
+                class="text-sm cursor-pointer hover:opacity-80 border-b border-gray-200 px-2 py-3 whitespace-nowrap bg-white"
+              >
+                Product Management
+              </li>
+              <li
+                (click)="logOut()"
+                class="text-sm cursor-pointer hover:opacity-80 border-b border-gray-200 p-2 whitespace-nowrap bg-white"
+              >
+                Log Out
+              </li>
+            </ul>
+          </div>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>

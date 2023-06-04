@@ -5,8 +5,17 @@ export interface IDestination {
   width: string;
   dataaos: string;
 }
-export interface IAuthCredential {
+export interface IAuth extends IToken {
+  user: User | null;
+}
+export interface IToken {
+  accessToken: string | null;
+}
+
+export interface User {
   username: string;
   email: string;
-  password: string;
+  active: boolean;
+  userRole: string;
+  code: number;
 }

@@ -68,9 +68,10 @@ module.exports = {
         heightScaleOn: {
           '0%': { maxHeight: '0' },
           '100%': {
-            maxHeight: '300vh',
+            maxHeight: '100%',
           },
         },
+
       }
 
     },

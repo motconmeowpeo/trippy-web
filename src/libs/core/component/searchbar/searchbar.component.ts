@@ -7,6 +7,8 @@ import { faCalendar, faUser } from '@fortawesome/free-regular-svg-icons';
 import {
   faLocationDot,
   faChevronDown,
+  faMagnifyingGlass,
+  faCircleXmark,
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -18,12 +20,15 @@ export class SearchbarComponent implements OnInit {
   faChevronDow = faChevronDown;
   faCalendar = faCalendar;
   faUser = faUser;
+  faSearch = faMagnifyingGlass;
+  faClear = faCircleXmark;
 
   destinationValue: string = 'Where are you going ?';
   dateValue: Date | string = 'Date from';
   adultNumber: number = 0;
   youthNumber: number = 0;
   childrenNumber: number = 0;
+  canClearInput = false;
 
   explore = EXPLORES;
 
@@ -54,5 +59,16 @@ export class SearchbarComponent implements OnInit {
   handleChildren(type: boolean) {
     type ? this.childrenNumber++ : this.childrenNumber--;
     if (this.childrenNumber < 0) this.childrenNumber = 0;
+  }
+
+  onInput() {
+    this.canClearInput = true;
+    if (this.explore.includes(this.destinationValue)) {
+      console.log(this.destinationValue);
+    }
+  }
+
+  clearInput() {
+    this.canClearInput = false;
   }
 }

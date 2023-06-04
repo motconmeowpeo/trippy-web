@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { faStarOfLife } from '@fortawesome/free-solid-svg-icons';
-import { Validators, FormControl } from '@angular/forms';
-import { EMAIL_REG_EXP, PASSWORD_REG_EXP, USER_REG_EXP } from '@core/constants';
-import { of, tap } from 'rxjs';
-import { RoleFacade } from 'src/libs/core/services/role/role.facade';
+import { Validators, FormControl, FormGroup } from '@angular/forms';
+import { EMAIL_REG_EXP, PASSWORD_REG_EXP } from '@core/constants';
+import { tap, delay, catchError, of } from 'rxjs';
+import * as AOS from 'aos';
+import { ILoginForm } from './login.form';
+import { AuthFacade } from '@core/services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,38 +16,51 @@ export class LoginComponent implements OnInit {
   faStarOfLife = faStarOfLife;
   emailMessage: string = '';
   passwordMessage: string = '';
-  constructor() {}
+  form!: FormGroup<ILoginForm>;
+  isLoading = false;
+  isLogin = false;
 
-  ngOnInit() {}
-  handleValidate(value: string, field: string) {
-    if (field === 'email') {
-      const emailController = new FormControl(value, [
-        Validators.required,
-        Validators.pattern(EMAIL_REG_EXP),
-      ]);
-      if (emailController.errors?.['required']) {
-        this.emailMessage = 'is required field';
-      } else {
-        if (emailController.status === 'INVALID') {
-          this.emailMessage = 'is invalid';
-        } else {
-          this.emailMessage = '';
-        }
-      }
-    } else if (field === 'password') {
-      const passwordController = new FormControl(value, [
-        Validators.required,
-        Validators.pattern(PASSWORD_REG_EXP),
-      ]);
-      if (passwordController.errors?.['required']) {
-        this.passwordMessage = 'is required field';
-      } else {
-        if (PASSWORD_REG_EXP.test(value)) {
-          this.passwordMessage = 'is invalid';
-        } else {
-          this.passwordMessage = '';
-        }
-      }
-    }
+  constructor(private authFacade: AuthFacade, private router: Router) {}
+
+  ngOnInit() {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+    this.createForm();
+  }
+
+  private createForm() {
+    this.form = new FormGroup({
+      email: new FormControl('', {
+        nonNullable: true,
+        validators: [Validators.required, Validators.pattern(EMAIL_REG_EXP)],
+        updateOn: 'change',
+      }),
+
+      password: new FormControl('', {
+        nonNullable: true,
+        validators: [Validators.required, Validators.pattern(PASSWORD_REG_EXP)],
+        updateOn: 'change',
+      }),
+    });
+  }
+
+  onSubmit() {
+    this.isLogin = true;
+    this.authFacade
+      .loginByEmail(this.form.value)
+      .pipe(
+        tap(() => {
+          this.isLogin = false;
+          this.form.reset();
+          this.router.navigate(['/']);
+        }),
+        catchError((err) => {
+          this.isLogin = false;
+          return of(err);
+        })
+      )
+      .subscribe();
   }
 }

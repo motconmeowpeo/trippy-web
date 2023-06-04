@@ -32,7 +32,7 @@
       <div class="flex flex-col">
         <span class="font-bold text-lg">Destination</span>
         <span class="text-global text-base">{{
-          this.destinationValue | titlecase
+          destinationValue | titlecase
         }}</span>
       </div>
     </div>
@@ -54,102 +54,29 @@
       </ul>
     </nz-dropdown-menu>
   </div>
-  <div
-    class="border-r-2 border-solid border-r-globaltext flex items-center flex-1 px-5 justify-between"
-  >
-    <div class="flex items-center justify-center">
-      <fa-icon class="text-primary text-xl mr-5" [icon]="faCalendar"></fa-icon>
-      <div class="flex flex-col justify-center">
-        <span class="font-bold text-lg">When</span>
-        <input
-          class="outline-none text-global text-base"
-          min="{{ this.minDate }}"
-          type="date"
-          [(ngModel)]="dateValue"
-        />
-      </div>
-    </div>
-  </div>
-  <div
-    class="flex items-center flex-1 px-5 justify-between relative cursor-pointer"
-  >
-    <div
-      class="flex items-center justify-between w-full"
-      (click)="toggleShowGuests()"
-    >
-      <div class="flex items-center justify-center">
-        <fa-icon class="text-primary text-xl mr-5" [icon]="faUser"></fa-icon>
-        <div class="flex flex-col">
-          <span class="font-bold text-lg">Guests</span>
-          <span class="text-global text-base">{{
-            this.adultNumber + this.youthNumber + this.childrenNumber
-          }}</span>
-        </div>
-      </div>
-
+  <div class="flex items-center flex-1 px-5 h-full justify-center relative">
+    <input
+      class="w-full h-full outline-primary border-2 border-global rounded-md px-2"
+      type="text"
+      (input)="onInput()"
+    />
+    <fa-icon
+      *ngIf="!canClearInput; else clear"
+      [icon]="faSearch"
+      class="text-lg absolute right-7 text-global"
+    ></fa-icon>
+    <ng-template #clear>
       <fa-icon
-        class="text-primary text-base mr-5"
-        [icon]="faChevronDow"
+        (click)="clearInput()"
+        [icon]="faClear"
+        class="text-lg absolute right-8 cursor-pointer text-gray-500"
       ></fa-icon>
-    </div>
-
-    <div
-      *ngIf="isShowGuests"
-      class="absolute bg-white w-full z-50 top-12 left-0 animate-display"
-    >
-      <div class="flex p-5 items-center">
-        <span class="flex-1">{{ this.adultNumber }}</span>
-        <span class="flex-1 text-base font-semibold">Adult</span>
-        <button
-          class="border-r-0 hover:bg-primary hover:text-white flex-1 max-w-[80px] rounded-l border border-solid border-global font-bold text-lg"
-          (click)="handleAdult(false)"
-        >
-          -
-        </button>
-        <button
-          class="border-l-0 hover:bg-primary hover:text-white flex-1 max-w-[80px] rounded-r border border-solid border-global font-bold text-lg"
-          (click)="handleAdult(true)"
-        >
-          +
-        </button>
-      </div>
-      <div class="flex p-5 items-center">
-        <span class="flex-1">{{ this.childrenNumber }}</span>
-        <span class="flex-1 text-base font-semibold">Children</span>
-        <button
-          class="border-r-0 hover:bg-primary hover:text-white flex-1 max-w-[80px] rounded-l border border-solid border-global font-bold text-lg"
-          (click)="handleChildren(false)"
-        >
-          -
-        </button>
-        <button
-          class="border-l-0 hover:bg-primary hover:text-white flex-1 max-w-[80px] rounded-r border border-solid border-global font-bold text-lg"
-          (click)="handleChildren(true)"
-        >
-          +
-        </button>
-      </div>
-      <div class="flex p-5 items-center">
-        <span class="flex-1">{{ this.youthNumber }}</span>
-        <span class="flex-1 text-base font-semibold">Youth</span>
-        <button
-          class="border-r-0 hover:bg-primary hover:text-white flex-1 max-w-[80px] rounded-l border border-solid border-global font-bold text-lg"
-          (click)="handleYouth(false)"
-        >
-          -
-        </button>
-        <button
-          class="border-l-0 hover:bg-primary hover:text-white flex-1 max-w-[80px] rounded-r border border-solid border-global font-bold text-lg"
-          (click)="handleYouth(true)"
-        >
-          +
-        </button>
-      </div>
-    </div>
+    </ng-template>
   </div>
-  <button
+
+  <!-- <button
     class="h-full bg-primary cursor-pointer flex flex-1 items-center justify-center rounded-md p-5 text-white font-bold hover:bg-primaryhover max-w-[150px]"
   >
     Search
-  </button>
+  </button> -->
 </div>

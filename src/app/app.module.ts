@@ -10,7 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
-import { ErrorMessageInterceptor } from '@core/services';
+import { AuthInterceptor, ErrorMessageInterceptor } from '@core/services';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthGuard } from '@core/guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +27,11 @@ import { ErrorMessageInterceptor } from '@core/services';
     HttpClientModule,
     BrowserAnimationsModule,
     NzNotificationModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => '',
+      },
+    }),
   ],
   providers: [
     {
@@ -32,6 +39,12 @@ import { ErrorMessageInterceptor } from '@core/services';
       useClass: ErrorMessageInterceptor,
       multi: true,
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    AuthGuard,
   ],
   bootstrap: [AppComponent],
 })

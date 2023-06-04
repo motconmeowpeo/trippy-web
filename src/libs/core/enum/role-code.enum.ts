@@ -1,5 +1,5 @@
-export enum RoleCode {
+export enum PermissionCode {
   ADMIN = 99999,
-  PERSONAL = 99998,
-  BUSINESS = 99997,
+  BUSINESS = 99998,
+  PERSONAL = 99997,
 }

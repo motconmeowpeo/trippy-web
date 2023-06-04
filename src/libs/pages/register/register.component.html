@@ -6,7 +6,7 @@
     (ngSubmit)="onSubmit()"
     *ngIf="!isLoading; else loading"
   >
-    <div class="w-full flex justify-center flex-col">
+    <div class="w-full flex justify-center flex-col" data-aos="flip-left">
       <span class="font-bold text-2xl block m-auto">Register</span>
       <!-- Username -->
       <div class="flex flex-col">
@@ -24,12 +24,6 @@
           placeholder="Username..."
           formControlName="username"
         />
-        <span
-          class="text-xs text-red-500"
-          *ngIf="this.form.controls.username.errors?.['required']"
-        >
-          Username is required field
-        </span>
         <span
           class="text-xs text-red-500"
           *ngIf="this.form.controls.username.status === 'INVALID'
@@ -57,12 +51,6 @@
           formControlName="email"
         />
       </div>
-      <span
-        class="text-xs text-red-500"
-        *ngIf="this.form.controls.email.errors?.['required']"
-      >
-        Email is required field
-      </span>
 
       <span
         class="text-xs text-red-500"
@@ -89,12 +77,7 @@
           placeholder="Password"
           formControlName="password"
         />
-        <span
-          class="text-xs text-red-500"
-          *ngIf="this.form.controls.password.errors?.['required']"
-        >
-          Password is required field
-        </span>
+
         <span
           class="text-xs text-red-500"
           *ngIf="this.form.controls.password.status === 'INVALID'
@@ -130,7 +113,10 @@
       <!-- Role -->
       <section *ngIf="roles$ | async as roles" class="mt-2">
         <div *ngFor="let role of roles" class="flex items-center">
-          <div *ngIf="role.code !== RoleCode.ADMIN" class="flex items-center">
+          <div
+            *ngIf="role.code !== PermissionCode.ADMIN"
+            class="flex items-center"
+          >
             <input type="radio" [value]="role?.id" formControlName="roleId" />
             <label class="ml-2">{{ role.name | titlecase }}</label>
           </div>
@@ -138,15 +124,18 @@
       </section>
 
       <button
-        [disabled]="form.invalid || isLoadingCreate"
+        [disabled]="form.invalid"
         [ngClass]="
           form.invalid || isLoadingCreate
             ? 'cursor-no-drop border-black border border-solid text-black'
             : 'hover:bg-primaryhover bg-primary cursor-pointer text-white'
         "
-        class="m-auto min-w-[100px] duration-300 transition-all h-10 text-lg font-semibold rounded-lg mt-5"
+        class="m-auto flex justify-center items-center min-w-[100px] duration-300 transition-all h-10 text-lg font-semibold rounded-lg mt-5"
       >
-        Sign up
+        <span *ngIf="!isLoadingCreate; else loadingSm">Sign Up</span>
+        <ng-template #loadingSm>
+          <app-loading-small></app-loading-small>
+        </ng-template>
       </button>
 
       <span class="mt-4"
@@ -155,7 +144,7 @@
           class="font-semibold text-lg text-primary cursor-pointer"
           [routerLink]="['/login']"
           routerLinkActive="router-link-active"
-          >Sign in</span
+          >Sign In</span
         >
       </span>
     </div>
