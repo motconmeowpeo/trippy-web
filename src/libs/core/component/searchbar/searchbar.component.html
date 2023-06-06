@@ -1,77 +1,20 @@
-<div
-  class="w-full max-w-7xl m-auto -mt-10 p-5 h-20 bg-white relative flex rounded-xl items-center"
->
-  <div
-    nz-dropdown
-    nzTrigger="click"
-    [nzDropdownMenu]="menu"
-    class="relative border-r-2 border-solid border-r-globaltext flex items-center flex-1 px-5 justify-between cursor-pointer"
-  >
-    <!-- <div class="flex items-center">
-      <fa-icon
-        class="text-primary text-xl mr-5"
-        [icon]="faLocationDot"
-      ></fa-icon>
-      <div class="flex flex-col">
-        <span class="font-bold text-lg">Destination</span>
-        <span class="text-global text-base">{{
-          this.destinationValue | titlecase
-        }}</span>
-      </div>
-    </div>
-    <fa-icon
-      class="text-primary text-base mr-5 cursor-pointer"
-      [icon]="faChevronDow"
-    ></fa-icon> -->
+<div class="w-full max-w-7xl m-auto -mt-10 p-5 h-20 bg-white relative justify-evenly flex rounded-xl items-center"
+  [formGroup]="form">
+  <app-select [selectList]="selectCountry" [hint]="false" [readonly]="false" placeholder="Where are you going ?"
+    [icon]="faLocationDot" classIcon="text-primary" className="flex-1" [loading]="isLoading" formControlName="country">
+  </app-select>
 
-    <div class="flex items-center">
-      <fa-icon
-        class="text-primary text-xl mr-5"
-        [icon]="faLocationDot"
-      ></fa-icon>
-      <div class="flex flex-col">
-        <span class="font-bold text-lg">Destination</span>
-        <span class="text-global text-base">{{
-          destinationValue | titlecase
-        }}</span>
-      </div>
-    </div>
-    <fa-icon
-      class="text-primary text-base mr-5 cursor-pointer"
-      [icon]="faChevronDow"
-    ></fa-icon>
-
-    <nz-dropdown-menu #menu="nzDropdownMenu">
-      <ul nz-menu>
-        <li
-          nz-menu-item
-          (click)="destinationValue = item"
-          class="p-1 pl-10 hover:text-primary hover:bg-gray-200 text-globaltext"
-          *ngFor="let item of explore"
-        >
-          {{ item | titlecase }}
-        </li>
-      </ul>
-    </nz-dropdown-menu>
-  </div>
-  <div class="flex items-center flex-1 px-5 h-full justify-center relative">
-    <input
+  <app-select [selectList]="selectCountry" [hint]="false" [readonly]="form.invalid" placeholder="Choose states ?"
+    [icon]="faLocationDot" classIcon="text-primary" className="flex-1" [loading]="isLoading" formControlName="state">
+  </app-select>
+  <div class="flex items-center px-5 h-full relative">
+    <!-- <input
       class="w-full h-full outline-primary border-2 border-global rounded-md px-2"
       type="text"
       (input)="onInput()"
-    />
-    <fa-icon
-      *ngIf="!canClearInput; else clear"
-      [icon]="faSearch"
-      class="text-lg absolute right-7 text-global"
-    ></fa-icon>
-    <ng-template #clear>
-      <fa-icon
-        (click)="clearInput()"
-        [icon]="faClear"
-        class="text-lg absolute right-8 cursor-pointer text-gray-500"
-      ></fa-icon>
-    </ng-template>
+    /> -->
+    <app-search className="w-full" placeholder="Search..." formControlName="search"></app-search>
+
   </div>
 
   <!-- <button

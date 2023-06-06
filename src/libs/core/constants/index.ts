@@ -5,3 +5,4 @@ export * from './regex.constant';
 export * from './url.constant';
 export * from './role.constant';
 export * from './base.constant';
+export * from './time.constant';

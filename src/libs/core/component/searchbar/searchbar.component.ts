@@ -4,18 +4,23 @@ import zh from '@angular/common/locales/zh';
 registerLocaleData(zh);
 import { EXPLORES } from '@core/constants';
 import { faCalendar, faUser } from '@fortawesome/free-regular-svg-icons';
+import { LocationFacade } from '@core/services';
 import {
   faLocationDot,
   faChevronDown,
   faMagnifyingGlass,
   faCircleXmark,
 } from '@fortawesome/free-solid-svg-icons';
-
+import { BaseComponent } from '@core/base';
+import { ISelectItem } from '@core/model';
+import { tap } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ISearchForm } from './searchBar.form';
 @Component({
   selector: 'app-searchbar',
   templateUrl: './searchbar.component.html',
 })
-export class SearchbarComponent implements OnInit {
+export class SearchbarComponent extends BaseComponent implements OnInit {
   faLocationDot = faLocationDot;
   faChevronDow = faChevronDown;
   faCalendar = faCalendar;
@@ -29,46 +34,60 @@ export class SearchbarComponent implements OnInit {
   youthNumber: number = 0;
   childrenNumber: number = 0;
   canClearInput = false;
-
-  explore = EXPLORES;
-
+  selectCountry: ISelectItem[] = [];
+  selectState: ISelectItem[] = [];
+  form!: FormGroup<ISearchForm>;
   isShowGuests = false;
   minDate: any;
-
-  constructor() {}
+  constructor(private locationfacade: LocationFacade) {
+    super();
+  }
 
   ngOnInit() {
-    var minDate = new Date();
-    minDate.setDate(minDate.getDate() + 7);
-    this.minDate = minDate.toISOString().substring(0, 10);
+    this.isLoading = true;
+    this.locationfacade
+      .getAllLocation()
+      .pipe(
+        tap((locations) => {
+          this.selectCountry = locations.map((location) => {
+            return {
+              name: location.name,
+              value: location.iso2,
+            };
+          });
+          this.isLoading = false;
+        })
+      )
+      .subscribe();
+    this.createForm();
   }
 
-  toggleShowGuests() {
-    this.isShowGuests
-      ? (this.isShowGuests = false)
-      : (this.isShowGuests = true);
-  }
-  handleAdult(type: boolean) {
-    type ? this.adultNumber++ : this.adultNumber--;
-    if (this.adultNumber < 0) this.adultNumber = 0;
-  }
-  handleYouth(type: boolean) {
-    type ? this.youthNumber++ : this.youthNumber--;
-    if (this.youthNumber < 0) this.youthNumber = 0;
-  }
-  handleChildren(type: boolean) {
-    type ? this.childrenNumber++ : this.childrenNumber--;
-    if (this.childrenNumber < 0) this.childrenNumber = 0;
-  }
 
   onInput() {
     this.canClearInput = true;
-    if (this.explore.includes(this.destinationValue)) {
-      console.log(this.destinationValue);
-    }
+
+    // if (this.explore.includes(this.destinationValue)) {
+    //   console.log(this.destinationValue);
+    // }
   }
 
   clearInput() {
     this.canClearInput = false;
+  }
+
+  private createForm() {
+    this.form = new FormGroup({
+      country: new FormControl('', {
+        nonNullable: true,
+        validators: [Validators.required],
+        updateOn: 'change',
+      }),
+
+      state: new FormControl('', {
+        nonNullable: true,
+        updateOn: 'change',
+      }),
+      search: new FormControl('', { nonNullable: true }),
+    });
   }
 }

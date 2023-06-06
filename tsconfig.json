@@ -20,6 +20,7 @@
     "module": "ES2022",
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"],
+    "preserveSymlinks": true,
     "paths": {
       "@core/*": ["src/libs/core/*/index.ts"],
       "@pages/*": ["src/libs/pages/*/index.ts"],

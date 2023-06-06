@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
+import { Injectable } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
+import { BaseComponent } from './component.base';
 
-export class BaseControlValueAccessor<T> implements ControlValueAccessor {
+export class BaseControlValueAccessor<T>
+  extends BaseComponent
+  implements ControlValueAccessor
+{
   disabled = false;
   value!: T;
 

@@ -1,0 +1,35 @@
+<div
+  #search
+  class="search relative flex items-center px-3 py-1 bg-white rounded border-2 border-primary h-full w-full text-surface-50 text-sm min-h-[45px] min-w-[350px]"
+  [ngClass]="className"
+>
+  <!-- Search Icon -->
+  <svg-icon key="search" fontSize="16px"></svg-icon>
+
+  <!-- Input -->
+  <input
+    #input
+    class="mx-3 focus:outline-none bg-transparent w-full truncate"
+    type="text"
+    [attr.placeholder]="placeholder"
+    [value]="value || ''"
+    (input)="onInput($event)"
+    (focus)="onFocus()"
+  />
+
+  <!-- Clear Icon -->
+  <svg-icon
+    *ngIf="value && document.activeElement === input"
+    class="cursor-pointer absolute right-2"
+    key="close"
+    fontSize="12px"
+    (click)="clearInput()"
+  ></svg-icon>
+
+  <div
+    *ngIf="hasBoxValue && isPopupShown"
+    class="absolute transition-all duration-700 sm:max-h-96 max-h-56 animate-fade-in-0.3 flex justify-center w-full overflow-y-auto overflow-x-hidden top-10 min-h-[30px] left-0 bg-white shadow-base px-4 py-2"
+  >
+    <ng-content></ng-content>
+  </div>
+</div>

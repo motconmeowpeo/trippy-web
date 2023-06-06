@@ -1,0 +1,88 @@
+<div
+  *ngIf="pages?.length"
+  class="flex items-center justify-between border-b border-l border-[#E8E8E8] border-gray-200 bg-white px-4 sm:px-6"
+  [ngClass]="className"
+>
+  <div
+    class="flex flex-col sm:flex-row w-full justify-between sm:flex-1 items-center"
+  >
+    <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+      <p class="pr-1 text-xs sm:text-sm text-gray-700 w-full text-end mr-1">
+        {{ 'resultsPerPage' }}
+      </p>
+
+      <select
+        class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-xs sm:text-sm border-[#E8E8E8] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-14 h-8 mr-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none disabled:cursor-not-allowed"
+      >
+        <option
+          *ngFor="let limit of pageLimitOptions"
+          [selected]="isSelected(limit)"
+        >
+          {{ limit }}
+        </option>
+      </select>
+    </div>
+
+    <div class="py-1 sm:py-0 sm:ml-6 sm:m-[33px]">
+      <p class="text-xs sm:text-sm text-gray-700">
+        <span class="font-medium">
+          {{ (currentPage - 1) * limit + 1 | number }}
+        </span>
+        -
+        <span class="font-medium">
+          {{
+            currentPage * limit < total
+              ? (currentPage * limit | number)
+              : (total | number)
+          }}
+        </span>
+        {{ 'of' }}
+        <span class="font-medium">{{ total | number }}</span>
+      </p>
+    </div>
+
+    <div class="flex gap-1 select-none text-gray-700 sm:py-0">
+      <!-- Prev -->
+      <button
+        class="rounded-full flex flex-row items-center bg-grey-500 hover:bg-gray-4 w-8 h-8 mt-1.5 justify-around mr-3"
+        [ngClass]="{
+          'opacity-10 pointer-events-none': !canPrev
+        }"
+        (click)="onPrev()"
+      >
+        <svg-icon
+          class="rotate-180 text-surface-50"
+          key="chevron"
+          fontSize="20px"
+        ></svg-icon>
+      </button>
+
+      <!-- Pages -->
+      <button
+        *ngFor="let page of pages"
+        [ngClass]="{
+          'bg-primary-600 text-white': currentPage === page
+        }"
+        class="px-3 py-2 border border-[#E8E8E8] border-gray-500 rounded-lg box-border flex flex-row items-center p-[9px] gap-1 w-8 h-8 mt-1.5 justify-around"
+        (click)="onGoTo(page)"
+      >
+        {{ page }}
+      </button>
+
+      <!-- Next -->
+      <button
+        class="rounded-full flex flex-row items-center bg-grey-500 hover:bg-gray-4 w-8 h-8 mt-1.5 justify-around ml-3"
+        [ngClass]="{
+          'opacity-10 pointer-events-none': !canNext
+        }"
+        (click)="onNext()"
+      >
+        <svg-icon
+          class="text-surface-50"
+          key="chevron"
+          fontSize="20px"
+        ></svg-icon>
+      </button>
+    </div>
+  </div>
+</div>

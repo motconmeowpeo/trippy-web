@@ -1,7 +1,6 @@
 @import '../node_modules/ng-zorro-antd/ng-zorro-antd.min.css';
 @import '../node_modules/aos/dist/aos.css';
 
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,7 +13,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
   border-width: thin;
   cursor: pointer;
 }
-html{
+html {
   scroll-behavior: smooth;
   /* overflow-x: hidden; */
 }

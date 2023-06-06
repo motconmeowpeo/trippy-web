@@ -8,6 +8,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TourItemModule } from '@core/component/tourItem';
 import { SearchbarModule } from '@core/component/searchbar';
 import { BannerBotModule } from '@core/component/bannerBot';
+import { SvgIconsModule } from '@ngneat/svg-icon';
+import { MenuModule, SelectModule } from '@core/ui';
 
 const routes: Routes = [
   {
@@ -23,8 +25,11 @@ const routes: Routes = [
     BannerModule,
     FontAwesomeModule,
     TourItemModule,
+    SvgIconsModule,
     SearchbarModule,
     BannerBotModule,
+    SelectModule,
+    MenuModule,
   ],
   declarations: [TourComponent],
 })

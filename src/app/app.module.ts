@@ -13,6 +13,7 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { AuthInterceptor, ErrorMessageInterceptor } from '@core/services';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from '@core/guard';
+import { IconsModule } from '@core/ui';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import { AuthGuard } from '@core/guard';
     HttpClientModule,
     BrowserAnimationsModule,
     NzNotificationModule,
+    IconsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => '',

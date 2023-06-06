@@ -1,0 +1,69 @@
+<div
+  class="input relative flex flex-col text-surface-100 px-3 pb-0.5 border-b border-outline"
+  [ngClass]="className"
+  [class]="readonly ? 'cursor-not-allowed' : ''"
+>
+  <!-- Label -->
+  <label *ngIf="label" [ngClass]="labelClass" class="text-xs font-bold mb-1">
+    {{ label }}
+    <span *ngIf="required" class="text-pink-300">*</span>
+  </label>
+
+  <!-- Input -->
+  <div class="flex items-center">
+    <ng-content select="[detail]"></ng-content>
+    <input
+      class="w-full pr-2 focus:outline-none bg-transparent text-sm"
+      [ngClass]="{ 'text-surface-50 cursor-not-allowed': !!readonly }"
+      [type]="isPasswordShown ? 'text' : type"
+      [attr.placeholder]="placeholder"
+      [attr.readonly]="readonly"
+      [value]="value || ''"
+      (blur)="onBlur($event)"
+      (input)="onInput($event)"
+      [disabled]="disabled"
+      [attr.autocomplete]="!!isTypePassword && label"
+      (keydown.space)="blockSpace($event)"
+      [multiple]="multiple"
+    />
+
+    <!-- Icon -->
+    <ng-content select="[icon]"></ng-content>
+
+    <!-- Suffix -->
+    <span *ngIf="suffix" class="ml-2 text-grey-300 text-sm">{{ suffix }}</span>
+
+    <!-- Icon for type Password -->
+    <svg-icon
+      *ngIf="isTypePassword"
+      class="cursor-pointer text-xl"
+      [key]="isPasswordShown ? 'eye' : 'eye-off'"
+      fontSize="20px"
+      (click)="togglePassword()"
+    ></svg-icon>
+  </div>
+
+  <!-- Error -->
+  <span
+    *ngIf="error"
+    class="absolute top-full mt-1 text-xs font-light sm:whitespace-nowrap whitespace-normal text-pink-500"
+    [innerHTML]="error"
+  >
+  </span>
+
+  <div
+    *ngIf="isTypePassword && isStrongPassword && error"
+    class="absolute top-1/2 right-10 -translate-y-1 w-4 h-4 rounded-1/2 flex items-center justify-center bg-pink-500"
+  >
+    <svg-icon class="text-white" key="exclamation" fontSize="10px"></svg-icon>
+  </div>
+
+  <!-- Hint -->
+  <span
+    *ngIf="!error && hint"
+    class="absolute top-full mt-1 text-xs font-light text-surface-50"
+    [ngClass]="willBreakHintWords ? 'break-all' : 'whitespace-nowrap'"
+    [innerHTML]="hint"
+  >
+  </span>
+</div>

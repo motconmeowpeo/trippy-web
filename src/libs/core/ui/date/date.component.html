@@ -1,0 +1,60 @@
+<div
+  class="input-date relative flex flex-col text-surface-100 pl-3 border-b border-outline h-full"
+  [class]="readonly ? 'cursor-not-allowed' : ''"
+  [ngClass]="className"
+>
+  <!-- Label -->
+  <label *ngIf="label" class="text-xs font-bold">
+    {{ label }} <span *ngIf="required" class="text-pink-300">*</span>
+  </label>
+
+  <!-- Input -->
+  <div
+    class="relative h-6 group flex"
+    [class]="readonly ? 'cursor-not-allowed pointer-events-none' : ''"
+    [ngClass]="inputClassName"
+  >
+    <!-- Date picker -->
+    <nz-date-picker
+      #datePicker
+      class="w-full px-0 text-lg"
+      [nzBackdrop]="true"
+      nzBorderless
+      [(ngModel)]="value"
+      (ngModelChange)="onInput($event)"
+      [nzSuffixIcon]="suffixIcon"
+      [nzFormat]="formatDate || SETTING_FORMAT_DATE || DEFAULT_FORMAT_DATE"
+      [nzPlaceHolder]="placeholder"
+      [nzDisabledDate]="disabledDate"
+      [nzDisabled]="readonly"
+      [nzAllowClear]="allowClear"
+      (input)="onTypingDay($event)"
+    ></nz-date-picker>
+
+    <!-- Icon -->
+    <ng-template #suffixIcon>
+      <svg-icon
+        [ngClass]="{
+          'group-hover:opacity-0 group-hover:duration-550': value.length
+        }"
+        [key]="customIcon"
+        fontSize="20px"
+      ></svg-icon>
+    </ng-template>
+  </div>
+
+  <!-- Error -->
+  <span
+    *ngIf="error"
+    class="absolute top-full mt-1 text-xs font-light whitespace-nowrap text-pink-500"
+    [innerHTML]="error"
+  >
+  </span>
+
+  <!-- Hint -->
+  <p
+    *ngIf="!error && hint"
+    class="absolute top-full mt-1 text-xs font-light text-surface-50"
+    [innerHTML]="hint"
+  ></p>
+</div>

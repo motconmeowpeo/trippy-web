@@ -10,6 +10,7 @@ import { EMPTY_INDEX, EMPTY_STRING } from '@core/constants';
 import { MenuComponent } from '../menu';
 import { BaseControlValueAccessor } from '@core/base';
 import { ISelectItem } from '@core/model';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'app-select',
@@ -33,6 +34,8 @@ export class SelectComponent extends BaseControlValueAccessor<
   @Input() error!: string;
   @Input() hint!: boolean;
   @Input() required!: string;
+  @Input() icon!: IconProp;
+  @Input() classIcon!: string;
   @Input() set selectList(selectList: ISelectItem[]) {
     this._selectList = [...selectList];
   }

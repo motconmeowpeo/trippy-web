@@ -8,10 +8,10 @@ export const SERVICES = [
   'contact',
 ];
 export const EXPLORES = [
-  'united state',
-  'canada',
-  'asia',
-  'africa',
-  'cambodia',
-  'europe',
+  { name: 'united state', value: 'united state' },
+  { name: 'canada', value: 'canada state' },
+  { name: 'asia', value: 'asia state' },
+  { name: 'africa', value: 'africa state' },
+  { name: 'cambodia', value: 'cambodia state' },
+  { name: 'europe', value: 'europe state' },
 ];
