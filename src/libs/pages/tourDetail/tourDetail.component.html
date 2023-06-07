@@ -14,9 +14,8 @@
         </div>
       </nz-carousel>
     </div>
-    <!-- content -->
+    <!-- Head -->
     <div class="w-full max-w-7xl m-auto mt-10">
-      <!-- Head -->
       <div class="flex items-center justify-between">
         <!-- Duration -->
         <div class="flex items-center">
@@ -48,6 +47,11 @@
           </div>
         </div>
       </div>
+    </div>
+    <!-- content -->
+    <div class="w-full max-w-7xl m-auto mt-10">
+      
+     
       <!-- Tabs -->
       <div class="card-container mt-10 pb-10 w-[70%]">
         <nz-tabset nzType="card">
@@ -113,15 +117,637 @@
           </nz-tab>
           <nz-tab nzTitle="REVIEWS">
             <ng-template nz-tab>
-              <span>Content 3</span>
+              <!-- Review Score -->
+              <div class="review-score flex mb-20">
+                <div class="rating-value text-center w-[30%] m-auto">
+                  <div class="rating-score text-5xl font-bold">
+                    4.18<span class="text-base text-neutral-900">/5</span>
+                  </div>
+                  <div class="ratting-text text-gray-600 font-medium">
+                    Wonderful
+                  </div>
+                  <div class="rating-vote text-gray-500 font-normal">
+                    8 verified reviews
+                  </div>
+                </div>
+                <div class="review-criteria flex flex-wrap">
+                  <div class="review-item w-[43%] mt-4 mx-4">
+                    <div class="flex">
+                      <span class="post-rating-criterion text-lg font-semibold"
+                        >Location</span
+                      >
+                      <span
+                        class="post-rating-value ml-auto font-semibold text-gray-700"
+                        >4.38/5</span
+                      >
+                    </div>
+                    <div class="review-progress w-full bg-gray-200 h-2 mt-2">
+                      <div class="bg-primary h-2" style="width: 88%"></div>
+                    </div>
+                  </div>
+                  <div class="review-item w-[43%] mt-4 mx-4">
+                    <div class="flex">
+                      <span class="post-rating-criterion text-lg font-semibold"
+                        >Amenities</span
+                      >
+                      <span
+                        class="post-rating-value ml-auto font-semibold text-gray-700"
+                        >4.13/5</span
+                      >
+                    </div>
+                    <div class="review-progress w-full bg-gray-200 h-2 mt-2">
+                      <div class="bg-primary h-2" style="width: 83%"></div>
+                    </div>
+                  </div>
+                  <div class="review-item w-[43%] mt-4 mx-4">
+                    <div class="flex">
+                      <span class="post-rating-criterion text-lg font-semibold"
+                        >Services</span
+                      >
+                      <span
+                        class="post-rating-value ml-auto font-semibold text-gray-700"
+                        >3.88/5</span
+                      >
+                    </div>
+                    <div class="review-progress w-full bg-gray-200 h-2 mt-2">
+                      <div class="bg-primary h-2" style="width: 78%"></div>
+                    </div>
+                  </div>
+                  <div class="review-item w-[43%] mt-4 mx-4">
+                    <div class="flex">
+                      <span class="post-rating-criterion text-lg font-semibold"
+                        >Price</span
+                      >
+                      <span
+                        class="post-rating-value ml-auto font-semibold text-gray-700"
+                        >3.88/5</span
+                      >
+                    </div>
+                    <div class="review-progress w-full bg-gray-200 h-2 mt-2">
+                      <div class="bg-primary h-2" style="width: 78%"></div>
+                    </div>
+                  </div>
+                  <div class="review-item w-[43%] mt-4 mx-4">
+                    <div class="flex">
+                      <span class="post-rating-criterion text-lg font-semibold"
+                        >Rooms</span
+                      >
+                      <span
+                        class="post-rating-value ml-auto font-semibold text-gray-700"
+                        >4.63/5</span
+                      >
+                    </div>
+                    <div class="review-progress w-full bg-gray-200 h-2 mt-2">
+                      <div class="bg-primary h-2" style="width: 93%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <!-- Review Comments -->
+              <div class="review-comments mt-3 mb-10">
+                <div class="">
+                  <span>Showing 6–8 of 8 comments</span>
+                </div>
+                <div class="comments-box shadow-lg p-4 m-auto">
+                  <div *ngFor="let index of [0, 1, 2]" class="comment mt-4">
+                    <hr />
+                    <div class="comment-avatar w-16 h-16 mt-12">
+                      <img
+                        src="../../../assets/avatar/defaultAvt2.png"
+                        alt=""
+                      />
+                    </div>
+                    <div class="comment-meta">
+                      <div
+                        class="comment-name text-gray-900 font-semibold mt-2"
+                      >
+                        Elicia
+                      </div>
+                      <div class="comment-time">27 Nov, 2020</div>
+                      <div class="comment-ratings flex mt-3">
+                        <div
+                          class="comment-rating comment-rating-location mr-6"
+                        >
+                          <div
+                            class="comment-rating-title text-gray-500 font-normal text-base"
+                          >
+                            Location
+                          </div>
+                          <div class="comment-rating-score">
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                            <fa-icon class="text-sm" [icon]="faStar"></fa-icon>
+                            <fa-icon class="text-sm" [icon]="faStar"></fa-icon>
+                          </div>
+                        </div>
+                        <div
+                          class="comment-rating comment-rating-amenities mr-6"
+                        >
+                          <div
+                            class="comment-rating-title text-gray-500 font-normal text-base"
+                          >
+                            Amenities
+                          </div>
+                          <div class="comment-rating-score">
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                          </div>
+                        </div>
+                        <div
+                          class="comment-rating comment-rating-services mr-6"
+                        >
+                          <div
+                            class="comment-rating-title text-gray-500 font-normal text-base"
+                          >
+                            Services
+                          </div>
+                          <div class="comment-rating-score">
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                            <fa-icon class="text-sm" [icon]="faStar"></fa-icon>
+                          </div>
+                        </div>
+                        <div class="comment-rating comment-rating-price mr-6">
+                          <div
+                            class="comment-rating-title text-gray-500 font-normal text-base"
+                          >
+                            Price
+                          </div>
+                          <div class="comment-rating-score">
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                          </div>
+                        </div>
+                        <div class="comment-rating comment-rating-rooms mr-6">
+                          <div
+                            class="comment-rating-title text-gray-500 font-normal text-base"
+                          >
+                            Rooms
+                          </div>
+                          <div class="comment-rating-score">
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                            <fa-icon
+                              class="text-sm text-primary"
+                              [icon]="faStar"
+                            ></fa-icon>
+                            <fa-icon class="text-sm" [icon]="faStar"></fa-icon>
+                            <fa-icon class="text-sm" [icon]="faStar"></fa-icon>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="comment-content mt-3 text-gray-500 font-normal text-lg"
+                      >
+                        This is exactly what i was looking for, thank you so
+                        much for these tutorials
+                      </div>
+                      <div class="comment-react mt-3 hover:text-primary">
+                        <button>Reply</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="comment-older">
+                  <button
+                    class="border border-primary rounded text-gray-900 font-extrabold text-xs p-3 hover:text-primary"
+                  >
+                    <fa-icon
+                      class="text-primary font-thin text-lg mr-3"
+                      [icon]="faArrowLeft"
+                    ></fa-icon>
+                    OLDER COMMENTS
+                  </button>
+                </div>
+              </div>
+              <hr />
+              <!-- Review Leave a Reply -->
+              <div class="review-post-comment mt-10">
+                <div class="post-cmt-header">
+                  <span class="text-gray-900 font-bold text-4xl"
+                    >Leave a Reply</span
+                  ><br />
+                  <span class="post-cmt-description text-blurred-lg"
+                    >Your email address will not be published. Required fields
+                    are marked *</span
+                  >
+                </div>
+                <div class="post-cmt-body mt-3">
+                  <div class="post-cmt-meta">
+                    <div class="flex mt-5">
+                      <input
+                        type="text"
+                        class="w-[30%] p-3 mr-3 border-2 outline-primary rounded border-gray-400 text-gray-600"
+                        placeholder="Your Name *"
+                      />
+                      <input
+                        type="text"
+                        class="w-[30%] p-3 mr-3 border-2 outline-primary rounded border-gray-400"
+                        placeholder="Email Address *"
+                      />
+                      <input
+                        type="text"
+                        class="w-[30%] p-3 border-2 outline-primary rounded border-gray-400"
+                        placeholder="Your Website"
+                      />
+                    </div>
+                    <div class="flex mt-5">
+                      <input
+                        type="text"
+                        class="w-[60%] p-3 mr-3 border-2 outline-primary rounded border-gray-400 text-gray-600"
+                        placeholder="Comment"
+                      />
+                      <div class="post-cmt-ratings mt-3">
+                        <div
+                          class="post-cmt-rating post-cmt-rating-location flex mr-6"
+                        >
+                          <div
+                            class="text-blurred-lg text-gray-500 font-normal text-base mr-8"
+                          >
+                            Location
+                          </div>
+                          <div class="post-cmt-rating-score">
+                            <!-- <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                        <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                        <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                        <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                        <fa-icon class="text-lg" [icon]="faStar"></fa-icon> -->
+                            <app-rating></app-rating>
+                          </div>
+                        </div>
+                        <div
+                          class="post-cmt-rating post-cmt-rating-amenities flex mr-6"
+                        >
+                          <div
+                            class="text-blurred-lg text-gray-500 font-normal text-base mr-6"
+                          >
+                            Amenities
+                          </div>
+                          <div class="post-cmt-rating-score">
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                          </div>
+                        </div>
+                        <div
+                          class="post-cmt-rating post-cmt-rating-services flex mr-6"
+                        >
+                          <div
+                            class="text-blurred-lg text-gray-500 font-normal text-base mr-9"
+                          >
+                            Services
+                          </div>
+                          <div class="post-cmt-rating-score">
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                          </div>
+                        </div>
+                        <div
+                          class="post-cmt-rating post-cmt-rating-price flex mr-6"
+                        >
+                          <div
+                            class="text-blurred-lg text-gray-500 font-normal text-base mr-14"
+                          >
+                            Price
+                          </div>
+                          <div class="post-cmt-rating-score">
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                          </div>
+                        </div>
+                        <div
+                          class="post-cmt-rating post-cmt-rating-rooms flex mr-6"
+                        >
+                          <div
+                            class="text-blurred-lg text-gray-500 font-normal text-base mr-11"
+                          >
+                            Rooms
+                          </div>
+                          <div class="post-cmt-rating-score">
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                            <fa-icon class="text-lg" [icon]="faStar"></fa-icon>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-3">
+                    <input type="checkbox" class="mr-3 p-2" id="save-info" />
+                    <label class="text-blurred-lg" for="save-info"
+                      >Save my name, email, and website in this browser for the
+                      next time I comment.</label
+                    >
+                  </div>
+                </div>
+                <div class="post-comment-submit">
+                  <button
+                    class="btn-submit-booking text-lime-50 bg-primary font-bold text-center rounded-md p-4 mt-3 hover:bg-primaryhover"
+                  >
+                    Post Comment
+                  </button>
+                </div>
+              </div>
             </ng-template>
           </nz-tab>
         </nz-tabset>
       </div>
-    </div>
-  </section>
-  <!-- Carousel -->
-</ng-container>
+      <div class="w-[30%] mt-3">
+        <!-- Book This Tour -->
+        <div
+          class="booking-form-container shadow-lg px-10 py-6 rounded-3xl bg-white"
+        >
+          <h3 class="booking-form-title relative text-lg font-bold">
+            Book This Tour
+            <div
+              class="line-top-btth absolute left-0 -top-6 w-full py-1 px-3 rounded-b-lg"
+            ></div>
+            <div
+              class="line-bottom-btth absolute -left-10 top-12 bg-gray-300"
+            ></div>
+          </h3>
+          <form
+            id="booking_form"
+            autocomplete="off"
+            name="booking_form"
+            method="post"
+            action=""
+            class="booking-form mt-12"
+          >
+            <div class="input-group">
+              <div class="booking-date flex flex-wrap">
+                <label class="booking-form-input-label text-lg font-medium mt-3"
+                  >From:</label
+                >
+                <input
+                  type="date"
+                  autocomplete="off"
+                  class="w-[50%] p-3 ml-auto mb-2 outline-none border-2 border-gray-100"
+                  id="booking_date_from"
+                  name="booking_date_from"
+                />
+              </div>
+              <hr />
+              <div class="my-3 flex booking-times-block">
+                <label class="booking-form-input-label text-lg font-medium"
+                  >Time:</label
+                >
+                <div
+                  id="booking-times"
+                  class="ml-auto booking-date-times"
+                ></div>
+              </div>
+              <hr />
+              <div class="booking-guests-block my-3 flex flex-wrap">
+                <label class="booking-form-input-label text-lg font-medium"
+                  >Tickets:</label
+                >
+                <div
+                  id="booking-guests-result"
+                  class="ml-auto text-base text-gray-500"
+                >
+                  Please select a date first.
+                </div>
+              </div>
+              <hr />
+              <div class="my-3 booking-services-block">
+                <label class="my-3 booking-form-input-label text-lg font-medium"
+                  >Add Extra</label
+                >
+                <div class="my-3 booking-services-inner">
+                  <div id="list_services" class="ml-2">
+                    <div class="list-service relative">
+                      <div class="input-square my-3 flex flex-wrap">
+                        <input
+                          id="booking_services_1"
+                          type="checkbox"
+                          name="booking_services[]"
+                          value="22"
+                        />
+                        <label
+                          for="booking_services_1"
+                          class="label-booking_services ml-2 text-base font-medium"
+                          >Service per booking</label
+                        >
+                        <span
+                          class="service-price-line text-gray-600 font-bold ml-auto"
+                          >$30.000</span
+                        >
+                      </div>
+                      <hr />
+                      <div class="view-list-details">
+                        <div class="view-details-inner">
+                          Lorem ipsum dolor sit amet, utinam munere antiopam vel
+                          ad. Qui eros iusto te. Nec ad feugiat honestatis. Quo
+                          illum detraxit an. Ius eius quodsi molestiae at,
+                          nostrum definitiones his cu. Discere referrentur mea
+                          id, an pri novum possim deterruisset. Eum oratio
+                          reprehendunt cu. Nec te quem assum postea.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="list-service relative">
+                      <div class="input-square my-3 flex flex-wrap">
+                        <input
+                          id="booking_services_2"
+                          type="checkbox"
+                          name="booking_services[]"
+                          value="23"
+                        />
+                        <label
+                          for="booking_services_2"
+                          class="label-booking_services ml-2 text-base font-medium"
+                          >Service per person</label
+                        >
+                        <div class="list-service-prices ml-auto">
+                          <span class="service-price-line">
+                            <label class="text-gray-500">Adult:</label>
+                            <span class="text-gray-600 font-bold ml-2"
+                              >$17.00</span
+                            >
+                          </span>
+                          <span class="service-price-line ml-3">
+                            <label class="text-gray-500">Youth:</label>
+                            <span class="text-gray-600 font-bold ml-2"
+                              >$14.00</span
+                            >
+                          </span>
+                        </div>
+                      </div>
+                      <hr />
+                      <div class="view-list-details">
+                        <div class="view-details-inner">
+                          Lorem ipsum dolor sit amet, utinam munere antiopam vel
+                          ad. Qui eros iusto te. Nec ad feugiat honestatis. Quo
+                          illum detraxit an. Ius eius quodsi molestiae at,
+                          nostrum definitiones his cu. Discere referrentur mea
+                          id, an pri novum possim deterruisset. Eum oratio
+                          reprehendunt cu. Nec te quem assum postea.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="total-group">
+              <label class="text-gray-500 text-lg font-normal">Total:</label>
+              <div id="booking-form-total"></div>
+            </div>
+            <div id="error-group ">
+              <label
+                class="booking-form-error-label text-lg font-normal text-red-600 hidden"
+                >Please fill in all the data.</label
+              >
+            </div>
+            <div class="submit-group">
+              <button
+                class="btn-submit-booking text-lime-50 bg-primary font-bold text-center rounded-md w-full h-12 mt-3 hover:bg-primaryhover"
+              >
+                Book Now
+              </button>
+            </div>
+          </form>
+        </div>
+        <!-- Last Minute Deals -->
+        <div
+          class="last-deals shadow-lg px-10 py-6 rounded-3xl bg-white mt-10 overflow-hidden"
+        >
+          <h3 class="relative text-lg font-bold mb-12">
+            Last Minute Deals
+            <div
+              class="line-bottom-btth absolute -left-10 top-12 bg-gray-300"
+            ></div>
+          </h3>
+          <div *ngFor="let index of [0, 1, 2, 3]; let last = last" class="">
+            <div class="last-deal-item my-5 flex">
+              <div class="last-deal-item-img overflow-hidden">
+                <img
+                  class="w-28 h-20 rounded-lg"
+                  src="https://demo2.pavothemes.com/triply/wp-content/uploads/2020/11/5c486ea739c52128a578315e_DSC04947-copy-820x520.jpg"
+                  alt=""
+                />
+              </div>
+              <div class="last-deal-item-meta pl-4">
+                <div class="last-deal-item-title overflow-hidden">
+                  <a class="text-lg font-medium hover:text-primary" href="#"
+                    >Osa Peninsula to Dominical</a
+                  >
+                </div>
+                <div class="last-deal-item-rating -mt-1">
+                  <fa-icon
+                    class="text-sm text-primary"
+                    [icon]="faStar"
+                  ></fa-icon>
+                  <fa-icon
+                    class="text-sm text-primary"
+                    [icon]="faStar"
+                  ></fa-icon>
+                  <fa-icon
+                    class="text-sm text-primary"
+                    [icon]="faStar"
+                  ></fa-icon>
+                  <fa-icon
+                    class="text-sm text-primary"
+                    [icon]="faStar"
+                  ></fa-icon>
+                  <fa-icon class="text-sm" [icon]="faStar"></fa-icon>
+                </div>
+                <div
+                  class="last-deal-item-price text-2xl text-primary font-bold"
+                >
+                  $102.60<span
+                    class="ml-2 text-stone-500 text-base line-through"
+                    >$114.00</span
+                  >
+                </div>
+              </div>
+            </div>
+            <ng-container *ngIf="!last">
+              <hr />
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div></section
+></ng-container>
 <ng-template #loading>
   <div class="w-full m-auto h-96 flex items-center justify-center">
     <app-loading></app-loading>
