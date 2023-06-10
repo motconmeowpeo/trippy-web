@@ -7,6 +7,7 @@ import { BannerModule } from '@core/component/banner';
 import { BannerBotModule } from '@core/component/bannerBot';
 import { TourItemModule } from '@core/component/tourItem';
 import { URL_TOURDETAIL } from '@core/constants';
+import { HeaderModule } from '@core/component/header';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
     BannerModule,
     BannerBotModule,
     TourItemModule,
+    HeaderModule
   ],
   declarations: [DestinationDetailComponent],
 })
-export class DestinationDetailModule {}
+export class DestinationDetailModule { }

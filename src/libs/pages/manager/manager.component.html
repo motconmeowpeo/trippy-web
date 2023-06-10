@@ -1,5 +1,16 @@
-<a routerLink="tour" routerLinkActive="router-link-active"> Tour </a>
-<a routerLink="invoice" routerLinkActive="router-link-active"> invoice </a>
-<a routerLink="customer" routerLinkActive="router-link-active"> cus </a>
-
-<router-outlet></router-outlet>
+<div class="flex">
+  <app-sidebar
+    *ngIf="{
+      isSidebarExpanded: isSidebarExpanded$ | async
+    } as asyncData"
+    class="flex h-full z-[99999999] absolute left-0 top-0 lg:block lg:h-auto lg:w-auto lg:static lg:left-auto lg:top-auto lg:z-0 lg:duration-300"
+    [ngClass]="
+      asyncData?.isSidebarExpanded
+        ? 'lg:w-expand-sidebar w-full'
+        : 'lg:w-collapse-sidebar'
+    "
+  ></app-sidebar>
+  <div class="overflow-auto relative grid-rows-auto-1fr pb-3">
+    <router-outlet></router-outlet>
+  </div>
+</div>

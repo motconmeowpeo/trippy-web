@@ -10,6 +10,13 @@ const routes: Routes = [
     component: ManagerComponent,
     children: [
       {
+        path: '',
+
+        loadChildren: async () =>
+          (await import('./management-tour/management-tour.module'))
+            .ManagementTourModule,
+      },
+      {
         path: URL_TOUR,
 
         loadChildren: async () =>

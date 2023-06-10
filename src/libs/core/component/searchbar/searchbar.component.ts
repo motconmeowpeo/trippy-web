@@ -62,7 +62,6 @@ export class SearchbarComponent extends BaseComponent implements OnInit {
     this.createForm();
   }
 
-
   onInput() {
     this.canClearInput = true;
 

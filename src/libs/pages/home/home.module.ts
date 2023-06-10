@@ -6,6 +6,7 @@ import { BannerTopModule } from '@core/component/bannerTop';
 import { BannerBotModule } from '@core/component/bannerBot';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { HeaderModule } from '@core/component/header';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
     BannerBotModule,
     BannerTopModule,
     FontAwesomeModule,
-    NzCarouselModule
+    NzCarouselModule,
+    HeaderModule
 
   ],
   declarations: [HomeComponent]

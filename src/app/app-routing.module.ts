@@ -61,13 +61,6 @@ const publicRoute: Routes = [
     loadChildren: () =>
       import('@pages/register').then((page) => page.RegisterModule),
   },
-
-  {
-    path: URL_REGISTER,
-    canActivate: [AuthGuard],
-    loadChildren: () =>
-      import('@pages/register').then((page) => page.RegisterModule),
-  },
   {
     path: URL_MANAGER,
     // canActivate: [AuthGuard],
@@ -82,4 +75,4 @@ const routes: Routes = [...publicRoute];
   imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' })],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

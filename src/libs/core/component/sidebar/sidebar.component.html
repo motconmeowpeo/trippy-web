@@ -1,0 +1,41 @@
+<ng-container
+  *ngIf="{
+    isSidebarExpanded: isSidebarExpanded$ | async,
+    isSidebarSwitched: isSidebarSwitched$ | async
+  } as asyncData"
+>
+  <div
+    #sidebar
+    class="sidebar z-1 h-screen min-w-[200px] flex flex-col p-3 transition-all duration-300"
+  >
+    <!-- Header -->
+    <section
+      class="relative flex items-center mt-1 mb-8 overflow-hidden"
+      [ngClass]="{
+        'justify-center': !asyncData?.isSidebarExpanded,
+        'pl-3': asyncData?.isSidebarExpanded
+      }"
+    >
+      <!-- Workspace -->
+      <div>
+        <img
+          routerLinkActive="active"
+          class="w-24 object-cover cursor-pointer"
+          src="assets/logo/logo.svg"
+          alt="logo"
+        />
+      </div>
+    </section>
+    <!-- Nav -->
+    <ul class="bg-gray-400">
+      <li
+        class="cursor-pointer"
+        *ngFor="let item of MENU_GROUP"
+        [routerLink]="item.url"
+        routerLinkActive="true"
+      >
+        {{ item.name | titlecase }}
+      </li>
+    </ul>
+  </div>
+</ng-container>

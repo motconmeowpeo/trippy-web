@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoadingModule } from '@core/component/loading';
 import { BannerModule } from '@core/component/banner';
 import { BannerBotModule } from '@core/component/bannerBot';
+import { HeaderModule } from '@core/component/header';
 
 const routes: Routes = [
   {
@@ -19,7 +20,8 @@ const routes: Routes = [
     LoadingModule,
     BannerModule,
     BannerBotModule,
+    HeaderModule
   ],
   declarations: [DestinationComponent],
 })
-export class DestinationModule {}
+export class DestinationModule { }
