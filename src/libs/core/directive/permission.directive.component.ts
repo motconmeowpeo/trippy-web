@@ -24,8 +24,6 @@ export class PermissionsDirective implements OnInit {
 
   ngOnInit(): void {
     if (!this.permissions?.length) {
-      console.log(456);
-
       this.viewContainer.createEmbeddedView(this.templateRef);
       return;
     }
@@ -34,7 +32,6 @@ export class PermissionsDirective implements OnInit {
       .pipe(
         first(),
         tap((user) => {
-          console.log(123);
           this.permissions.some((code) => code === user?.code) ||
           user?.code === PermissionCode.ADMIN // ADMIN is strongest
             ? this.viewContainer.createEmbeddedView(this.templateRef)

@@ -57,7 +57,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut() {
-    this.user$.subscribe((data) => console.log(data));
     this.authFacade.logout();
     this.router.navigate([URL_LOGIN]);
   }

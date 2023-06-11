@@ -1,25 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-rating',
   templateUrl: './rating.component.html',
-  styleUrls: ['./rating.component.css']
+  styleUrls: ['./rating.component.css'],
 })
 export class RatingStarsComponent {
   faStar = faStar;
   stars = [0, 1, 2, 3, 4];
-  selectedStar: number = -1;
+  @Input() selectedStar = -1;
+  @Input() disable = false;
   hoveredStar = -1;
 
+  @Output() handleRate: EventEmitter<number> = new EventEmitter<number>();
   hoverStar(index: number) {
-    this.hoveredStar = index;
+    if (!this.disable) this.hoveredStar = index;
   }
 
   selectStar(index: number) {
-    this.selectedStar = index;
+    if (!this.disable) {
+      this.selectedStar = index;
+      this.handleRate.emit(index);
+    }
   }
-  
+
   resetHoveredStar() {
     this.hoveredStar = -1;
   }

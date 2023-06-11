@@ -5,8 +5,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { RatingModule } from "@core/component/rating";
+import { RatingModule } from '@core/component/rating';
 import { LoadingModule } from '@core/component/loading';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoadingSmallModule } from '@core/component/loading-small';
 const routes: Routes = [
   {
     path: '',
@@ -21,7 +23,9 @@ const routes: Routes = [
     FontAwesomeModule,
     NzTabsModule,
     LoadingModule,
-    RatingModule
+    RatingModule,
+    ReactiveFormsModule,
+    LoadingSmallModule,
   ],
   declarations: [TourDetailComponent],
 })

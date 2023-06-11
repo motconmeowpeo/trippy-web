@@ -18,7 +18,6 @@ export class DestinationDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.name = this.activatedRoute.snapshot.paramMap.get('name');
-    console.log(this.name);
   }
 
   ngOnInit() {
