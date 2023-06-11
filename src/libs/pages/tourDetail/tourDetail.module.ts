@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RatingModule } from "@core/component/rating";
 import { LoadingModule } from '@core/component/loading';
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
     FontAwesomeModule,
     NzTabsModule,
     LoadingModule,
+    RatingModule
   ],
   declarations: [TourDetailComponent],
 })

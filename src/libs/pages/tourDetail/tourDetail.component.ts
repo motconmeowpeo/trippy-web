@@ -8,6 +8,8 @@ import {
   faCheck,
   faClose,
   faLocationDot,
+  faStar,
+  faArrowLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -24,8 +26,10 @@ export class TourDetailComponent implements OnInit {
   faLocationDot = faLocationDot;
   tour$ = this.tourFacade.tour$;
   isLoading = false;
-
+  faStar = faStar;
+  faArrowLeft =faArrowLeft;
   slideConfig = { slidesToShow: 2, slidesToScroll: 2 };
+
   constructor(private tourFacade: TourFacade, private router: ActivatedRoute) {}
 
   ngOnInit() {
