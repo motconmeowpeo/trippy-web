@@ -68,22 +68,22 @@ export class TourDetailComponent implements OnInit {
         validators: [Validators.required],
         updateOn: 'change',
       }),
-      locationRate: new FormControl(0, {
+      locationRate: new FormControl(-1, {
         nonNullable: true,
         validators: [Validators.required, Validators.min(0)],
         updateOn: 'change',
       }),
-      servicesRate: new FormControl(0, {
+      servicesRate: new FormControl(-1, {
         nonNullable: true,
         validators: [Validators.required, Validators.min(0)],
         updateOn: 'change',
       }),
-      priceRate: new FormControl(0, {
+      priceRate: new FormControl(-1, {
         nonNullable: true,
         validators: [Validators.required, Validators.min(0)],
         updateOn: 'change',
       }),
-      roomsRate: new FormControl(0, {
+      roomsRate: new FormControl(-1, {
         nonNullable: true,
         validators: [Validators.required, Validators.min(0)],
         updateOn: 'change',
