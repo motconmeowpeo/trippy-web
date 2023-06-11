@@ -6,3 +6,8 @@ export enum AUTH {
   valid = 'VALID',
   invalid = 'INVALID',
 }
+
+export enum ModalCloseStatus {
+  COMPLETE = 'COMPLETE',
+  CANCEL = 'CANCEL',
+}

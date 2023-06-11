@@ -27,6 +27,17 @@
         </li>
         <fa-icon class="text-sm ml-1 text-primary" [icon]="faPlus"></fa-icon>
       </div>
+      <div *ngIf="user$ | async">
+        <li
+          *permissions="[PermissionCode.ADMIN, PermissionCode.BUSINESS]"
+          routerLink="/manager"
+          routerLinkActive="active"
+          class="text-black text-xl p-6 flex items-center cursor-pointer hover:text-primaryhover"
+        >
+          Management
+          <fa-icon class="text-sm ml-1 text-primary" [icon]="faPlus"></fa-icon>
+        </li>
+      </div>
     </ul>
   </div>
 
@@ -73,14 +84,6 @@
                 My Invoice
               </li>
 
-              <li
-                *permissions="[PermissionCode.ADMIN, PermissionCode.BUSINESS]"
-                routerLink="manager"
-                routerLinkActive="active"
-                class="text-sm cursor-pointer hover:opacity-80 border-b border-gray-200 px-2 py-3 whitespace-nowrap bg-white"
-              >
-                Product Management
-              </li>
               <li
                 (click)="logOut()"
                 class="text-sm cursor-pointer hover:opacity-80 border-b border-gray-200 p-2 whitespace-nowrap bg-white"

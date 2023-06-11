@@ -8,10 +8,12 @@ import {
   URL_CONTACT,
   URL_DESTINATION,
   URL_HOME,
+  URL_LOGIN,
   URL_PAGE,
   URL_TOUR,
 } from '@core/constants';
 import { PermissionCode } from '../../enum/role-code.enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -35,7 +37,8 @@ export class HeaderComponent implements OnInit {
   faUser = faUser;
   isAuthorized = false;
   isMenuShown = true;
-  constructor(private authFacade: AuthFacade) {}
+  user$ = this.authFacade.user$;
+  constructor(private authFacade: AuthFacade, private router: Router) {}
 
   ngOnInit() {
     this.isAuthenticated();
@@ -54,7 +57,9 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut() {
+    this.user$.subscribe((data) => console.log(data));
     this.authFacade.logout();
+    this.router.navigate([URL_LOGIN]);
   }
 
   private handleClickOutside() {

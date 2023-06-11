@@ -1,0 +1,28 @@
+<app-information-modal [type]="type">
+  <!-- Content -->
+  <section class="content text-center" content>
+    <p class="text-md" [innerHTML]="description"></p>
+  </section>
+
+  <!-- Cancel -->
+  <app-button
+    type="secondary"
+    class="pr-3"
+    (click)="close({ status: ModalCloseStatus.CANCEL })"
+    btn-primary
+  >
+    {{ textCancel }}
+  </app-button>
+
+  <!-- Submit -->
+  <app-button
+    *ngIf="textSubmit"
+    className="px-3 text-white bg-transparent hover:opacity-90"
+    [style.background-color]="MODAL_STYLE[type].backgroundColor"
+    [style.border-radius]="'4px'"
+    btn-secondary
+    (click)="submit()"
+  >
+    {{ textSubmit }}
+  </app-button>
+</app-information-modal>

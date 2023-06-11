@@ -20,10 +20,9 @@ export class ButtonComponent {
   readonly TYPES = {
     custom: 'bg-white disabled:opacity-80',
     basic: 'bg-white text-grey-200 shadow-base',
-    primary:
-      'bg-primary text-white hover:bg-opacity-80 disabled:bg-primary',
+    primary: 'bg-primary text-white hover:bg-primaryhover disabled:bg-primary',
     secondary:
-      'bg-white hover:bg-secondary disabled:bg-grey-500 text-surface-80 border border-outline',
+      'bg-white hover:bg-secondary hover:opacity-70 disabled:bg-grey-500 text-surface-80 hover:text-white transition-all duration-300 border border-outline',
     outline:
       'bg-white text-primary-600 outline outline-1  outline-primary-600 hover:bg-background-1',
     grey: 'bg-grey-300 text-white',

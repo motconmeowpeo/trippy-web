@@ -21,6 +21,7 @@ export class TourItemComponent implements OnInit {
   @Input() tourDays!: string;
   @Input() tourPeople!: string;
   @Input() id!: string;
+  @Input() disableExplore = false;
 
   constructor() {}
 

@@ -16,6 +16,8 @@ import { ISelectItem } from '@core/model';
 import { tap } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ISearchForm } from './searchBar.form';
+import { DialogService } from '@ngneat/dialog';
+import { TestModal } from '@core/ui/modal/test';
 @Component({
   selector: 'app-searchbar',
   templateUrl: './searchbar.component.html',
@@ -39,7 +41,10 @@ export class SearchbarComponent extends BaseComponent implements OnInit {
   form!: FormGroup<ISearchForm>;
   isShowGuests = false;
   minDate: any;
-  constructor(private locationfacade: LocationFacade) {
+  constructor(
+    private locationfacade: LocationFacade,
+    private dialog: DialogService
+  ) {
     super();
   }
 
@@ -88,5 +93,24 @@ export class SearchbarComponent extends BaseComponent implements OnInit {
       }),
       search: new FormControl('', { nonNullable: true }),
     });
+  }
+
+  openTest() {
+    this.dialog
+      .open(TestModal, {
+        data: {
+          title: 'Test',
+          description: 'This is test',
+          textSubmit: 'Delete',
+          textCancel: 'Cancel',
+        },
+        size: 'lg',
+      })
+      .afterClosed$.pipe(
+        tap((result) => {
+          console.log(result);
+        })
+      )
+      .subscribe();
   }
 }
