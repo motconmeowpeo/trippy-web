@@ -12,6 +12,9 @@ export class ConfirmModalComponent
   implements OnInit
 {
   readonly ModalCloseStatus = ModalCloseStatus;
+
+   
+  
   get description(): string {
     return this.data?.description;
   }

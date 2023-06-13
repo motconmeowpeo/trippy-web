@@ -4,6 +4,7 @@ import {
   setEntities,
   setActiveId,
   addEntities,
+  deleteEntities,
 } from '@ngneat/elf-entities';
 import { filter, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -29,5 +30,11 @@ export class TourCommentFacade {
     return this.tourService
       .createComment(payload)
       .pipe(tap((comment) => store.update(addEntities(comment))));
+  }
+
+  delete(id: string) {
+    return this.tourService
+      .delete(id)
+      .pipe(tap((comment) => store.update(deleteEntities(comment.id))));
   }
 }

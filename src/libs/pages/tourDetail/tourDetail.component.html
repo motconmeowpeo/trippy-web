@@ -281,6 +281,13 @@
                               ></app-rating>
                             </div>
                           </div>
+                          <svg-icon
+                            key="trash"
+                            fontSize="24px"
+                            class="cursor-pointer hover:text-primary"
+                            *permissions="[PermissionCode.ADMIN]"
+                            (click)="deleteComment(comment.id)"
+                          ></svg-icon>
                         </div>
                         <div
                           class="comment-content mt-3 text-gray-500 font-normal text-lg"
@@ -365,6 +372,8 @@
           </nz-tab>
         </nz-tabset>
       </div>
+
+      <!-- Form -->
       <div class="flex-1 mt-24">
         <!-- Book This Tour -->
         <div

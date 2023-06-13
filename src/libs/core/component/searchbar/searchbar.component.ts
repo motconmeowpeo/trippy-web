@@ -100,7 +100,6 @@ export class SearchbarComponent extends BaseComponent implements OnInit {
       .open(TestModal, {
         data: {
           title: 'Test',
-          description: 'This is test',
           textSubmit: 'Delete',
           textCancel: 'Cancel',
         },

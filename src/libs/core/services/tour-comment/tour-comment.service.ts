@@ -16,4 +16,8 @@ export class TourComment {
   createComment(payload: Partial<ICreateTourComment>) {
     return this.http.post<ITourComment>(API_COMMENT, payload);
   }
+
+  delete(id: string) {
+    return this.http.delete<ITourComment>(`${API_COMMENT}/${id}`);
+  }
 }

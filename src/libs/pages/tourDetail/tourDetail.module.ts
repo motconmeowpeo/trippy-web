@@ -9,6 +9,8 @@ import { RatingModule } from '@core/component/rating';
 import { LoadingModule } from '@core/component/loading';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoadingSmallModule } from '@core/component/loading-small';
+import { SvgIconsModule } from '@ngneat/svg-icon';
+import { PermissionsDirectiveModule } from '@core/directive';
 const routes: Routes = [
   {
     path: '',
@@ -26,6 +28,8 @@ const routes: Routes = [
     RatingModule,
     ReactiveFormsModule,
     LoadingSmallModule,
+    SvgIconsModule,
+    PermissionsDirectiveModule,
   ],
   declarations: [TourDetailComponent],
 })

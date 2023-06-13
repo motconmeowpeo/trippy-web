@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthFacade, TourFacade, UserFacade } from '@core/services';
+import {
+  AuthFacade,
+  ToastNotificationService,
+  TourFacade,
+  UserFacade,
+} from '@core/services';
 import {
   faClock,
   faUser,
@@ -13,11 +18,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { ICommentForm } from './tourDetail.form';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { ReportCategory } from '@core/enum';
+import { ModalCloseStatus, PermissionCode, ReportCategory } from '@core/enum';
 import { TourCommentFacade } from '@core/services/tour-comment';
 import { format } from 'date-fns';
 import { HOUR_MINUTE_FORMAT_TIME, SETTING_FORMAT_DATE } from '@core/constants';
 import { tap } from 'rxjs';
+import { DialogService } from '@ngneat/dialog';
+import { ConfirmModalComponent } from '@core/ui/modal';
 
 @Component({
   selector: 'app-tourDetail',
@@ -39,14 +46,18 @@ export class TourDetailComponent implements OnInit {
   slideConfig = { slidesToShow: 2, slidesToScroll: 2 };
   comments$ = this.tourCommentFacade.comments$;
   user$ = this.authFacade.user$;
+  formComment!: FormGroup<ICommentForm>;
+  isPosting = false;
+  isDeleteing = false;
+  PermissionCode = PermissionCode;
   constructor(
     private tourFacade: TourFacade,
     private router: ActivatedRoute,
     private tourCommentFacade: TourCommentFacade,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private dialog: DialogService,
+    private notifiService: ToastNotificationService
   ) {}
-  formComment!: FormGroup<ICommentForm>;
-  isPosting = false;
 
   ngOnInit() {
     this.isLoading = true;
@@ -106,6 +117,31 @@ export class TourDetailComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  deleteComment(id: string) {
+    this.dialog
+      .open(ConfirmModalComponent, {
+        data: {
+          title: 'Delete comment',
+          textSubmit: 'Delete',
+          textCancel: 'Cancel',
+        },
+      })
+      .afterClosed$.pipe(
+        tap((status: any) => {
+          if (status?.status === ModalCloseStatus.COMPLETE) {
+            this.delete(id);
+          }
+        })
+      )
+      .subscribe();
+  }
+
+  delete(id: string) {
+    this.tourCommentFacade.delete(id).subscribe(() => {
+      this.notifiService.success('Success', 'Deleted comment');
+    });
   }
 
   postComment(id: string) {

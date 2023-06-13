@@ -1,5 +1,5 @@
 <!-- something -->
-<div class="post-cmt-rating-score">
+<div [ngClass]="disable ? 'cursor-default' : 'post-cmt-rating-score'">
   <fa-icon
     class="text-lg"
     [icon]="faStar"
