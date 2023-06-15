@@ -14,6 +14,7 @@ export class TourItemComponent implements OnInit {
   faCalendar = faCalendar;
   faUser = faUser;
   faRight = faArrowRightLong;
+  isRouter = false;
   @Input() imgSrc!: string;
   @Input() tourName!: string;
   @Input() tourLocation!: string;

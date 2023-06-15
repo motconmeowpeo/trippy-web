@@ -1,0 +1,23 @@
+<div
+  class="chip inline-flex items-center justify-center cursor-pointer bg-background-2 rounded-10 pr-2 select-none h-6"
+  [ngClass]="className"
+  [style]="{
+    'background-color': backgroundColor
+  }"
+>
+
+  <!-- Text -->
+  <span class="ml-2 text-black max-w-[150px] sm:max-w-xs truncate">{{
+    text
+  }}</span>
+
+  <!-- Remove -->
+  <svg-icon
+    *ngIf="isRemovable"
+    class="ml-2"
+    key="close"
+    fontSize="12px"
+    icon
+    (click)="clickRemove($event)"
+  ></svg-icon>
+</div>

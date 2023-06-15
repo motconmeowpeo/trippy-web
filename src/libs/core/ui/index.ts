@@ -5,4 +5,7 @@ export * from './date';
 export * from './pagination';
 export * from './search';
 export * from './input';
-export * from './button'
+export * from './button';
+export * from './chip';
+export * from './upload-file';
+export * from './input-file';

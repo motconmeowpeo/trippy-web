@@ -1,0 +1,17 @@
+<app-form-modal>
+  <span>This is test</span>
+  <form action="" [formGroup]="form" class="p-5">
+    <app-upload-file
+      label="{{ 'Preview' | titlecase }}"
+      placeholder="Choose your image preview"
+      formControlName="preview"
+      classNameChip="max-w-[15rem] sm:max-w-xs"
+    ></app-upload-file>
+  </form>
+
+  <!-- Action -->
+
+  <app-button submit> Save </app-button>
+  <!-- Cancel -->
+  <app-button cancel class="ml-3" type="secondary"> Cancel </app-button>
+</app-form-modal>
