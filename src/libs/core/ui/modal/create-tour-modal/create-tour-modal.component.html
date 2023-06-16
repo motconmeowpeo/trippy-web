@@ -1,0 +1,165 @@
+<app-form-modal data-aos="flip-left">
+  <div class="bg-slate-100 px-10 w-full flex flex-col">
+    <div class="w-full">
+      <label class="mt-5 text-xl flex items-start" for="tour-name"
+        >Tour name</label
+      >
+      <input
+        class="w-full mt-2 h-11 p-2 rounded-md outline-primary"
+        type="text"
+        id="tour-name"
+        placeholder="Tour name..."
+      />
+    </div>
+    <div class="w-full">
+      <label class="mt-5 text-xl flex items-start" for="tour-description"
+        >Tour description</label
+      >
+      <input
+        class="w-full mt-2 h-11 p-2 rounded-md outline-primary"
+        type="text"
+        id="tour-description"
+        placeholder="Tour description..."
+      />
+    </div>
+    <div class="w-full flex">
+      <div class="w-full mr-3">
+        <label class="mt-5 text-xl flex items-start" for="max-people"
+          >Max people</label
+        >
+        <input
+          class="w-full mt-2 h-11 p-2 rounded-md outline-primary"
+          type="text"
+          id="max-people"
+          placeholder="Max people..."
+        />
+      </div>
+      <div class="w-full">
+        <label class="mt-5 text-xl flex items-start" for="total-day"
+          >Total day</label
+        >
+        <input
+          class="w-full mt-2 h-11 p-2 rounded-md outline-primary"
+          type="text"
+          id="total-day"
+          placeholder="Total day..."
+        />
+      </div>
+    </div>
+    <div class="w-full flex">
+      <div class="w-full mr-3">
+        <label class="mt-5 text-xl flex items-start" for="min-age"
+          >Min age</label
+        >
+        <input
+          class="w-full mt-2 h-11 p-2 rounded-md outline-primary"
+          type="text"
+          id="min-age"
+          placeholder="Min age..."
+        />
+      </div>
+      <div class="w-full">
+        <label class="mt-5 text-xl flex items-start" for="preview"
+          >Preview image</label
+        >
+        <form action="" [formGroup]="form">
+        <app-upload-file
+          placeholder="Choose your image preview"
+          formControlName="preview"
+          classNameChip="max-w-[15rem] sm:max-w-xs h-11"
+        ></app-upload-file>
+      </form>
+      </div>
+    </div>
+    <div class="w-full">
+      <label class="mt-5 text-xl flex items-start" for="overview"
+        >Overview Image</label
+      >
+      <form action="" [formGroup]="form">
+        <app-upload-file
+          placeholder="Choose your image preview"
+          formControlName="overview"
+          classNameChip="max-w-[15rem] sm:max-w-xs"
+          [multiFile]="true"
+        ></app-upload-file>
+      </form>
+    
+    </div>
+
+    <app-select
+      [selectList]="selectCountry"
+      [hint]="false"
+      [readonly]="false"
+      placeholder="Location"
+      [icon]="faLocationDot"
+      classIcon="text-primary"
+      className="w-full mt-8 h-11 p-2 rounded-md outline-primary"
+      [loading]="isLoading"
+      formControlName="country"
+    >
+    </app-select>
+
+    <div class="w-full">
+      <label class="mt-8 text-xl flex items-start" for="ticket">Ticket</label>
+      <div class="ml-5 mt-2">
+        <div class="flex mt-3 items-center">
+          <label class="w-20 text-base" for="ticket-child">1-13</label>
+          <input
+            class="h-10 p-2 rounded-md outline-primary"
+            type="text"
+            id="ticket-child"
+          />
+          <fa-icon
+            class="px-4 text-lg"
+            [icon]="faNote"
+            nz-tooltip
+            nzTooltipTitle="If ticket free,
+            please type '0'"
+            nzTooltipPlacement="bottom"
+          ></fa-icon>
+        </div>
+        <div class="flex mt-3 items-center">
+          <label class="w-20 text-base" for="ticket-young">13-17</label>
+          <input
+            class="h-10 p-2 rounded-md outline-primary"
+            type="text"
+            id="ticket-young"
+          />
+        </div>
+        <div class="flex mt-3 items-center">
+          <label class="w-20 text-base" for="ticket-adolescent">17+</label>
+          <input
+            class="h-10 p-2 rounded-md outline-primary"
+            type="text"
+            id="ticket-adolescent"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="w-full mb-7">
+      <label class="mt-5 text-xl flex items-start" for="tuor-plan"
+        >Tour plan</label
+      >
+      <div class="w-full mt-4 flex items-center">
+        <label class="w-14 text-base" for="tuor-plan">Day 1</label>
+        <input
+          class="w-80 h-10 p-2 rounded-md outline-primary"
+          type="text"
+          value="Day 1: "
+        />
+        <button>
+          <fa-icon class="text-xl pl-8" [icon]="faPlus"></fa-icon>
+        </button>
+        <button>
+          <fa-icon class="text-xl pl-4" [icon]="faMinus"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action -->
+
+  <app-button submit> Create </app-button>
+  <!-- Cancel -->
+  <app-button cancel class="ml-3" type="secondary"> Cancel </app-button>
+</app-form-modal>

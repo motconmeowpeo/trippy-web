@@ -8,6 +8,7 @@ import { InformationModalComponent } from './information-modal';
 import { FormModalComponent } from './form-modal';
 import { FormInformationModalComponent } from './form-information-modal';
 import { SvgIconsModule } from '@ngneat/svg-icon';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   ButtonModule,
   InputModule,
@@ -24,12 +25,16 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { ConfirmModalComponent } from './confirm-modal';
 import { TestModal } from '../test';
+import { CreateTourModalComponent } from '../create-tour-modal';
+import { UpdateTourModalComponent } from '../update-tour-modal';
 const MODALS = [
   FormInformationModalComponent,
   FormModalComponent,
   InformationModalComponent,
   ConfirmModalComponent,
   TestModal,
+  CreateTourModalComponent,
+  UpdateTourModalComponent,
 ];
 
 @NgModule({
@@ -38,6 +43,7 @@ const MODALS = [
     ReactiveFormsModule,
     FormsModule,
     SvgIconsModule,
+    FontAwesomeModule,
 
     // UI
     ButtonModule,
@@ -48,6 +54,10 @@ const MODALS = [
     SearchModule,
     NzToolTipModule,
     NzButtonModule,
+    UploadFileModule,
+    InputFileModule,
+    ChipModule,
+    MenuModule,
     UploadFileModule,
     InputFileModule,
     ChipModule,
