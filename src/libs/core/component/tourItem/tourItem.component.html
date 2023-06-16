@@ -1,8 +1,9 @@
 <li
   class="h-full"
-  [routerLink]="['/tour', id]"
+  
   routerLinkActive="router-link-active"
 >
+<!-- [routerLink]="['/tour', id]" -->
   <img
     class="h-1/2 relative -bottom-4 z-10 object-cover rounded-3xl"
     src="{{ imgSrc }}"
@@ -50,6 +51,34 @@
       >
         Explore
         <fa-icon class="text-primary ml-2" [icon]="faRight"></fa-icon>
+      </button>
+      <button
+        *ngIf="!disableMenu"
+        class="flex float-right items-center relative"
+        (click)="toggleMenu()"
+      >
+        <fa-icon
+          class="text-primary -mb-4 mr-1 font-bold text-xl"
+          [icon]="faEllipsis"
+        ></fa-icon>
+        <div
+          *ngIf="isShown"
+          class="absolute right-6 mt-16 w-24 bg-slate-100 rounded shadow-lg z-10"
+        >
+          <div class="absolute w-6 h-8 left-24"></div>
+          <button
+            class="block w-full px-4 py-2 text-gray-800 hover:text-primary"
+            (click)="openEditTour(id)"
+          >
+            Update
+          </button>
+          <button
+            class="block w-full px-4 py-2 text-gray-800 hover:text-primary"
+            (click)="openDeleteTour(id)"
+          >
+            Delete
+          </button>
+        </div>
       </button>
     </div>
   </div>
