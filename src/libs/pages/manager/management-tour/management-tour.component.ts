@@ -16,10 +16,7 @@ export class ManagementTourComponent implements OnInit {
   limit = 5;
   canNext = true;
   canPrev = false;
-  constructor(
-    private tourFacade: TourFacade,
-    private dialog: DialogService
-  ) {}
+  constructor(private tourFacade: TourFacade, private dialog: DialogService) {}
 
   pageLimitOptions: number[] = [5, 10, 20, 50];
   total: number = 0;
@@ -29,7 +26,7 @@ export class ManagementTourComponent implements OnInit {
     this.calculateTotal();
     this.tourFacade.getAll().subscribe(() => (this.isLoading = false));
   }
-  
+
   calculateTotal(): void {
     this.tours$.subscribe((tours) => {
       this.total = tours.length;
@@ -37,20 +34,19 @@ export class ManagementTourComponent implements OnInit {
   }
 
   openCreateTour() {
-    this.dialog
-      .open(CreateTourModalComponent, {
-        data: {
-          title: 'Create Tour',
-        },
-      })
-      // .afterClosed$.pipe(
-      //   tap((status: any) => {
-      //     if (status?.status === ModalCloseStatus.COMPLETE) {
-      //       this.delete(id);
-      //     }
-      //   })
-      // )
-      // .subscribe();
+    this.dialog.open(CreateTourModalComponent, {
+      data: {
+        title: 'Create Tour',
+      },
+    });
+    // .afterClosed$.pipe(
+    //   tap((status: any) => {
+    //     if (status?.status === ModalCloseStatus.COMPLETE) {
+    //       this.delete(id);
+    //     }
+    //   })
+    // )
+    // .subscribe();
   }
 
   onGoToPage(page: number): void {
@@ -59,35 +55,35 @@ export class ManagementTourComponent implements OnInit {
     this.currentPage = page;
     this.canNext = true;
     this.canPrev = true;
-    if(this.currentPage >= (this.total/this.limit) ) {
+    if (this.currentPage >= this.total / this.limit) {
       this.canNext = false;
-    } else if(this.currentPage <= 1 ) {
+    } else if (this.currentPage <= 1) {
       this.canPrev = false;
     }
   }
 
   onNextPage(): void {
     alert('you just clicked the NextPage button');
-    
+
     this.currentPage = this.currentPage + 1;
     this.canPrev = true;
-    if(this.currentPage >= (this.total/this.limit) ) {
+    if (this.currentPage >= this.total / this.limit) {
       this.canNext = false;
     }
   }
 
   onPreviousPage(): void {
     alert('you just clicked the PreviousPage button');
-    
+
     this.currentPage = this.currentPage - 1;
     this.canNext = true;
-    if(this.currentPage <= 1 ) {
+    if (this.currentPage <= 1) {
       this.canPrev = false;
     }
   }
 
   onLimitChange(limit: number): void {
     alert('you just clicked the LimitChange button');
-    alert(limit) ;  
+    alert(limit);
   }
 }

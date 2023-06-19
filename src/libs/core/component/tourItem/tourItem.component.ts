@@ -9,8 +9,6 @@ import { DialogService } from '@ngneat/dialog';
 import { ConfirmModalComponent } from '@core/ui/modal';
 import { UpdateTourModalComponent } from '@core/ui/modal/update-tour-modal';
 
-
-
 @Component({
   selector: 'app-tourItem',
   templateUrl: './tourItem.component.html',
@@ -27,54 +25,51 @@ export class TourItemComponent implements OnInit {
   @Input() tourName!: string;
   @Input() tourLocation!: string;
   @Input() tourPrice!: string;
-  @Input() tourDays!: string;
-  @Input() tourPeople!: string;
+  @Input() tourDays!: number | string;
+  @Input() tourPeople!: number | string;
   @Input() id!: string;
   @Input() disableExplore = false;
   @Input() disableMenu = true;
 
-  constructor(  private dialog: DialogService, ) {
-  }
+  constructor(private dialog: DialogService) {}
 
   toggleMenu() {
     this.isShown = !this.isShown;
   }
 
   openDeleteTour(id: string) {
-    this.dialog
-      .open(ConfirmModalComponent, {
-        data: {
-          title: 'Delete Tour',
-          textSubmit: 'Delete',
-          textCancel: 'Cancel',
-        },
-      })
-      // .afterClosed$.pipe(
-      //   tap((status: any) => {
-      //     if (status?.status === ModalCloseStatus.COMPLETE) {
-      //       this.delete(id);
-      //     }
-      //   })
-      // )
-      // .subscribe();
+    this.dialog.open(ConfirmModalComponent, {
+      data: {
+        title: 'Delete Tour',
+        textSubmit: 'Delete',
+        textCancel: 'Cancel',
+      },
+    });
+    // .afterClosed$.pipe(
+    //   tap((status: any) => {
+    //     if (status?.status === ModalCloseStatus.COMPLETE) {
+    //       this.delete(id);
+    //     }
+    //   })
+    // )
+    // .subscribe();
   }
 
   openEditTour(id: string) {
-    this.dialog
-      .open(UpdateTourModalComponent, {
-        data: {
-          title: 'Update Tour',
-        },
-      })
-      // .afterClosed$.pipe(
-      //   tap((status: any) => {
-      //     if (status?.status === ModalCloseStatus.COMPLETE) {
-      //       this.delete(id);
-      //     }
-      //   })
-      // )
-      // .subscribe();
+    this.dialog.open(UpdateTourModalComponent, {
+      data: {
+        title: 'Update Tour',
+      },
+    });
+    // .afterClosed$.pipe(
+    //   tap((status: any) => {
+    //     if (status?.status === ModalCloseStatus.COMPLETE) {
+    //       this.delete(id);
+    //     }
+    //   })
+    // )
+    // .subscribe();
   }
-  
+
   ngOnInit() {}
 }

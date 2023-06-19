@@ -7,7 +7,15 @@ import { TourItemModule } from '@core/component/tourItem';
 import { LoadingModule } from '@core/component/loading';
 
 @NgModule({
-  imports: [CommonModule, ManagementTourRoutingModule, SearchModule, TourItemModule, LoadingModule, ButtonModule, PaginationModule],
+  imports: [
+    CommonModule,
+    ManagementTourRoutingModule,
+    SearchModule,
+    TourItemModule,
+    LoadingModule,
+    ButtonModule,
+    PaginationModule,
+  ],
   declarations: [ManagementTourComponent],
 })
 export class ManagementTourModule {}

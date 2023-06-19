@@ -19,6 +19,9 @@ export class FormModalComponent<
   isOpenConfirmClose = false;
   isFormChanged = false;
   dialog = inject(DialogService);
+  isLoading = false;
+  isCreating = false;
+  isDeleting = false;
   readonly ModalCloseStatus = ModalCloseStatus;
 
   @Input() form!: FormGroup<IForm>;
@@ -54,10 +57,6 @@ export class FormModalComponent<
         ? this.openModalConfirm()
         : this.checkMultipleDialogs(target);
     }
-  }
-
-  submit() {
-    this.close({ status: ModalCloseStatus.COMPLETE });
   }
 
   // errorMessage(controlName: keyof IForm, subControlName?: string): string {

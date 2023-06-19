@@ -52,7 +52,7 @@
     </div> -->
     <div class="text-xl ml-5 relative">
       <fa-icon
-        *ngIf="!isAuthorized; else user"
+        *ngIf="!isAuthorized || !user$; else user"
         routerLink="login"
         routerLinkActive="active"
         [icon]="faUser"

@@ -16,18 +16,17 @@ import { FormModalComponent } from '../base/form-modal';
   selector: 'app-update-tour-modal',
   templateUrl: './update-tour-modal.component.html',
 })
-export class UpdateTourModalComponent extends FormModalComponent<any> implements OnInit {
+export class UpdateTourModalComponent
+  extends FormModalComponent<any>
+  implements OnInit
+{
   faNote = faCircleExclamation;
   faPlus = faCirclePlus;
   faMinus = faCircleMinus;
   faLocationDot = faLocationDot;
 
-  isLoading = false;
-
   selectCountry: ISelectItem[] = [];
-  constructor(
-    private locationfacade: LocationFacade,
-  ) {
+  constructor(private locationfacade: LocationFacade) {
     super();
   }
 
@@ -69,5 +68,4 @@ export class UpdateTourModalComponent extends FormModalComponent<any> implements
       overview: new FormControl(fileOverview, { nonNullable: true }),
     });
   }
-
 }

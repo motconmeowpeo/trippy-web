@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from './modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 // Custom Modal
 import { InformationModalComponent } from './information-modal';
 import { FormModalComponent } from './form-modal';
