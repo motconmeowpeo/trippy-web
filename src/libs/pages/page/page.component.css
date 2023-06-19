@@ -1,0 +1,9 @@
+
+.card-contact {
+    transition: transform 0.2s ease-in-out;
+    transform: translateY(100%);
+}
+
+.card-info:hover .card-contact{
+    transform: translateY(0);
+}
