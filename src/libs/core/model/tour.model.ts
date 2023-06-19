@@ -14,8 +14,8 @@ export interface ITour {
   totalDays: number;
   minAge: number;
   createBy: string;
-  tickets: ITicketTour;
-  tourPlan: ITourPlan;
+  tickets: ITicketTour[];
+  tourPlan: ITourPlan[];
 }
 
 export interface ITourCommand {

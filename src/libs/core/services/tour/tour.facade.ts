@@ -7,7 +7,7 @@ import {
   deleteEntities,
   deleteAllEntities,
 } from '@ngneat/elf-entities';
-import { filter, tap } from 'rxjs';
+import { filter, tap, delay } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { store } from './tour.store';
 import { TourService } from './tour.service';
@@ -54,14 +54,16 @@ export class TourFacade {
   }
   create(payload: Partial<ITourCommand>) {
     return this.tourService.create(payload).pipe(
+      delay(2000),
       tap((tour) => {
         const storageRefPreview = ref(this.storage, tour.preview);
-        getDownloadURL(storageRefPreview).then((preview) => {
-          store.update(addEntities({ ...tour, preview }));
-          store.update(setActiveId(tour.id));
-          console.log(store.getValue());
-        });
-        // store.update(addEntities(tour));
+        if (storageRefPreview)
+          getDownloadURL(storageRefPreview).then((preview) => {
+            store.update(addEntities({ ...tour, preview }, { prepend: true }));
+            store.update(setActiveId(tour.id));
+          });
+
+        // store.update(setActiveId(tour.id));
       })
     );
   }

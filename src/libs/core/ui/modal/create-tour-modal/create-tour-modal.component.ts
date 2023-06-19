@@ -192,7 +192,7 @@ export class CreateTourModalComponent
   }
 
   createTour() {
-    // this.isCreating = true;
+    this.isCreating = true;
     this.user$
       .pipe(
         switchMap((user) => {
@@ -202,7 +202,6 @@ export class CreateTourModalComponent
           }
           return of(user);
         }),
-        delay(3000),
         tap((user) => {
           const payload: ITourCommand = {
             ...this.formCreate.value,
@@ -210,14 +209,6 @@ export class CreateTourModalComponent
               (image) => image.name
             ),
             preview: head(this.formCreate.value.preview)?.name,
-            // name: this.formCreate.value.name,
-            // description: this.formCreate.value.description,
-            // locationId: this.formCreate.value.locationId,
-            // maxPeople: this.formCreate.value.maxPeople,
-            // minAge: this.formCreate.value.minAge,
-            // tickets: this.formCreate.value.tickets,
-            // totalDays: this.formCreate.value.totalDays,
-            // tourPlan: this.formCreate.value.tourPlan,
             createBy: user?.id || '',
           };
           this.onCreateTour(payload);
@@ -237,9 +228,6 @@ export class CreateTourModalComponent
         })
       )
       .subscribe();
-    // const storageRef = ref(this.storage, 'TrippyDb.drawio (6).png');
-    // const string = getDownloadURL(storageRef);
-    // console.log(string);
   }
 
   private upLoadOverview(files: File[]) {
