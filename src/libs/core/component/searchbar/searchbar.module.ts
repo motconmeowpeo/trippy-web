@@ -26,7 +26,7 @@ registerLocaleData(zh);
     SearchModule,
     ReactiveFormsModule,
     ButtonModule,
-    ModalModule,
+    // ModalModule,
   ],
   declarations: [SearchbarComponent],
   exports: [SearchbarComponent],

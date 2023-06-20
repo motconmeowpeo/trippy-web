@@ -44,11 +44,11 @@ export class TourFacade {
           ref(this.storage, image)
         );
         const overviewPr = storageRefOverview.map((ref) => getDownloadURL(ref));
-        Promise.all(overviewPr).then((overview) =>
-          store.update(setEntities([{ ...tour, overview }]))
-        );
+        Promise.all(overviewPr).then((overview) => {
+          store.update(setEntities([{ ...tour, overview }]));
+          store.update(setActiveId(tour.id));
+        });
         // store.update(setEntities([tour]));
-        store.update(setActiveId(tour.id));
       })
     );
   }
@@ -57,11 +57,10 @@ export class TourFacade {
       delay(2000),
       tap((tour) => {
         const storageRefPreview = ref(this.storage, tour.preview);
-        if (storageRefPreview)
-          getDownloadURL(storageRefPreview).then((preview) => {
-            store.update(addEntities({ ...tour, preview }, { prepend: true }));
-            store.update(setActiveId(tour.id));
-          });
+        getDownloadURL(storageRefPreview).then((preview) => {
+          store.update(addEntities({ ...tour, preview }, { prepend: true }));
+          store.update(setActiveId(tour.id));
+        });
 
         // store.update(setActiveId(tour.id));
       })

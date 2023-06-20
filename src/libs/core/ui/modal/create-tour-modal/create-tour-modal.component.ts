@@ -6,7 +6,7 @@ import {
   TourFacade,
 } from '@core/services';
 import { ISelectItem, ITour, ITourCommand } from '@core/model';
-import { of, switchMap, tap, delay } from 'rxjs';
+import { of, switchMap, tap, delay, catchError } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import {
@@ -222,9 +222,13 @@ export class CreateTourModalComponent
       .create(payload)
       .pipe(
         tap(() => {
-          this.notifiService.success('Success', 'Created user');
+          this.notifiService.success('Success', 'Created tour');
           this.close();
           this.isCreating = false;
+        }),
+        catchError((err) => {
+          this.isCreating = false;
+          return of(err);
         })
       )
       .subscribe();
