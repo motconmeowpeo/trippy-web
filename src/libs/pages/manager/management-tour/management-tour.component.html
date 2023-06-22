@@ -20,26 +20,21 @@
         </app-button>
       </div>
     </div>
-    <section *ngIf="tours$ | async as tours">
-      <div class="w-full m-auto p-3">
+    <section class="h-full" *ngIf="tours$ | async as tours">
+      <div class="w-full m-auto p-3" *ngIf="tours.length">
         <!-- TourItem -->
         <ul class="list-none flex pt-2 flex-wrap">
           <app-tourItem
-            class="h-[500px] w-1/5 rounded-3xl bg-transparent p-4 relative cursor-auto"
-            *ngFor="let tour of tours"
-            [tourName]="tour.name"
-            tourPrice="30"
-            [tourPeople]="tour.maxPeople"
-            [imgSrc]="tour.preview"
-            [tourDays]="tour.totalDays"
-            [tourLocation]="tour.location.name"
-            [id]="tour.id"
+            class="h-[400px] w-1/5 rounded-3xl bg-transparent px-6 pb-6 relative cursor-auto"
+            classBox="h-10"
             [disableExplore]="true"
-            [disableMenu]="false"
+            *ngFor="let tour of tours"
+            [tour]="tour"
           ></app-tourItem>
         </ul>
       </div>
     </section>
+
     <app-pagination
       [pageLimitOptions]="pageLimitOptions"
       [currentPage]="currentPage"

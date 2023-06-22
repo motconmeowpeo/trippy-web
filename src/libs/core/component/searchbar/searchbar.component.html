@@ -15,7 +15,7 @@
   >
   </app-select>
 
-  <app-select
+  <!-- <app-select
     [selectList]="selectCountry"
     [hint]="false"
     [readonly]="form.invalid"
@@ -26,7 +26,7 @@
     [loading]="isLoading"
     formControlName="state"
   >
-  </app-select>
+  </app-select> -->
   <div class="flex items-center px-5 h-full relative">
     <!-- <input
       class="w-full h-full outline-primary border-2 border-global rounded-md px-2"
@@ -38,11 +38,6 @@
       placeholder="Search..."
       formControlName="search"
     ></app-search>
-    <div class="h-10">
-      <app-button cancel type="primary" (click)="openTest()">
-        <span>Somthing</span>
-      </app-button>
-    </div>
   </div>
 
   <!-- <button

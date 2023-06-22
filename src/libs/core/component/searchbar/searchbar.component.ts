@@ -12,12 +12,14 @@ import {
   faCircleXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { BaseComponent } from '@core/base';
-import { ISelectItem } from '@core/model';
-import { tap } from 'rxjs';
+import { IBaseParams, ISelectItem } from '@core/model';
+import { tap, debounceTime } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ISearchForm } from './searchBar.form';
 import { DialogService } from '@ngneat/dialog';
 import { TestModal } from '@core/ui/modal/test';
+import { debounce } from 'lodash';
+import { TourFacade } from '../../services/tour/tour.facade';
 @Component({
   selector: 'app-searchbar',
   templateUrl: './searchbar.component.html',
@@ -41,8 +43,11 @@ export class SearchbarComponent extends BaseComponent implements OnInit {
   form!: FormGroup<ISearchForm>;
   isShowGuests = false;
   minDate: any;
+  search!: string;
+  country!: string;
   constructor(
     private locationfacade: LocationFacade,
+    private tourFacade: TourFacade,
     private dialog: DialogService
   ) {
     super();
@@ -87,29 +92,26 @@ export class SearchbarComponent extends BaseComponent implements OnInit {
         updateOn: 'change',
       }),
 
-      state: new FormControl('', {
-        nonNullable: true,
-        updateOn: 'change',
-      }),
       search: new FormControl('', { nonNullable: true }),
     });
+    this.handleSearch();
   }
 
-  openTest() {
-    this.dialog
-      .open(TestModal, {
-        data: {
-          title: 'Test',
-          textSubmit: 'Delete',
-          textCancel: 'Cancel',
-        },
-        size: 'lg',
-      })
-      .afterClosed$.pipe(
-        tap((result) => {
-          console.log(result);
+  private handleSearch() {
+    this.form.valueChanges
+      .pipe(
+        debounceTime(300),
+        tap((formValue) => {
+          this.country = formValue.country || '';
+          this.search = formValue.search || '';
+          this.searchTour({ search: this.search, filter: this.country });
         })
       )
       .subscribe();
+  }
+
+  private searchTour(param?: IBaseParams) {
+    this.isLoading = true;
+    this.tourFacade.getAll(param).subscribe(() => (this.isLoading = false));
   }
 }

@@ -8,6 +8,11 @@ import { faCalendar, faUser } from '@fortawesome/free-regular-svg-icons';
 import { DialogService } from '@ngneat/dialog';
 import { ConfirmModalComponent } from '@core/ui/modal';
 import { UpdateTourModalComponent } from '@core/ui/modal/update-tour-modal';
+import { ITour } from '@core/model';
+import { catchError, of, tap } from 'rxjs';
+import { TourFacade } from '@core/services/tour';
+import { ModalCloseStatus } from '@core/enum';
+import { ToastNotificationService } from '@core/services';
 
 @Component({
   selector: 'app-tourItem',
@@ -29,36 +34,40 @@ export class TourItemComponent implements OnInit {
   @Input() tourPeople!: number | string;
   @Input() id!: string;
   @Input() disableExplore = false;
-  @Input() disableMenu = true;
+  @Input() classBox!: string;
+  @Input() tour!: ITour;
 
-  constructor(private dialog: DialogService) {}
-
-  toggleMenu() {
-    this.isShown = !this.isShown;
-  }
-
+  constructor(
+    private dialog: DialogService,
+    private tourFacade: TourFacade,
+    private toast: ToastNotificationService
+  ) {}
+  ngOnInit() {}
   openDeleteTour(id: string) {
-    this.dialog.open(ConfirmModalComponent, {
-      data: {
-        title: 'Delete Tour',
-        textSubmit: 'Delete',
-        textCancel: 'Cancel',
-      },
-    });
-    // .afterClosed$.pipe(
-    //   tap((status: any) => {
-    //     if (status?.status === ModalCloseStatus.COMPLETE) {
-    //       this.delete(id);
-    //     }
-    //   })
-    // )
-    // .subscribe();
+    this.dialog
+      .open(ConfirmModalComponent, {
+        data: {
+          title: 'Delete Tour',
+          description: 'You can not revert this tour after delete',
+          textSubmit: 'Delete',
+          textCancel: 'Cancel',
+        },
+      })
+      .afterClosed$.pipe(
+        tap((status: any) => {
+          if (status?.status === ModalCloseStatus.COMPLETE) {
+            this.deleteTour(id);
+          }
+        })
+      )
+      .subscribe();
   }
 
-  openEditTour(id: string) {
+  openEditTour(tour: ITour) {
     this.dialog.open(UpdateTourModalComponent, {
       data: {
         title: 'Update Tour',
+        tour,
       },
     });
     // .afterClosed$.pipe(
@@ -71,5 +80,17 @@ export class TourItemComponent implements OnInit {
     // .subscribe();
   }
 
-  ngOnInit() {}
+  deleteTour(id: string) {
+    this.tourFacade
+      .delete(id)
+      .pipe(
+        tap(() => {
+          this.toast.success('Success', 'Deleted tour');
+        }),
+        catchError((err) => {
+          return of(err);
+        })
+      )
+      .subscribe();
+  }
 }

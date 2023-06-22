@@ -3,15 +3,16 @@ import { Injectable } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
 import { ITour } from '../../model/tour.model';
 import { API_TOUR } from '../../constants/url.constant';
-import { ITourCommand } from '@core/model';
+import { IBaseParams, ITourCommand } from '@core/model';
+import { HttpService } from '../http';
 
 @Injectable({ providedIn: 'root' })
 export class TourService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpService) {}
 
-  getAll(): Observable<ITour[]> {
+  getAll(params?: IBaseParams): Observable<ITour[]> {
     // return this.http.get<IHero[]>(API_URL);
-    return this.http.get<ITour[]>(API_TOUR);
+    return this.http.get<ITour[]>(API_TOUR, { params });
   }
 
   getTourById(id: string): Observable<ITour> {

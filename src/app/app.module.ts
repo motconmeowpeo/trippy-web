@@ -22,6 +22,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { getAnalytics, provideAnalytics } from '@angular/fire/analytics';
 import { getAuth, provideAuth } from '@angular/fire/auth';
+import { HttpService } from '@core/services/http';
 const firebaseConfig = {
   apiKey: 'AIzaSyCc4VBVIu_dvt9SE57dj8fMBYDlgPCidqg',
   authDomain: 'trippy-3dc63.firebaseapp.com',
@@ -46,6 +47,7 @@ const firebaseConfig = {
     BrowserAnimationsModule,
     NzNotificationModule,
     IconsModule,
+
     JwtModule.forRoot({
       config: {
         tokenGetter: () => '',
@@ -71,6 +73,7 @@ const firebaseConfig = {
       multi: true,
     },
     AuthGuard,
+    HttpService,
   ],
   bootstrap: [AppComponent],
 })

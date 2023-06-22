@@ -33,6 +33,7 @@ export interface ITourCommand {
 }
 
 export interface TourLocation {
+  id: string;
   name: string;
   iso2: string;
 }

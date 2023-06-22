@@ -11,7 +11,7 @@ import { filter, tap, delay } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { store } from './tour.store';
 import { TourService } from './tour.service';
-import { ITour, ITourCommand } from '@core/model';
+import { IBaseParams, ITour, ITourCommand } from '@core/model';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { Storage } from '@angular/fire/storage';
 
@@ -23,10 +23,10 @@ export class TourFacade {
     filter((role) => !!role)
   );
   constructor(private tourService: TourService, private storage: Storage) {}
-  getAll() {
-    return this.tourService.getAll().pipe(
+  getAll(params?: IBaseParams) {
+    store.update(deleteAllEntities());
+    return this.tourService.getAll(params).pipe(
       tap((tours) => {
-        store.update(deleteAllEntities());
         tours.map((tour) => {
           const storageRefPreview = ref(this.storage, tour.preview);
           getDownloadURL(storageRefPreview).then((preview) => {
