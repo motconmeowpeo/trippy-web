@@ -13,6 +13,7 @@ import { LoadingSmallModule } from '@core/component/loading-small';
 import { SvgIconsModule } from '@ngneat/svg-icon';
 import { PermissionsDirectiveModule } from '@core/directive';
 import { InputModule } from '@core/ui';
+import { FooterModule } from '@core/component/footer';
 const routes: Routes = [
   {
     path: '',
@@ -34,6 +35,7 @@ const routes: Routes = [
     PermissionsDirectiveModule,
     NzCollapseModule,
     InputModule,
+    FooterModule,
   ],
   declarations: [TourDetailComponent],
 })

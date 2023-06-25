@@ -1,7 +1,9 @@
-<div class="pt-20 w-full min-h-screen relative bg-slate-100">
+<div
+  class="w-full max-h-[87vh] min-h-[87vh] relative bg-slate-100 overflow-auto"
+>
   <ng-container *ngIf="isLoading; else tours">
     <div
-      class="w-full max-w-7xl h-full m-auto flex items-center justify-center"
+      class="w-full max-w-7xl min-h-[87vh] m-auto flex items-center justify-center"
     >
       <app-loading></app-loading>
     </div>
@@ -23,7 +25,7 @@
     <section class="h-full" *ngIf="tours$ | async as tours">
       <div class="w-full m-auto p-3" *ngIf="tours.length">
         <!-- TourItem -->
-        <ul class="list-none flex pt-2 flex-wrap">
+        <ul class="list-none flex pt-2 flex-wrap pb-20">
           <app-tourItem
             class="h-[400px] w-1/5 rounded-3xl bg-transparent px-6 pb-6 relative cursor-pointer"
             classBox="h-10"
@@ -36,7 +38,7 @@
     </section>
   </ng-template>
   <app-pagination
-    *ngIf="tours$"
+    *ngIf="tours$ && false"
     className="absolute left-0 bottom-0 right-0"
     [pageLimitOptions]="pageLimitOptions"
     [currentPage]="currentPage"

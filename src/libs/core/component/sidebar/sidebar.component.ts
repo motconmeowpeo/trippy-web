@@ -38,7 +38,7 @@ export class SidebarComponent extends BaseComponent {
   sidebarItemsState: Record<string, boolean> = {};
   isComponentFirstLoaded = true;
   changeMenuSubscription!: Subscription;
-
+  isSideBarShown = true;
   constructor(
     private router: Router,
     private shellFacade: ShellFacade,
@@ -47,5 +47,8 @@ export class SidebarComponent extends BaseComponent {
     super();
   }
 
+  toggleSidebar() {
+    this.isSideBarShown = !this.isSideBarShown;
+  }
   ngOnInit(): void {}
 }

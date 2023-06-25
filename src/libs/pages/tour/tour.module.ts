@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { LoadingSmallModule } from '@core/component/loading-small';
+import { FooterModule } from '@core/component/footer';
 
 const routes: Routes = [
   {
@@ -42,6 +43,7 @@ const routes: Routes = [
     LoadingSmallModule,
     SearchModule,
     ButtonModule,
+    FooterModule,
   ],
   declarations: [TourComponent],
 })

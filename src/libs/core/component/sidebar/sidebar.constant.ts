@@ -1,4 +1,10 @@
-import { URL_CUSTOMER, URL_INVOICE, URL_TOUR } from '@pages/manager';
+import {
+  URL_CONTACT,
+  URL_CUSTOMER,
+  URL_INVOICE,
+  URL_TOUR,
+} from '@pages/manager';
+
 export interface ISidebarMenu {
   name: string;
   url: string;
@@ -11,17 +17,22 @@ export const MENU_GROUP: ISidebarMenu[] = [
   {
     name: 'tour',
     url: URL_TOUR,
-    icon: 'people',
+    icon: 'plane-departure',
   },
   {
     name: 'invoice',
     url: URL_INVOICE,
-    icon: 'people',
+    icon: 'receipt-alt',
   },
   {
     name: 'customer',
     url: URL_CUSTOMER,
-    icon: 'people',
+    icon: 'user',
+  },
+  {
+    name: 'contact',
+    url: URL_CONTACT,
+    icon: 'phone',
   },
 
   // [

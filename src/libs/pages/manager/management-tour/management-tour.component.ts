@@ -21,7 +21,6 @@ export class ManagementTourComponent implements OnInit {
   pageLimitOptions: number[] = [5, 10, 20, 50];
   total: number = 0;
   ngOnInit() {
-
     this.isLoading = true;
     this.calculateTotal();
     this.tourFacade.getAll().subscribe(() => (this.isLoading = false));
@@ -83,7 +82,6 @@ export class ManagementTourComponent implements OnInit {
   }
 
   onLimitChange(limit: number): void {
-    alert('you just clicked the LimitChange button');
-    alert(limit);
+    console.log(limit);
   }
 }

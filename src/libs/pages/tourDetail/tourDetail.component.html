@@ -221,7 +221,7 @@
                         <div
                           class="comment-name text-gray-900 font-semibold mt-2"
                         >
-                          {{ comment.author?.username }}
+                          {{ comment.author.username }}
                         </div>
                         <div class="comment-time">
                           {{ parseDateAndTime(comment.createAt) }}
@@ -664,3 +664,4 @@
     <app-loading></app-loading>
   </div>
 </ng-template>
+<app-footer></app-footer>

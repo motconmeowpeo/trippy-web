@@ -4,6 +4,7 @@ import { SidebarComponent } from './sidebar.component';
 import { RouterModule } from '@angular/router';
 import { PermissionsDirectiveModule } from '../../directive/permission.directive.module';
 import { IconsModule } from '@core/ui';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { IconsModule } from '@core/ui';
 
     // Icons
     IconsModule,
+    FontAwesomeModule,
   ],
   declarations: [SidebarComponent],
   exports: [SidebarComponent],

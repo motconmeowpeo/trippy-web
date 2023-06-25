@@ -6,6 +6,7 @@ import { LoadingModule } from '@core/component/loading';
 import { BannerModule } from '@core/component/banner';
 import { BannerBotModule } from '@core/component/bannerBot';
 import { HeaderModule } from '@core/component/header';
+import { FooterModule } from '@core/component/footer';
 
 const routes: Routes = [
   {
@@ -20,8 +21,9 @@ const routes: Routes = [
     LoadingModule,
     BannerModule,
     BannerBotModule,
-    HeaderModule
+    HeaderModule,
+    FooterModule,
   ],
   declarations: [DestinationComponent],
 })
-export class DestinationModule { }
+export class DestinationModule {}

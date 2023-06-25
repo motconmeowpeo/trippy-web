@@ -7,6 +7,7 @@ import { BannerTopModule } from '@core/component/bannerTop';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconsModule } from '@core/ui';
 import { HeaderModule } from '@core/component/header';
+import { FooterModule } from '@core/component/footer';
 const routes: Routes = [
   {
     path: '',
@@ -21,6 +22,7 @@ const routes: Routes = [
     BannerTopModule,
     FontAwesomeModule,
     HeaderModule,
+    FooterModule,
   ],
   declarations: [PageComponent],
 })

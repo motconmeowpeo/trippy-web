@@ -13,6 +13,7 @@ import { LoadingModule } from '@core/component/loading';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { ToastNotificationService } from '@core/services';
 import { LoadingSmallModule } from '@core/component/loading-small';
+import { FooterModule } from '@core/component/footer';
 const routes: Routes = [
   {
     path: '',
@@ -32,6 +33,7 @@ const routes: Routes = [
     LoadingSmallModule,
 
     ReactiveFormsModule,
+    FooterModule,
   ],
   declarations: [RegisterComponent],
 })

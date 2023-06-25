@@ -1,16 +1,7 @@
-<div class="flex">
-  <app-sidebar
-    *ngIf="{
-      isSidebarExpanded: isSidebarExpanded$ | async
-    } as asyncData"
-    class="flex h-full z-[99999999] absolute left-0 top-0 lg:block lg:h-auto lg:w-auto lg:static lg:left-auto lg:top-auto lg:z-0 lg:duration-300"
-    [ngClass]="
-      asyncData?.isSidebarExpanded
-        ? 'lg:w-expand-sidebar w-full'
-        : 'lg:w-collapse-sidebar'
-    "
-  ></app-sidebar>
-  <div class="overflow-auto relative grid-rows-auto-1fr pb-3 w-full">
+<div class="grid relative grid-cols-auto-1fr">
+  <!-- class="grid grid-cols-[50px_minmax(200px,_1fr)] grid-rows-auto-1fr relative" -->
+  <app-sidebar class=""></app-sidebar>
+  <div class="overflow-auto">
     <router-outlet></router-outlet>
   </div>
 </div>

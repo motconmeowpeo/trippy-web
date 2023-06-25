@@ -7,14 +7,14 @@ import { BannerBotModule } from '@core/component/bannerBot';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { HeaderModule } from '@core/component/header';
-
+import { FooterModule } from '@core/component/footer';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
-  }
-]
+    component: HomeComponent,
+  },
+];
 @NgModule({
   imports: [
     RouterModule.forChild(routes),
@@ -23,9 +23,9 @@ const routes: Routes = [
     BannerTopModule,
     FontAwesomeModule,
     NzCarouselModule,
-    HeaderModule
-
+    HeaderModule,
+    FooterModule,
   ],
-  declarations: [HomeComponent]
+  declarations: [HomeComponent],
 })
-export class HomeModule { }
+export class HomeModule {}
