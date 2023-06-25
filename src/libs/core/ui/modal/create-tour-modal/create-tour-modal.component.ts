@@ -48,6 +48,7 @@ export class CreateTourModalComponent
   planDay = 0;
   selectCountry: ISelectItem[] = [];
   user$ = this.authFacade.user$;
+
   constructor(
     private locationfacade: LocationFacade,
     private tourFacade: TourFacade,
@@ -202,7 +203,8 @@ export class CreateTourModalComponent
           }
           return of(user);
         }),
-        tap((user) => {
+        delay(3000),
+        switchMap((user) => {
           const payload: ITourCommand = {
             ...this.formCreate.value,
             overview: this.formCreate.value.overview?.map(
@@ -211,27 +213,24 @@ export class CreateTourModalComponent
             preview: head(this.formCreate.value.preview)?.name,
             createBy: user?.id || '',
           };
-          this.onCreateTour(payload);
+          return this.onCreateTour(payload);
         })
       )
       .subscribe();
   }
 
   private onCreateTour(payload: ITourCommand) {
-    this.tourFacade
-      .create(payload)
-      .pipe(
-        tap(() => {
-          this.notifiService.success('Success', 'Created tour');
-          this.close();
-          this.isCreating = false;
-        }),
-        catchError((err) => {
-          this.isCreating = false;
-          return of(err);
-        })
-      )
-      .subscribe();
+    return this.tourFacade.create(payload).pipe(
+      tap(() => {
+        this.notifiService.success('Success', 'Created tour');
+        this.close();
+        this.isCreating = false;
+      }),
+      catchError((err) => {
+        this.isCreating = false;
+        return of(err);
+      })
+    );
   }
 
   private upLoadOverview(files: File[]) {

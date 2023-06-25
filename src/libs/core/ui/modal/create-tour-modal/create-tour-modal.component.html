@@ -182,13 +182,13 @@
         <label class="w-14 text-base" for="tuor-plan"
           >Day {{ index + 1 }}</label
         >
-        <input
-          class="w-80 h-10 p-2 rounded-md outline-primary"
+        <textarea
+          class="w-80 max-h-20 p-2 animate-display rounded-md outline-primary"
           type="text"
           #valuePlan
           placeholder="Tour plan..."
           (change)="onAddTourPlan(index, valuePlan.value)"
-        />
+        ></textarea>
         <svg-icon
           class="ml-4 cursor-pointer"
           key="trash"

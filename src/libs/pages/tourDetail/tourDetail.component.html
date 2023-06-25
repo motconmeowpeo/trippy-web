@@ -66,19 +66,19 @@
                 <div class="flex flex-col text-lg">
                   <span class="flex items-center">
                     <fa-icon class="text-green-400" [icon]="faCheck"></fa-icon>
-                    <span class="ml-1">Specialized bilingual guide</span>
+                    <span class="ml-1"
+                      >Box lunch water, banana apple and chocolate</span
+                    >
                   </span>
                   <span class="flex items-center">
                     <fa-icon class="text-green-400" [icon]="faCheck"></fa-icon>
-                    <span class="ml-1">Specialized bilingual guide</span>
+                    <span class="ml-1">
+                      Entrance fees (Cable and car and Moon Valley)</span
+                    >
                   </span>
                   <span class="flex items-center">
                     <fa-icon class="text-green-400" [icon]="faCheck"></fa-icon>
-                    <span class="ml-1">Specialized bilingual guide</span>
-                  </span>
-                  <span class="flex items-center">
-                    <fa-icon class="text-green-400" [icon]="faCheck"></fa-icon>
-                    <span class="ml-1">Specialized bilingual guide</span>
+                    <span class="ml-1">Private Transport</span>
                   </span>
                   <span class="flex items-center">
                     <fa-icon class="text-green-400" [icon]="faCheck"></fa-icon>
@@ -88,30 +88,33 @@
                 <div class="flex flex-col ml-10 text-lg">
                   <span class="flex items-center">
                     <fa-icon class="text-red-500" [icon]="faClose"></fa-icon>
-                    <span class="ml-1">Specialized bilingual guide</span>
+                    <span class="ml-1">Airport Transfers</span>
                   </span>
                   <span class="flex items-center">
                     <fa-icon class="text-red-500" [icon]="faClose"></fa-icon>
-                    <span class="ml-1">Specialized bilingual guide</span>
+                    <span class="ml-1">5 Star Accommodation</span>
                   </span>
                   <span class="flex items-center">
                     <fa-icon class="text-red-500" [icon]="faClose"></fa-icon>
-                    <span class="ml-1">Specialized bilingual guide</span>
+                    <span class="ml-1"> Entry Fees</span>
                   </span>
                   <span class="flex items-center">
                     <fa-icon class="text-red-500" [icon]="faClose"></fa-icon>
-                    <span class="ml-1">Specialized bilingual guide</span>
-                  </span>
-                  <span class="flex items-center">
-                    <fa-icon class="text-red-500" [icon]="faClose"></fa-icon>
-                    <span class="ml-1">Specialized bilingual guide</span>
+                    <span class="ml-1">Departure Taxes</span>
                   </span>
                 </div>
               </div>
             </div>
           </nz-tab>
           <nz-tab nzTitle="TOUR PLAN">
-            <span>Content 2</span>
+            <nz-collapse nzAccordion>
+              <nz-collapse-panel
+                *ngFor="let panel of tour.tourPlan"
+                [nzHeader]="'Day ' + panel.day"
+              >
+                <p class="leading-9 text-lg">{{ panel.description }}</p>
+              </nz-collapse-panel>
+            </nz-collapse>
           </nz-tab>
           <nz-tab nzTitle="REVIEWS">
             <ng-template nz-tab>
@@ -395,6 +398,8 @@
             method="post"
             action=""
             class="booking-form mt-12"
+            [formGroup]="formInvoice"
+            (ngSubmit)="onCreateInvoice()"
           >
             <div class="input-group">
               <div class="booking-date flex flex-wrap">
@@ -406,29 +411,60 @@
                   autocomplete="off"
                   class="w-[50%] p-3 ml-auto mb-2 outline-none border-2 border-gray-100"
                   id="booking_date_from"
+                  min="{{ today | date : 'yyyy-MM-dd' }}"
                   name="booking_date_from"
+                  formControlName="date"
                 />
               </div>
               <hr />
-              <div class="my-3 flex booking-times-block">
-                <label class="booking-form-input-label text-lg font-medium"
-                  >Time:</label
-                >
-                <div
-                  id="booking-times"
-                  class="ml-auto booking-date-times"
-                ></div>
-              </div>
+
               <hr />
               <div class="booking-guests-block my-3 flex flex-wrap">
                 <label class="booking-form-input-label text-lg font-medium"
-                  >Tickets:</label
-                >
+                  >Tickets:
+                  <span class="text-xs text-red-500">{{
+                    formInvoice.controls.adult.value +
+                      formInvoice.controls.young.value +
+                      formInvoice.controls.children.value >
+                    tour.maxPeople
+                      ? 'Max people is ' + tour.maxPeople
+                      : ''
+                  }}</span>
+                </label>
                 <div
                   id="booking-guests-result"
                   class="ml-auto text-base text-gray-500"
                 >
-                  Please select a date first.
+                  <ng-container
+                    *ngIf="!formInvoice.controls.date.value; else tickets"
+                  >
+                    Please select a date first.
+                  </ng-container>
+                  <ng-template #tickets>
+                    <div
+                      class="flex mt-2 items-center"
+                      *ngFor="let item of tour.tickets"
+                    >
+                      <ng-container
+                        *ngIf="
+                          (item.age === 'CHILDREN' && tour.minAge < 13) ||
+                          (item.age === 'YOUNG' && tour.minAge < 17) ||
+                          item.age === 'ADULT'
+                        "
+                      >
+                        <label class="w-40" for="">{{
+                          (item.age | titlecase) + '( $' + item.price + '.00 )'
+                        }}</label>
+                        <input
+                          class="border border-primary rounded-sm flex-1 p-2"
+                          type="number"
+                          min="0"
+                          placeholder="Number of people"
+                          formControlName="{{ item.age | lowercase }}"
+                        />
+                      </ng-container>
+                    </div>
+                  </ng-template>
                 </div>
               </div>
               <hr />
@@ -445,6 +481,8 @@
                           type="checkbox"
                           name="booking_services[]"
                           value="22"
+                          formControlName="serviceBooking"
+                          class="cursor-pointer"
                         />
                         <label
                           for="booking_services_1"
@@ -453,7 +491,7 @@
                         >
                         <span
                           class="service-price-line text-gray-600 font-bold ml-auto"
-                          >$30.000</span
+                          >$30.00</span
                         >
                       </div>
                       <hr />
@@ -475,6 +513,8 @@
                           type="checkbox"
                           name="booking_services[]"
                           value="23"
+                          formControlName="servicePerson"
+                          class="cursor-pointer"
                         />
                         <label
                           for="booking_services_2"
@@ -483,15 +523,8 @@
                         >
                         <div class="list-service-prices ml-auto">
                           <span class="service-price-line">
-                            <label class="text-gray-500">Adult:</label>
                             <span class="text-gray-600 font-bold ml-2"
                               >$17.00</span
-                            >
-                          </span>
-                          <span class="service-price-line ml-3">
-                            <label class="text-gray-500">Youth:</label>
-                            <span class="text-gray-600 font-bold ml-2"
-                              >$14.00</span
                             >
                           </span>
                         </div>
@@ -514,7 +547,11 @@
             </div>
             <div id="total-group">
               <label class="text-gray-500 text-lg font-normal">Total:</label>
-              <div id="booking-form-total"></div>
+              <span
+                class="text-primary font-semibold ml-5"
+                id="booking-form-total"
+                >{{ '$' + total + '.00' }}</span
+              >
             </div>
             <div id="error-group ">
               <label
@@ -524,9 +561,38 @@
             </div>
             <div class="submit-group">
               <button
-                class="btn-submit-booking text-lime-50 bg-primary font-bold text-center rounded-md w-full h-12 mt-3 hover:bg-primaryhover"
+                [disabled]="
+                  formInvoice.invalid ||
+                  formInvoice.controls.adult.value +
+                    formInvoice.controls.young.value +
+                    formInvoice.controls.children.value >
+                    tour.maxPeople ||
+                  formInvoice.controls.adult.value +
+                    formInvoice.controls.young.value +
+                    formInvoice.controls.children.value ===
+                    0 ||
+                  isCreating
+                "
+                [ngClass]="
+                  formInvoice.invalid ||
+                  formInvoice.controls.adult.value +
+                    formInvoice.controls.young.value +
+                    formInvoice.controls.children.value >
+                    tour.maxPeople ||
+                  formInvoice.controls.adult.value +
+                    formInvoice.controls.young.value +
+                    formInvoice.controls.children.value ===
+                    0 ||
+                  isCreating
+                    ? 'cursor-no-drop border-black border border-solid text-black'
+                    : 'hover:bg-primaryhover bg-primary cursor-pointer text-white '
+                "
+                class="btn-submit-booking font-bold flex justify-center items-center rounded-md w-full h-12 mt-3"
               >
-                Book Now
+                <span *ngIf="!isCreating; else loadingSm">Book Now</span>
+                <ng-template #loadingSm>
+                  <app-loading-small></app-loading-small>
+                </ng-template>
               </button>
             </div>
           </form>

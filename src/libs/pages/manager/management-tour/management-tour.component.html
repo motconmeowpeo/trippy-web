@@ -1,4 +1,4 @@
-<div class="pt-20 w-full min-h-screen bg-slate-100">
+<div class="pt-20 w-full min-h-screen relative bg-slate-100">
   <ng-container *ngIf="isLoading; else tours">
     <div
       class="w-full max-w-7xl h-full m-auto flex items-center justify-center"
@@ -25,7 +25,7 @@
         <!-- TourItem -->
         <ul class="list-none flex pt-2 flex-wrap">
           <app-tourItem
-            class="h-[400px] w-1/5 rounded-3xl bg-transparent px-6 pb-6 relative cursor-auto"
+            class="h-[400px] w-1/5 rounded-3xl bg-transparent px-6 pb-6 relative cursor-pointer"
             classBox="h-10"
             [disableExplore]="true"
             *ngFor="let tour of tours"
@@ -34,20 +34,20 @@
         </ul>
       </div>
     </section>
-
-    <app-pagination
-      [pageLimitOptions]="pageLimitOptions"
-      [currentPage]="currentPage"
-      [total]="total"
-      [limit]="limit"
-      [canNext]="canNext"
-      [canPrev]="canPrev"
-      [widthOffset]="2"
-      [className]="'pagination-style'"
-      (goTo)="onGoToPage($event)"
-      (next)="onNextPage()"
-      (previous)="onPreviousPage()"
-      (limitChange)="onLimitChange($event)"
-    ></app-pagination>
   </ng-template>
+  <app-pagination
+    *ngIf="tours$"
+    className="absolute left-0 bottom-0 right-0"
+    [pageLimitOptions]="pageLimitOptions"
+    [currentPage]="currentPage"
+    [total]="total"
+    [limit]="limit"
+    [canNext]="canNext"
+    [canPrev]="canPrev"
+    [widthOffset]="2"
+    (goTo)="onGoToPage($event)"
+    (next)="onNextPage()"
+    (previous)="onPreviousPage()"
+    (limitChange)="onLimitChange($event)"
+  ></app-pagination>
 </div>

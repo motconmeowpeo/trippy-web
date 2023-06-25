@@ -29,17 +29,21 @@ export class TourComponent implements OnInit {
   ngOnInit() {
     this.isLoading = true;
     this.createForm();
-    this.tourFacade.getAll().subscribe(() => (this.isLoading = false));
+    this.tourFacade.getAll().subscribe();
     this.locationfacade
       .getAllLocation()
       .pipe(
         tap((locations) => {
-          this.selectCountry = locations.map((location) => {
+          this.selectCountry = [{ name: 'All country', value: '' }];
+
+          const country = locations.map((location) => {
             return {
               name: location.name,
               value: location.iso2,
             };
           });
+          this.selectCountry = [...this.selectCountry, ...country];
+          this.isLoading = false;
         })
       )
       .subscribe();

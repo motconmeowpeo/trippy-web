@@ -16,15 +16,21 @@ import {
   faStar,
   faArrowLeft,
 } from '@fortawesome/free-solid-svg-icons';
-import { ICommentForm } from './tourDetail.form';
+import { ICommentForm, IInvoiceForm } from './tourDetail.form';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { ModalCloseStatus, PermissionCode, ReportCategory } from '@core/enum';
 import { TourCommentFacade } from '@core/services/tour-comment';
-import { format } from 'date-fns';
-import { HOUR_MINUTE_FORMAT_TIME, SETTING_FORMAT_DATE } from '@core/constants';
+import { format, add } from 'date-fns';
+import {
+  DEFAULT_FORMAT_DATE,
+  HOUR_MINUTE_FORMAT_TIME,
+  SETTING_FORMAT_DATE,
+} from '@core/constants';
 import { tap } from 'rxjs';
 import { DialogService } from '@ngneat/dialog';
 import { ConfirmModalComponent } from '@core/ui/modal';
+import { ITour } from '@core/model';
+import { InvoiceFacade } from '@core/services/invoice';
 
 @Component({
   selector: 'app-tourDetail',
@@ -47,15 +53,21 @@ export class TourDetailComponent implements OnInit {
   comments$ = this.tourCommentFacade.comments$;
   user$ = this.authFacade.user$;
   formComment!: FormGroup<ICommentForm>;
+  formInvoice!: FormGroup<IInvoiceForm>;
   isPosting = false;
+  isCreating = false;
   isDeleteing = false;
   PermissionCode = PermissionCode;
+  total = 0;
+  tour!: ITour;
+  today = add(new Date(), { days: 7 });
   constructor(
     private tourFacade: TourFacade,
     private router: ActivatedRoute,
     private tourCommentFacade: TourCommentFacade,
     private authFacade: AuthFacade,
     private dialog: DialogService,
+    private invoiceFacade: InvoiceFacade,
     private notifiService: ToastNotificationService
   ) {}
 
@@ -64,15 +76,17 @@ export class TourDetailComponent implements OnInit {
     const tourId = this.router.snapshot.paramMap.get('id');
 
     if (tourId) {
-      this.createForm(tourId);
-      this.tourFacade
-        .getTourById(tourId)
-        .subscribe(() => (this.isLoading = false));
+      this.createFormComment(tourId);
+      this.createFormInvoice(tourId);
+      this.tourFacade.getTourById(tourId).subscribe((tour) => {
+        this.tour = tour;
+        this.isLoading = false;
+      });
       this.tourCommentFacade.getByTourId(tourId).subscribe();
     }
   }
 
-  private createForm(id: string) {
+  private createFormComment(id: string) {
     this.formComment = new FormGroup({
       content: new FormControl('', {
         nonNullable: true,
@@ -101,10 +115,66 @@ export class TourDetailComponent implements OnInit {
       }),
       tourId: new FormControl(id, {
         nonNullable: true,
-        validators: [Validators.required, Validators.min(0)],
+        validators: [Validators.required],
         updateOn: 'change',
       }),
     });
+  }
+
+  private createFormInvoice(id: string) {
+    this.formInvoice = new FormGroup({
+      date: new FormControl('', {
+        nonNullable: true,
+        validators: [Validators.required],
+        updateOn: 'change',
+      }),
+      children: new FormControl(0, {
+        nonNullable: true,
+        validators: [Validators.required, Validators.min(0)],
+        updateOn: 'change',
+      }),
+      young: new FormControl(0, {
+        nonNullable: true,
+        validators: [Validators.required, Validators.min(0)],
+        updateOn: 'change',
+      }),
+      adult: new FormControl(0, {
+        nonNullable: true,
+        validators: [Validators.required, Validators.min(0)],
+        updateOn: 'change',
+      }),
+      serviceBooking: new FormControl(false, {
+        nonNullable: true,
+        validators: [Validators.required, Validators.min(0)],
+        updateOn: 'change',
+      }),
+      servicePerson: new FormControl(false, {
+        nonNullable: true,
+        validators: [Validators.required, Validators.min(0)],
+        updateOn: 'change',
+      }),
+      tourId: new FormControl(id, {
+        nonNullable: true,
+        validators: [Validators.required],
+        updateOn: 'change',
+      }),
+    });
+    this.caculatorTotal();
+  }
+
+  private caculatorTotal() {
+    this.formInvoice.valueChanges
+      .pipe(
+        tap((formValue) => {
+          this.total =
+            (formValue?.adult || 0) * this.tour.tickets[0].price +
+            (formValue.young || 0) * this.tour.tickets[1].price +
+            (formValue?.children || 0) * this.tour.tickets[2].price +
+            (formValue.serviceBooking ? 30 : 0) +
+            (formValue.servicePerson ? 17 : 0);
+        })
+      )
+      .subscribe();
   }
 
   handlePostComment() {
@@ -178,5 +248,32 @@ export class TourDetailComponent implements OnInit {
       new Date(time),
       `${SETTING_FORMAT_DATE} ${HOUR_MINUTE_FORMAT_TIME}`
     );
+  }
+
+  onCreateInvoice() {
+    this.user$
+      .pipe(
+        tap((user) => {
+          if (user) this.createInvoice(user?.id);
+        })
+      )
+      .subscribe();
+  }
+  createInvoice(userId: string) {
+    this.isCreating = true;
+    this.invoiceFacade
+      .create({
+        ...this.formInvoice.value,
+        userId,
+        total: this.total,
+      })
+      .pipe(
+        tap(() => {
+          this.isCreating = false;
+          this.notifiService.success('Success', 'Create invoice');
+          this.formInvoice.reset();
+        })
+      )
+      .subscribe();
   }
 }

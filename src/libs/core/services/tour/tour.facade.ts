@@ -24,9 +24,9 @@ export class TourFacade {
   );
   constructor(private tourService: TourService, private storage: Storage) {}
   getAll(params?: IBaseParams) {
-    store.update(deleteAllEntities());
     return this.tourService.getAll(params).pipe(
       tap((tours) => {
+        store.update(deleteAllEntities());
         tours.map((tour) => {
           const storageRefPreview = ref(this.storage, tour.preview);
           getDownloadURL(storageRefPreview).then((preview) => {

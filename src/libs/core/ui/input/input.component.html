@@ -1,5 +1,5 @@
 <div
-  class="input relative flex flex-col text-surface-100 px-3 pb-0.5 min-h border-b border-outline"
+  class="input relative flex flex-col text-surface-100 px-3 pb-0.5 min-h border border-primary"
   [ngClass]="className"
   [class]="readonly ? 'cursor-not-allowed' : ''"
 >
@@ -13,7 +13,7 @@
   <div class="flex items-center">
     <ng-content select="[detail]"></ng-content>
     <input
-      class="w-full pr-2 focus:outline-none bg-transparent text-sm"
+      class="w-full p-2 focus:outline-none bg-transparent text-sm rounded-sm"
       [ngClass]="{ 'text-surface-50 cursor-not-allowed': !!readonly }"
       [type]="isPasswordShown ? 'text' : type"
       [attr.placeholder]="placeholder"

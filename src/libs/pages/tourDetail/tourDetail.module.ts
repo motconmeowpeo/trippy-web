@@ -4,6 +4,7 @@ import { TourDetailComponent } from './tourDetail.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RatingModule } from '@core/component/rating';
 import { LoadingModule } from '@core/component/loading';
@@ -11,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoadingSmallModule } from '@core/component/loading-small';
 import { SvgIconsModule } from '@ngneat/svg-icon';
 import { PermissionsDirectiveModule } from '@core/directive';
+import { InputModule } from '@core/ui';
 const routes: Routes = [
   {
     path: '',
@@ -30,6 +32,8 @@ const routes: Routes = [
     LoadingSmallModule,
     SvgIconsModule,
     PermissionsDirectiveModule,
+    NzCollapseModule,
+    InputModule,
   ],
   declarations: [TourDetailComponent],
 })
