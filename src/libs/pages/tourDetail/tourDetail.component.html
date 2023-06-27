@@ -214,8 +214,14 @@
                   ><div class="comments-box shadow-lg p-4 m-auto">
                     <div *ngFor="let comment of comments" class="comment mt-4">
                       <hr />
-                      <div class="comment-avatar w-16 h-16 mt-12">
-                        <img src="assets/avatar/defaultAvt2.png" alt="" />
+                      <div
+                        class="flex items-center justify-center p-1 cursor-pointer w-12 h-12 rounded hover:bg-background-2"
+                      >
+                        <span
+                          class="flex items-center cursor-pointer justify-center rounded-1/2 w-full h-full bg-primary text-white uppercase font-bold"
+                        >
+                          {{ comment.author.email | slice : 0 : 1 }}
+                        </span>
                       </div>
                       <div class="comment-meta">
                         <div

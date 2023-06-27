@@ -5,6 +5,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { PermissionsDirectiveModule } from '../../directive/permission.directive.module';
+import { SvgIconsModule } from '@ngneat/svg-icon';
+import { MenuModule, IconsModule } from '@core/ui';
 
 @NgModule({
   imports: [
@@ -13,6 +15,9 @@ import { PermissionsDirectiveModule } from '../../directive/permission.directive
     RouterModule,
     NzToolTipModule,
     PermissionsDirectiveModule,
+    MenuModule,
+    SvgIconsModule,
+    IconsModule,
   ],
   declarations: [HeaderComponent],
   exports: [HeaderComponent],
