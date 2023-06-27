@@ -11,9 +11,14 @@
         class="bg-[#263238] text-xl font-semibold text-center w-full flex justify-center items-center text-white h-20"
       >
         <img
+          *ngIf="isSideBarShown"
+          src="assets/logo/logo.png"
+          class="object-cover h-10 animate-display"
+          alt=""
+        /><img
+          *ngIf="!isSideBarShown"
           src="assets/logo/logoSm.png"
-          class="object-cover"
-          [class]="isSideBarShown ? 'h-16 w-16' : 'h-10 w-10'"
+          class="object-cover h-10 animate-display"
           alt=""
         />
       </div>
