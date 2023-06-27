@@ -1,3 +1,41 @@
-<p>
-  management-invoice works!
-</p>
+<div class="pt-20 w-full bg-slate-100">
+  <ng-container *ngIf="isLoading; else tours">
+    <div
+      class="w-full max-w-7xl h-full m-auto flex items-center justify-center"
+    >
+      <app-loading></app-loading>
+    </div>
+  </ng-container>
+  <ng-template #tours>
+    <div class="flex justify-end mr-6 pt-3 border-t border-t-white">
+      <app-search placeholder="Search by user, tour, price,..."></app-search>
+    </div>
+    <div class="m-5 max-h-[670px] overflow-auto">
+      <section class="w-full" *ngIf="test$ | async as tours">
+        <table class="w-full table-auto border">
+          <thead>
+            <tr class="border text-left sticky  text- top-0 bg-primary text-white">
+              <th class="w-[20%] px-4 py-2">Customer</th>
+              <th class="px-4 py-2">Tour</th>
+              <th class="w-[10%] px-4 py-2">Start date</th>
+              <th class="w-[10%] px-4 py-2">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class="cursor-pointer"
+              *ngFor="let tour of tours; even as isEven"
+              [ngClass]="isEven ? 'bg-white' : 'bg-gray-100'"
+              (click)="openInvoiceDetail(tour)"
+            >
+              <td class="px-4 py-2">{{ tour.name }}r</td>
+              <td class="px-4 py-2">{{ tour.tourName }}</td>
+              <td class="px-4 py-2">{{ tour.startDate }}</td>
+              <td class="px-4 py-2">{{ tour.totals }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </ng-template>
+</div>

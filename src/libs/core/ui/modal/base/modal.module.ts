@@ -26,6 +26,7 @@ import { ConfirmModalComponent } from './confirm-modal';
 import { TestModal } from '../test';
 import { CreateTourModalComponent } from '../create-tour-modal';
 import { UpdateTourModalComponent } from '../update-tour-modal';
+import { InvoiceDetailModalComponent } from '../invoice-detail-modal';
 const MODALS = [
   FormInformationModalComponent,
   FormModalComponent,
@@ -34,6 +35,7 @@ const MODALS = [
   TestModal,
   CreateTourModalComponent,
   UpdateTourModalComponent,
+  InvoiceDetailModalComponent,
 ];
 
 @NgModule({

@@ -5,8 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { BannerBotModule } from '@core/component/bannerBot';
 import { BannerTopModule } from '@core/component/bannerTop';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { IconsModule } from '@core/ui';
 import { HeaderModule } from '@core/component/header';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { ScrollToDirective } from './scrollTo.directive';
 import { FooterModule } from '@core/component/footer';
 const routes: Routes = [
   {
@@ -22,8 +23,11 @@ const routes: Routes = [
     BannerTopModule,
     FontAwesomeModule,
     HeaderModule,
+    NzCarouselModule,
     FooterModule,
   ],
-  declarations: [PageComponent],
+  declarations: [	PageComponent,
+      ScrollToDirective
+   ],
 })
 export class PageModule {}
