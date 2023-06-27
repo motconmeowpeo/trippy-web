@@ -1,8 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ElementRef,
-} from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import {
   faArrowRightLong,
   faShoePrints,
@@ -19,6 +15,7 @@ import {
   faQuoteLeft,
   faAngleUp,
 } from '@fortawesome/free-solid-svg-icons';
+import * as AOS from 'aos';
 
 export interface review {
   rReview: string;
@@ -78,7 +75,12 @@ export class PageComponent implements OnInit {
     ];
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    AOS.init({
+      duration: 1500,
+      once: true,
+    });
+  }
 
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
