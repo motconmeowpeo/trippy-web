@@ -4,4 +4,5 @@ export * from './status.enum';
 export * from './common.enum';
 export * from './time.enum';
 export * from './tour.enum';
+export * from './invoice.enum';
 export * from './base.enum';

@@ -1,7 +1,7 @@
-<div class="w-full bg-slate-100">
+<div class="w-full max-h-[87vh] min-h-[87vh] bg-slate-100">
   <ng-container *ngIf="isLoading; else tours">
     <div
-      class="w-full max-w-7xl h-full m-auto flex items-center justify-center"
+      class="w-full max-w-7xl h-full min-h-[87vh] m-auto flex items-center justify-center"
     >
       <app-loading></app-loading>
     </div>
@@ -11,32 +11,48 @@
       <app-search placeholder="Search by user, tour, price,..."></app-search>
     </div>
     <div class="m-5 max-h-[670px] overflow-auto">
-      <section class="w-full" *ngIf="test$ | async as tours">
-        <table class="w-full table-auto border">
-          <thead>
-            <tr
-              class="border text-left sticky text- top-0 bg-primary text-white"
+      <section class="w-full" *ngIf="invoices$ | async as invoices">
+        <div
+          class="w-full m-auto p-3"
+          *ngIf="invoices.length; else noDataFound"
+        >
+          <table class="w-full table-auto border">
+            <thead>
+              <tr
+                class="border text-left sticky text- top-0 bg-primary text-white"
+              >
+                <th class="w-[20%] px-4 py-2">Customer</th>
+                <th class="px-4 py-2">Tour</th>
+                <th class="w-[10%] px-4 py-2">Start date</th>
+                <th class="w-[10%] px-4 py-2">Total</th>
+                <th class="w-[10%] px-4 py-2">Payment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                class="cursor-pointer"
+                *ngFor="let invoice of invoices; even as isEven"
+                [ngClass]="isEven ? 'bg-white' : 'bg-gray-100'"
+                (click)="openInvoiceDetail(invoice)"
+              >
+                <td class="px-4 py-2">{{ invoice.user.username }}r</td>
+                <td class="px-4 py-2">{{ invoice.tour.name }}</td>
+                <td class="px-4 py-2">{{ invoice.date }}</td>
+                <td class="px-4 py-2">{{ '$' + invoice.total + '.00' }}</td>
+                <td class="px-4 py-2">{{ invoice.payStatus | titlecase }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ng-template #noDataFound>
+          <div
+            class="w-full m-auto min-h-[40vh] flex flex-col items-center justify-center"
+          >
+            <span class="text-gray-500 font-semibold text-2xl"
+              >No data found</span
             >
-              <th class="w-[20%] px-4 py-2">Customer</th>
-              <th class="px-4 py-2">Tour</th>
-              <th class="w-[10%] px-4 py-2">Start date</th>
-              <th class="w-[10%] px-4 py-2">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              class="cursor-pointer"
-              *ngFor="let tour of tours; even as isEven"
-              [ngClass]="isEven ? 'bg-white' : 'bg-gray-100'"
-              (click)="openInvoiceDetail(tour)"
-            >
-              <td class="px-4 py-2">{{ tour.name }}r</td>
-              <td class="px-4 py-2">{{ tour.tourName }}</td>
-              <td class="px-4 py-2">{{ tour.startDate }}</td>
-              <td class="px-4 py-2">{{ tour.totals }}</td>
-            </tr>
-          </tbody>
-        </table>
+          </div>
+        </ng-template>
       </section>
     </div>
   </ng-template>

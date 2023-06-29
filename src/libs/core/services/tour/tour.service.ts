@@ -16,6 +16,11 @@ export class TourService {
     return this.http.get<ITour[]>(API_TOUR, { params });
   }
 
+  getTourByManager(authorId?: string, params?: IBaseParams) {
+    return this.http.get<ITour[]>(`${API_TOUR}/manager/${authorId}`, {
+      params,
+    });
+  }
   getTourById(id: string): Observable<ITour> {
     return this.http.get<ITour>(`${API_TOUR}/${id}`);
   }

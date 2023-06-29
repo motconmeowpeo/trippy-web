@@ -9,8 +9,11 @@
     </div>
   </ng-container>
   <ng-template #tours>
-    <div class="flex justify-end mr-6 pt-3 border-t border-t-white">
-      <app-search></app-search>
+    <div
+      class="flex justify-end mr-6 pt-3 border-t border-t-white"
+      [formGroup]="form"
+    >
+      <app-search formControlName="search"></app-search>
       <div class="h-12 ml-6">
         <app-button
           className="w-52"
@@ -23,7 +26,7 @@
       </div>
     </div>
     <section class="h-full" *ngIf="tours$ | async as tours">
-      <div class="w-full m-auto p-3" *ngIf="tours.length">
+      <div class="w-full m-auto p-3" *ngIf="tours.length; else noDataFound">
         <!-- TourItem -->
         <ul class="list-none flex pt-2 flex-wrap pb-20">
           <app-tourItem
@@ -35,6 +38,15 @@
           ></app-tourItem>
         </ul>
       </div>
+      <ng-template #noDataFound>
+        <div
+          class="w-full m-auto min-h-[40vh] flex flex-col items-center justify-center"
+        >
+          <span class="text-gray-500 font-semibold text-2xl"
+            >No data found</span
+          >
+        </div>
+      </ng-template>
     </section>
   </ng-template>
   <app-pagination

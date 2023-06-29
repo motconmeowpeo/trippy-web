@@ -1,3 +1,7 @@
+import { ITour } from './tour.model';
+import { IUser } from './user.model';
+import { PayStatus } from '../enum/invoice.enum';
+
 export interface IInvoiceCommand {
   date: string;
   children: number;
@@ -19,6 +23,9 @@ export interface IInvoice {
   serviceBooking: boolean;
   servicePerson: boolean;
   tourId: string;
+  user: IUser;
+  tour: ITour;
   userId: string;
   total: number;
+  payStatus: PayStatus;
 }

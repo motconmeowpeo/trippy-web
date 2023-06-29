@@ -4,6 +4,11 @@ import { TourFacade } from '@core/services/tour';
 import { DialogService } from '@ngneat/dialog';
 import { CreateTourModalComponent } from '@core/ui/modal/create-tour-modal';
 import { TestModal } from '@core/ui/modal/test';
+import { AuthFacade } from '../../../core/services/auth/auth.facade';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ISearchForm } from './management-tour.form';
+import { debounceTime, tap } from 'rxjs';
+import { IBaseParams } from '@core/model';
 
 @Component({
   selector: 'app-management-tour',
@@ -11,19 +16,33 @@ import { TestModal } from '@core/ui/modal/test';
 })
 export class ManagementTourComponent implements OnInit {
   tours$ = this.tourFacade.tours$;
+  user$ = this.authFacade.user$;
   isLoading = false;
   currentPage = 1;
   limit = 5;
   canNext = true;
   canPrev = false;
-  constructor(private tourFacade: TourFacade, private dialog: DialogService) {}
+  form!: FormGroup<ISearchForm>;
+  search = '';
+  constructor(
+    private tourFacade: TourFacade,
+    private dialog: DialogService,
+    private authFacade: AuthFacade
+  ) {}
 
   pageLimitOptions: number[] = [5, 10, 20, 50];
   total: number = 0;
   ngOnInit() {
     this.isLoading = true;
     this.calculateTotal();
-    this.tourFacade.getAll().subscribe(() => (this.isLoading = false));
+    this.createForm();
+    this.user$.subscribe((user) => {
+      if (user) {
+        this.tourFacade
+          .getTourByManager(user?.id)
+          .subscribe(() => (this.isLoading = false));
+      }
+    });
   }
 
   calculateTotal(): void {
@@ -83,5 +102,35 @@ export class ManagementTourComponent implements OnInit {
 
   onLimitChange(limit: number): void {
     console.log(limit);
+  }
+
+  private createForm() {
+    this.form = new FormGroup({
+      search: new FormControl('', { nonNullable: true }),
+    });
+    this.handleSearch();
+  }
+
+  private handleSearch() {
+    this.form.valueChanges
+      .pipe(
+        debounceTime(300),
+        tap((formValue) => {
+          this.search = formValue.search || '';
+          this.searchTour({ search: this.search });
+        })
+      )
+      .subscribe();
+  }
+
+  private searchTour(params?: IBaseParams) {
+    this.isLoading = true;
+    this.user$.subscribe((user) => {
+      if (user) {
+        this.tourFacade
+          .getTourByManager(user?.id, params)
+          .subscribe(() => (this.isLoading = false));
+      }
+    });
   }
 }

@@ -27,6 +27,13 @@ export class TourFacade {
       })
     );
   }
+
+  getTourByManager(authorId: string, params?: IBaseParams) {
+    return this.tourService
+      .getTourByManager(authorId, params)
+      .pipe(tap((tours) => store.update(setEntities(tours))));
+  }
+
   getTourById(id: string) {
     return this.tourService.getTourById(id).pipe(
       tap((tour) => {
@@ -35,6 +42,7 @@ export class TourFacade {
       })
     );
   }
+
   create(payload: Partial<ITourCommand>) {
     return this.tourService.create(payload).pipe(
       tap((tour) => {

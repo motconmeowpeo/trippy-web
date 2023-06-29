@@ -26,10 +26,10 @@
     <!-- Nav -->
     <ul class="h-full">
       <li
-        class="bg-[#37474f] h-14 border-b relative flex items-center pl-4 py-4 border-b-[#455a64] cursor-pointer text-[#ecefe2] hover:text-[#f9fbf2] duration-300 transition-all hover:bg-[#424f56]"
+        class="bg-[#37474f] h-14 border-b relative flex items-center pl-4 py-4 border-b-[#455a64] cursor-pointer text-[#ecefe2] duration-300 transition-all"
         *ngFor="let item of MENU_GROUP"
         [routerLink]="item.url"
-        routerLinkActive="true"
+        routerLinkActive="activeSideBar"
       >
         <ng-container *ngIf="isSideBarShown">
           <svg-icon

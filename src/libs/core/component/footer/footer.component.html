@@ -57,7 +57,6 @@
         <li
           *ngFor="let item of this.EXPLORES"
           [routerLink]="['destination', item]"
-          routerLinkActive="router-link-active"
           class="text-globaltext text-xl p-3 cursor-pointer hover:text-primaryhover"
         >
           {{ item.name | titlecase }}

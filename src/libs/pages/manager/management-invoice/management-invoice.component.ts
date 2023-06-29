@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { DialogService } from '@ngneat/dialog';
 import { InvoiceDetailModalComponent } from '@core/ui/modal/invoice-detail-modal';
 import { Observable, map, of, tap } from 'rxjs';
+import { InvoiceFacade } from '@core/services/invoice';
+import { AuthFacade } from '@core/services';
+import { PayStatus } from '@core/enum';
+import { IInvoice } from '@core/model';
 export interface Invoice {
   name: string;
   tourName: string;
@@ -15,78 +19,27 @@ export interface Invoice {
 })
 export class ManagementInvoiceComponent implements OnInit {
   isLoading = false;
-  constructor(private dialog: DialogService) {}
-  test$ = of([
-    {
-      name: 'KH1',
-      tourName: 'Tour`',
-      startDate: '1/1/1000',
-      totals: 10,
-    },
-    {
-      name: 'KH1',
-      tourName: 'Tour`',
-      startDate: '1/1/1000',
-      totals: 10,
-    },
-    {
-      name: 'KH1',
-      tourName: 'Tour`',
-      startDate: '1/1/1000',
-      totals: 10,
-    },
-    {
-      name: 'KH1',
-      tourName: 'Tour`',
-      startDate: '1/1/1000',
-      totals: 10,
-    },
-    {
-      name: 'KH1',
-      tourName: 'Tour`',
-      startDate: '1/1/1000',
-      totals: 10,
-    },
-    {
-      name: 'KH1',
-      tourName: 'Tour`',
-      startDate: '1/1/1000',
-      totals: 10,
-    },
-    {
-      name: 'KH1',
-      tourName: 'Tour`',
-      startDate: '1/1/1000',
-      totals: 10,
-    },
-    {
-      name: 'KH1',
-      tourName: 'Tour`',
-      startDate: '1/1/1000',
-      totals: 10,
-    },
-    {
-      name: 'KH1',
-      tourName: 'Tour`',
-      startDate: '1/1/1000',
-      totals: 10,
-    },
-    {
-      name: 'KH1',
-      tourName: 'Tour`',
-      startDate: '1/1/1000',
-      totals: 10,
-    },
-    {
-      name: 'KH1',
-      tourName: 'Tour`',
-      startDate: '1/1/1000',
-      totals: 10,
-    },
-  ]);
-  ngOnInit() {}
+  invoices$ = this.invoiceFacade.invoices$;
+  user$ = this.authFacade.user$;
+  PayStatus = PayStatus;
+  constructor(
+    private dialog: DialogService,
+    private invoiceFacade: InvoiceFacade,
+    private authFacade: AuthFacade
+  ) {}
 
-  openInvoiceDetail(invoice: any) {
+  ngOnInit() {
+    this.isLoading = true;
+    this.user$.subscribe((user) => {
+      if (user) {
+        this.invoiceFacade
+          .getAllInvoiceByAuthor(user.id)
+          .subscribe(() => (this.isLoading = false));
+      }
+    });
+  }
+
+  openInvoiceDetail(invoice: IInvoice) {
     this.dialog.open(InvoiceDetailModalComponent, {
       data: {
         title: 'Invoice detail',

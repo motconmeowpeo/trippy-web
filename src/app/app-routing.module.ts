@@ -10,6 +10,7 @@ import {
   URL_REGISTER,
   URL_MANAGER,
   URL_PAGE,
+  URL_CONTACT,
 } from '@core/constants';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '@core/guard';
@@ -72,6 +73,12 @@ const publicRoute: Routes = [
     path: URL_PAGE,
     // canActivate: [AuthGuard],
     loadChildren: () => import('@pages/page').then((page) => page.PageModule),
+  },
+  {
+    path: URL_CONTACT,
+    // canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('@pages/contact').then((page) => page.ContactModule),
   },
 ];
 const privateRoute = [];

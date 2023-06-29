@@ -5,6 +5,7 @@ import { ManagementTourRoutingModule } from './management-tour.module.routing';
 import { ButtonModule, PaginationModule, SearchModule } from '@core/ui';
 import { TourItemModule } from '@core/component/tourItem';
 import { LoadingModule } from '@core/component/loading';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { LoadingModule } from '@core/component/loading';
     LoadingModule,
     ButtonModule,
     PaginationModule,
+    ReactiveFormsModule,
   ],
   declarations: [ManagementTourComponent],
 })

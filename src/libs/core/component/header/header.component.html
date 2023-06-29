@@ -3,10 +3,10 @@
 >
   <!-- LOGO -->
   <div class="ml-10">
-    <a routeLink="/" routerLinkActive="active">
+    <a routeLink="/" routerLinkActive="activeHeader">
       <img
         routeLink="/"
-        routerLinkActive="active"
+        routerLinkActive="activeHeader"
         class="w-36 object-cover cursor-pointer"
         src="assets/logo/logo.svg"
         alt="logo"
@@ -19,7 +19,7 @@
       <div
         *ngFor="let item of this.MENUS"
         routerLink="{{ item.path }}"
-        routerLinkActive="active"
+        routerLinkActive="activeHeader"
         class="text-black text-xl p-6 flex items-center cursor-pointer hover:text-primaryhover"
       >
         <li>
@@ -31,7 +31,7 @@
         <li
           *permissions="[PermissionCode.ADMIN, PermissionCode.BUSINESS]"
           routerLink="/manager"
-          routerLinkActive="active"
+          routerLinkActive="activeHeader"
           class="text-black text-xl p-6 flex items-center cursor-pointer hover:text-primaryhover"
         >
           Management
@@ -54,7 +54,7 @@
       <fa-icon
         *ngIf="!isAuthorized || !user$; else user"
         routerLink="login"
-        routerLinkActive="active"
+        routerLinkActive="activeHeader"
         [icon]="faUser"
         nz-tooltip
         nzTooltipTitle="Login"

@@ -9,8 +9,10 @@ import { HttpService } from '../http';
 export class InvoiceService {
   constructor(private http: HttpService) {}
 
-  getAll(params?: IBaseParams): Observable<IInvoice[]> {
-    return this.http.get<IInvoice[]>(API_INVOICE, { params });
+  getAll(authorId: string, params?: IBaseParams): Observable<IInvoice[]> {
+    return this.http.get<IInvoice[]>(`${API_INVOICE}/author/${authorId}`, {
+      params,
+    });
   }
 
   // getTourById(id: string): Observable<IInvoice> {

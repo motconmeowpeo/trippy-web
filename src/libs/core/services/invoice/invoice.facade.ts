@@ -14,14 +14,14 @@ import { IBaseParams, IInvoiceCommand } from '@core/model';
 
 @Injectable({ providedIn: 'root' })
 export class InvoiceFacade {
-  tours$ = store.pipe(selectAllEntities());
-  tour$ = store.pipe(
+  invoices$ = store.pipe(selectAllEntities());
+  invoice$ = store.pipe(
     selectActiveEntity(),
-    filter((role) => !!role)
+    filter((invoice) => !!invoice)
   );
   constructor(private invoiceService: InvoiceService) {}
-  getAll(params?: IBaseParams) {
-    return this.invoiceService.getAll(params).pipe(
+  getAllInvoiceByAuthor(authorId: string, params?: IBaseParams) {
+    return this.invoiceService.getAll(authorId, params).pipe(
       tap((invoice) => {
         store.update(setEntities(invoice));
       })
