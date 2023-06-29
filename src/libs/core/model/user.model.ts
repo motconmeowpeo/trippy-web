@@ -1,9 +1,11 @@
+import { IRole } from './role.model';
+
 export interface IUser {
   id: string;
   username: string;
   email: string;
   password: string;
-  role: string;
+  role: IRole;
   active: boolean;
 }
 export interface ICreateUser {

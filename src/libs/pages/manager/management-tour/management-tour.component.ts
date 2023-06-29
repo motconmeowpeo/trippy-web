@@ -100,9 +100,7 @@ export class ManagementTourComponent implements OnInit {
     }
   }
 
-  onLimitChange(limit: number): void {
-    console.log(limit);
-  }
+  onLimitChange(limit: number): void {}
 
   private createForm() {
     this.form = new FormGroup({

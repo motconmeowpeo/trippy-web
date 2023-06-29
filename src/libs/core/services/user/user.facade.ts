@@ -18,9 +18,16 @@ export class UserFacade {
     filter((user) => !!user)
   );
   constructor(private userService: UserService) {}
+
   createUser(payload: Partial<ICreateUser>) {
     return this.userService
       .createUser(payload)
       .pipe(tap((user) => store.update(addEntities(user))));
+  }
+
+  getAllUserByManager(authorId: string) {
+    return this.userService
+      .getAllUserByManager(authorId)
+      .pipe(tap((users) => store.update(setEntities(users))));
   }
 }
