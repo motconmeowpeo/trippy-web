@@ -1,4 +1,4 @@
-<div class="pt-20 w-full bg-slate-100">
+<div class="w-full bg-slate-100">
   <ng-container *ngIf="isLoading; else tours">
     <div
       class="w-full max-w-7xl h-full m-auto flex items-center justify-center"
@@ -14,7 +14,9 @@
       <section class="w-full" *ngIf="test$ | async as tours">
         <table class="w-full table-auto border">
           <thead>
-            <tr class="border text-left sticky  text- top-0 bg-primary text-white">
+            <tr
+              class="border text-left sticky text- top-0 bg-primary text-white"
+            >
               <th class="w-[20%] px-4 py-2">Customer</th>
               <th class="px-4 py-2">Tour</th>
               <th class="w-[10%] px-4 py-2">Start date</th>

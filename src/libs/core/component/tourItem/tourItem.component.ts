@@ -12,6 +12,8 @@ import { ITour } from '@core/model';
 import { catchError, of, tap } from 'rxjs';
 import { TourFacade } from '@core/services/tour';
 import { ModalCloseStatus } from '@core/enum';
+import { S3_URL } from '@core/constants';
+
 import { ToastNotificationService } from '@core/services';
 
 @Component({
@@ -26,6 +28,7 @@ export class TourItemComponent implements OnInit {
   isRouter = false;
   faEllipsis = faEllipsis;
   isShown = false;
+  readonly S3_URL = S3_URL;
   @Input() imgSrc!: string;
   @Input() tourName!: string;
   @Input() tourLocation!: string;

@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { delay, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ITour } from '../../model/tour.model';
 import { API_TOUR } from '../../constants/url.constant';
 import { IBaseParams, ITourCommand } from '@core/model';
 import { HttpService } from '../http';
+import { toFormData } from '../../until/shared.util';
 
 @Injectable({ providedIn: 'root' })
 export class TourService {

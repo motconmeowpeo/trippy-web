@@ -10,7 +10,11 @@
     <div class="h-500px mt-10">
       <nz-carousel nzEnableSwipe nzAutoPlay [nzEffect]="'fade'">
         <div nz-carousel-content *ngFor="let preview of tour.overview">
-          <img class="w-full h-full object-cover" [src]="preview" alt="" />
+          <img
+            class="w-full h-full object-cover"
+            [src]="S3_URL + preview"
+            alt=""
+          />
         </div>
       </nz-carousel>
     </div>

@@ -4,9 +4,10 @@ import {
   LocationFacade,
   ToastNotificationService,
   TourFacade,
+  FileService,
 } from '@core/services';
-import { ISelectItem, ITour, ITourCommand } from '@core/model';
-import { of, switchMap, tap, delay, catchError } from 'rxjs';
+import { ISelectItem, ITourCommand } from '@core/model';
+import { of, switchMap, tap, map, catchError } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import {
@@ -22,12 +23,6 @@ import {
   ITicketTour,
 } from './create-tour-modal.form';
 import { Ticket } from '@core/enum';
-import {
-  Storage,
-  getDownloadURL,
-  ref,
-  uploadBytesResumable,
-} from '@angular/fire/storage';
 import { head } from 'lodash';
 
 @Component({
@@ -53,8 +48,8 @@ export class CreateTourModalComponent
     private locationfacade: LocationFacade,
     private tourFacade: TourFacade,
     private authFacade: AuthFacade,
-    private storage: Storage,
-    private notifiService: ToastNotificationService
+    private notifiService: ToastNotificationService,
+    private fileService: FileService
   ) {
     super();
   }
@@ -197,20 +192,23 @@ export class CreateTourModalComponent
     this.user$
       .pipe(
         switchMap((user) => {
-          if (this.formCreate.value.overview && this.formCreate.value.preview) {
-            this.upLoadOverview(this.formCreate.value.overview);
-            this.uploadPreview(this.formCreate.value.preview);
+          if (this.formCreate.value.preview && this.formCreate.value.overview) {
+            return this.fileService
+              .upload(
+                this.formCreate.value.preview?.concat(
+                  this.formCreate.value.overview
+                )
+              )
+              .pipe(map(() => user));
           }
           return of(user);
         }),
-        delay(3000),
         switchMap((user) => {
           const payload: ITourCommand = {
             ...this.formCreate.value,
-            overview: this.formCreate.value.overview?.map(
-              (image) => image.name
-            ),
-            preview: head(this.formCreate.value.preview)?.name,
+            overview:
+              this.formCreate.value.overview?.map((image) => image.name) || [],
+            preview: head(this.formCreate.value.preview)?.name || '',
             createBy: user?.id || '',
           };
           return this.onCreateTour(payload);
@@ -231,30 +229,5 @@ export class CreateTourModalComponent
         return of(err);
       })
     );
-  }
-
-  private upLoadOverview(files: File[]) {
-    // Array.from(this.file).map((file) => console.log(file));
-    Array.from(files).map((file) => {
-      const storageRef = ref(this.storage, `${file.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {},
-        (error) => console.log(error)
-      );
-    });
-  }
-  private uploadPreview(files: File[]) {
-    // Array.from(this.file).map((file) => console.log(file));
-    Array.from(files).map((file) => {
-      const storageRef = ref(this.storage, `${file.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {},
-        (error) => console.log(error)
-      );
-    });
   }
 }

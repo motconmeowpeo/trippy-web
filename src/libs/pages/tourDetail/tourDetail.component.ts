@@ -24,6 +24,7 @@ import { format, add } from 'date-fns';
 import {
   DEFAULT_FORMAT_DATE,
   HOUR_MINUTE_FORMAT_TIME,
+  S3_URL,
   SETTING_FORMAT_DATE,
 } from '@core/constants';
 import { tap } from 'rxjs';
@@ -48,6 +49,7 @@ export class TourDetailComponent implements OnInit {
   isLoading = false;
   faStar = faStar;
   faArrowLeft = faArrowLeft;
+  readonly S3_URL=S3_URL
   readonly reportCategory = ['Location', 'Services', 'Price', 'Rooms'];
   slideConfig = { slidesToShow: 2, slidesToScroll: 2 };
   comments$ = this.tourCommentFacade.comments$;

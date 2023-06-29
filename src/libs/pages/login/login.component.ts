@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faStarOfLife } from '@fortawesome/free-solid-svg-icons';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { EMAIL_REG_EXP, PASSWORD_REG_EXP } from '@core/constants';
-import { tap, delay, catchError, of } from 'rxjs';
+import { tap, catchError, of } from 'rxjs';
 import * as AOS from 'aos';
 import { ILoginForm } from './login.form';
 import { AuthFacade } from '@core/services';

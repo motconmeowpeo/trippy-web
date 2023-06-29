@@ -6,7 +6,7 @@ import {
   addEntities,
   deleteEntities,
 } from '@ngneat/elf-entities';
-import { filter, tap, delay } from 'rxjs';
+import { filter, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { store } from './invoice.store';
 import { InvoiceService } from './invoice.service';
@@ -45,7 +45,6 @@ export class InvoiceFacade {
 
   create(payload: Partial<IInvoiceCommand>) {
     return this.invoiceService.create(payload).pipe(
-      delay(2000),
       tap((invoice) => {
         store.update(addEntities(invoice, { prepend: true }));
 

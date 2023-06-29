@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { delay, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { API_INVOICE } from '../../constants/url.constant';
 import { IBaseParams, IInvoice, IInvoiceCommand } from '@core/model';
 import { HttpService } from '../http';

@@ -23,19 +23,4 @@ export interface ICreateTourForm {
   locationId: FormControl<string>;
 }
 
-// export const formArrayTourPlan = (
-//   tourPlans: ITourPlan[]
-// ): FormArray<ITourPlan> => {
-//   return new FormArray<ITourPlan>(
-//     tourPlans.map((tourPlan) => formGroupTaskItem(tourPlan))
-//   );
-// };
 
-// export const formGroupTaskItem = ({
-//   day,
-//   description,
-// }: ITourPlan): FormGroup<ITourPlan> =>
-//   new FormGroup({
-//     day: new FormControl(day, { nonNullable: true }),
-//     description: new FormControl(description, { nonNullable: true }),
-//   });

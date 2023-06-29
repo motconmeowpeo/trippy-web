@@ -22,8 +22,8 @@ export interface ITourCommand {
   name?: string;
   description?: string;
   locationId?: string;
-  preview?: string;
-  overview?: string[];
+  preview: string;
+  overview: string[];
   maxPeople?: number;
   totalDays?: number;
   minAge?: number;
