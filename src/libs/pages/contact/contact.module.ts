@@ -5,6 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { BannerModule } from '@core/component/banner';
 import { FooterModule } from '@core/component/footer';
 import { BannerBotModule } from '@core/component/bannerBot';
+import { ButtonModule } from '@core/ui';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 const routes: Routes = [
   {
@@ -20,6 +23,8 @@ const routes: Routes = [
     BannerModule,
     FooterModule,
     BannerBotModule,
+    ButtonModule,
+    FontAwesomeModule,
   ],
   declarations: [ContactComponent],
 })

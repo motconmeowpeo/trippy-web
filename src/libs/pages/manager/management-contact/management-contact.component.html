@@ -1,0 +1,55 @@
+<div class="w-full max-h-[87vh] min-h-[87vh] bg-slate-100">
+  <ng-container *ngIf="isLoading; else tours">
+    <div
+      class="w-full max-w-7xl h-full min-h-[87vh] m-auto flex items-center justify-center"
+    >
+      <app-loading></app-loading>
+    </div>
+  </ng-container>
+  <ng-template #tours>
+    <div class="flex justify-end mr-6 pt-3 border-t border-t-white">
+      <app-search></app-search>
+    </div>
+    <div class="m-5 max-h-[670px] overflow-auto">
+      <section class="w-full">
+        <div class="w-full m-auto p-3">
+          <table class="w-full table-auto border border-primary">
+            <thead>
+              <tr
+                class="border text-left sticky text- top-0 bg-primary text-white"
+              >
+                <th class="w-[10%] px-4 py-2">Name</th>
+                <th class="w-[20%] px-4 py-2">Email</th>
+                <th class="w-[20%] px-4 py-2">Address</th>
+                <th class="w-[10%] px-4 py-2">Time</th>
+                <th class="px-4 py-2">Desc</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                class="cursor-pointer"
+                *ngFor="let index of [1, 2, 3, 3, 4, 5, 6]; even as isEven"
+                [ngClass]="isEven ? 'bg-white' : 'bg-gray-100'"
+              >
+                <td class="px-4 py-2">test data $</td>
+                <td class="px-4 py-2">test data $</td>
+                <td class="px-4 py-2">test data $</td>
+                <td class="px-4 py-2">test data $</td>
+                <td class="px-4 py-2">test data $</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ng-template #noDataFound>
+          <div
+            class="w-full m-auto min-h-[40vh] flex flex-col items-center justify-center"
+          >
+            <span class="text-gray-500 font-semibold text-2xl"
+              >No data found</span
+            >
+          </div>
+        </ng-template>
+      </section>
+    </div>
+  </ng-template>
+</div>
