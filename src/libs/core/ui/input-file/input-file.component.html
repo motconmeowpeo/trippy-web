@@ -1,0 +1,62 @@
+<ng-container *ngIf="!onlyInput; else showOnlyInput">
+  <div
+    class="input relative flex flex-col text-surface-100 pb-0.5"
+    [class]="!readonly ? ' border-outline' : ''"
+    [ngClass]="className"
+  >
+    <!-- Label -->
+    <label class="text-xs font-bold mb-1">{{ label }}</label>
+
+    <!-- Input -->
+    <div class="flex items-center h-11 relative bg-white rounded-lg p-2">
+      <input
+        class="w-full focus:outline-none"
+        type="text"
+        [placeholder]="placeholder"
+        readonly
+      />
+      <input
+        #inputFileElement
+        class="hidden"
+        type="file"
+        (input)="onInput($event)"
+        [accept]="fileFormat"
+        [multiple]="multiple"
+      />
+
+      <!-- Icon for type File -->
+      <svg-icon
+        class="cursor-pointer absolute right-0 text-surface-50"
+        [ngClass]="{ 'cursor-not-allowed': disabled }"
+        key="upload"
+        fontSize="20px"
+        (click)="!disabled && selectFile()"
+      ></svg-icon>
+    </div>
+
+    <!-- Error -->
+    <span
+      *ngIf="error"
+      class="absolute top-full mt-1 text-xs font-light whitespace-nowrap text-pink-500"
+      [innerHTML]="error"
+    >
+    </span>
+
+    <!-- Hint -->
+    <span
+      *ngIf="hint"
+      class="absolute top-full mt-1 text-xs font-light whitespace-nowrap text-surface-50"
+      [innerHTML]="hint"
+    >
+    </span>
+  </div>
+</ng-container>
+<ng-template #showOnlyInput>
+  <input
+    hidden
+    #inputFileElement
+    type="file"
+    (input)="onInput($event)"
+    [accept]="fileFormat"
+  />
+</ng-template>

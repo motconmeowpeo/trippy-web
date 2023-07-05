@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterModule } from '@core/component/footer';
 import { HeaderModule } from '@core/component/header';
+import { RatingModule } from '@core/component/rating';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,6 +15,7 @@ import { AuthInterceptor, ErrorMessageInterceptor } from '@core/services';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from '@core/guard';
 import { IconsModule } from '@core/ui';
+import { HttpService } from '@core/services/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,12 +25,14 @@ import { IconsModule } from '@core/ui';
     FontAwesomeModule,
     HeaderModule,
     FooterModule,
+    RatingModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     NzNotificationModule,
     IconsModule,
+
     JwtModule.forRoot({
       config: {
         tokenGetter: () => '',
@@ -47,6 +51,7 @@ import { IconsModule } from '@core/ui';
       multi: true,
     },
     AuthGuard,
+    HttpService,
   ],
   bootstrap: [AppComponent],
 })

@@ -24,22 +24,28 @@ export class AuthInterceptor implements HttpInterceptor {
       first(),
       switchMap((accessToken) => {
         const setHeaders: Record<string, string | string[]> = {
-          ['x-request-id']: uuid(),
+          // ['x-request-id']: uuid(),
         };
 
         if (accessToken) {
           setHeaders['Authorization'] = `Bearer ${accessToken}`;
         }
 
-        return next.handle(request.clone({ setHeaders })).pipe(
-          catchError((err) => {
-            if (err.status === HttpStatusCode.UNAUTHORIZED) {
-              this.authFacade.logout();
-              this.router.navigateByUrl(URL_LOGIN);
-            }
-            return throwError(() => err);
-          })
-        );
+        return next
+          .handle(
+            request.clone({
+              setHeaders,
+            })
+          )
+          .pipe(
+            catchError((err) => {
+              if (err.status === HttpStatusCode.UNAUTHORIZED) {
+                this.authFacade.logout();
+                this.router.navigateByUrl(URL_LOGIN);
+              }
+              return throwError(() => err);
+            })
+          );
       })
     );
   }

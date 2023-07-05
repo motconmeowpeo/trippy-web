@@ -1,0 +1,139 @@
+<div class="w-full max-h-[87vh] min-h-[87vh] bg-slate-100">
+  <div
+    class="flex justify-end items-center mr-6 pt-3 border-t border-t-white"
+    [formGroup]="form"
+  >
+    <app-select
+      [selectList]="FILTER_LIST"
+      [hint]="false"
+      [readonly]="false"
+      classIcon="text-primary"
+      className="flex-1 mr-4"
+      label="Status Contact"
+      [loading]="isLoading"
+      formControlName="filter"
+      [defaultValue]="FILTER_LIST[0]"
+    >
+    </app-select>
+
+    <app-search
+      placeholder="Search by user name"
+      formControlName="search"
+    ></app-search>
+  </div>
+  <ng-container *ngIf="isLoading; else contact">
+    <div
+      class="w-full max-w-7xl h-full min-h-[87vh] m-auto flex items-center justify-center"
+    >
+      <app-loading></app-loading>
+    </div>
+  </ng-container>
+  <ng-template #contact>
+    <div
+      class="m-5 max-h-[670px] h-full overflow-auto"
+      *ngIf="contacts$ | async as contacts"
+    >
+      <section
+        class="max-h-[87vh] min-h-[87vh]"
+        *ngIf="contacts.length; else noDataFound"
+      >
+        <div class="w-full h-full m-auto p-3">
+          <table class="w-full table-auto border border-primary">
+            <thead>
+              <tr
+                class="border text-left sticky text- top-0 bg-primary text-white"
+              >
+                <th class="w-[20%] px-4 py-2">Name</th>
+                <th class="w-[20%] px-4 py-2">Email</th>
+                <th class="w-[10%] px-4 py-2">Time</th>
+                <th class="px-4 py-2">Message</th>
+                <th class="w-[5%] px-4 py-2">Status</th>
+                <th class="w-[5%]"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                class="cursor-pointer relative"
+                *ngFor="let contact of contacts; even as isEven"
+                [ngClass]="isEven ? 'bg-white' : 'bg-gray-100'"
+              >
+                <td class="px-4 py-2">{{ contact.username }}</td>
+                <td class="px-4 py-2">{{ contact.email }}</td>
+                <td class="px-4 py-2">{{ formatDate(contact.createAt) }}</td>
+                <td class="px-4 py-2">{{ contact.message }}</td>
+                <td
+                  [ngClass]="
+                    contact.status === ContactStatus.PENDING
+                      ? 'text-yellow-400'
+                      : contact.status === ContactStatus.RESOLVED
+                      ? 'text-green-500'
+                      : 'text-red-500'
+                  "
+                  class="px-4 py-2 font-semibold"
+                >
+                  {{ contact.status | titlecase }}
+                </td>
+                <div class="absolute bottom-[2px] right-2">
+                  <app-menu position="right">
+                    <!-- Trigger -->
+                    <i
+                      class="flex items-center justify-center p-1 cursor-pointer w-6 h-6 rounded hover:bg-background-2"
+                      menuTrigger
+                    >
+                      <svg-icon
+                        class="text-surface-50"
+                        key="dots"
+                        fontSize="20px"
+                      ></svg-icon>
+                    </i>
+
+                    <!-- Menu -->
+                    <ul
+                      class="flex flex-col bg-white shadow-base p-1 rounded text-xs"
+                      menuContent
+                    >
+                      <!-- Edit -->
+                      <li
+                        (click)="resolveContact(contact.id)"
+                        *ngIf="
+                          contact.status === ContactStatus.PENDING ||
+                          contact.status === ContactStatus.REJECTED
+                        "
+                        class="inline-flex items-center px-3 py-2 cursor-pointer rounded hover:bg-background-2"
+                      >
+                        <span class="whitespace-nowrap text-green-500"
+                          >Resolve</span
+                        >
+                      </li>
+                      <li
+                        *ngIf="
+                          contact.status === ContactStatus.PENDING ||
+                          contact.status === ContactStatus.RESOLVED
+                        "
+                        (click)="rejectContact(contact.id)"
+                        class="inline-flex items-center px-3 py-2 cursor-pointer rounded hover:bg-background-2"
+                      >
+                        <span class="whitespace-nowrap text-red-500"
+                          >Reject</span
+                        >
+                      </li>
+                    </ul>
+                  </app-menu>
+                </div>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <ng-template #noDataFound>
+        <div
+          class="w-full m-auto min-h-[40vh] flex flex-col items-center justify-center"
+        >
+          <span class="text-gray-500 font-semibold text-2xl"
+            >No data found</span
+          >
+        </div>
+      </ng-template>
+    </div>
+  </ng-template>
+</div>

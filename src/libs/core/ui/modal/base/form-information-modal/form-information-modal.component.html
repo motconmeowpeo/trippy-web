@@ -1,0 +1,40 @@
+<app-modal *ngIf="type">
+  <div class="sm:px-14 px-4 py-8 bg-white">
+    <!-- Header -->
+    <section class="header pb-6">
+      <figure
+        class="absolute top-0 left-0 right-0 -translate-y-1/2 w-24 h-24 rounded-1/2 mx-auto flex items-center justify-center bg-white"
+      >
+        <svg-icon
+          class="object-cover w-full h-full rounded-full p-3 text-white"
+          [key]="MODAL_STYLE[type].icon"
+          [style.background-color]="MODAL_STYLE[type].backgroundColor"
+          fontSize="85px"
+        ></svg-icon>
+      </figure>
+
+      <!-- Title -->
+      <h5
+        *ngIf="data?.title"
+        class="text-center font-bold text-xl sm:pt-8 pt-5"
+      >
+        {{ data?.title }}
+      </h5>
+    </section>
+
+    <!-- Body -->
+    <ng-content></ng-content>
+
+    <!-- Footer -->
+    <section class="flex justify-center pt-5 overflow-auto pb-2">
+      <!-- Button primary -->
+      <ng-content select="[btn-primary]"></ng-content>
+
+      <!-- Button secondary -->
+      <ng-content select="[btn-secondary]"></ng-content>
+
+      <!-- Button tertiary -->
+      <ng-content select="[btn-tertiary]"></ng-content>
+    </section>
+  </div>
+</app-modal>

@@ -1,9 +1,17 @@
-import { URL_CUSTOMER, URL_INVOICE, URL_TOUR } from '@pages/manager';
+import { PermissionCode } from 'src/libs/core/enum/role-code.enum';
+import {
+  URL_CONTACT,
+  URL_CUSTOMER,
+  URL_INVOICE,
+  URL_TOUR,
+} from '@pages/manager';
+
 export interface ISidebarMenu {
   name: string;
   url: string;
   icon?: string;
   isSwitchSidebar?: boolean;
+  permissonCode: number[];
 }
 
 // Set name as translate value
@@ -11,17 +19,26 @@ export const MENU_GROUP: ISidebarMenu[] = [
   {
     name: 'tour',
     url: URL_TOUR,
-    icon: 'people',
+    icon: 'plane-departure',
+    permissonCode: [PermissionCode.ADMIN, PermissionCode.BUSINESS],
   },
   {
     name: 'invoice',
     url: URL_INVOICE,
-    icon: 'people',
+    icon: 'receipt-alt',
+    permissonCode: [PermissionCode.ADMIN, PermissionCode.BUSINESS],
   },
   {
     name: 'customer',
     url: URL_CUSTOMER,
-    icon: 'people',
+    icon: 'user',
+    permissonCode: [PermissionCode.ADMIN, PermissionCode.BUSINESS],
+  },
+  {
+    name: 'contact',
+    url: URL_CONTACT,
+    icon: 'phone',
+    permissonCode: [PermissionCode.ADMIN],
   },
 
   // [

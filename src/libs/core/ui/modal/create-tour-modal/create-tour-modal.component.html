@@ -1,0 +1,216 @@
+<app-form-modal data-aos="flip-left">
+  <form
+    class="bg-slate-100 px-10 w-full flex flex-col"
+    [formGroup]="formCreate"
+    (ngSubmit)="createTour()"
+  >
+    <div class="w-full">
+      <label class="mt-5 text-xl flex items-start" for="tour-name"
+        >Tour name <span class="text-xs text-red-600">*</span></label
+      >
+
+      <input
+        class="w-full mt-2 h-11 p-2 rounded-md outline-primary"
+        type="text"
+        id="tour-name"
+        placeholder="Tour name..."
+        formControlName="name"
+      />
+    </div>
+    <div class="w-full">
+      <label class="mt-5 text-xl flex items-start" for="tour-description"
+        >Tour description<span class="text-xs text-red-600">*</span></label
+      >
+      <input
+        class="w-full mt-2 h-11 p-2 rounded-md outline-primary"
+        type="text"
+        id="tour-description"
+        placeholder="Tour description..."
+        formControlName="description"
+      />
+    </div>
+    <div class="w-full flex">
+      <div class="w-full mr-3">
+        <label class="mt-5 text-xl flex items-start" for="max-people"
+          >Max people<span class="text-xs text-red-600">*</span></label
+        >
+        <input
+          class="w-full mt-2 h-11 p-2 rounded-md outline-primary"
+          type="number"
+          id="max-people"
+          placeholder="Max people..."
+          formControlName="maxPeople"
+        />
+      </div>
+      <div class="w-full">
+        <label class="mt-5 text-xl flex items-start" for="total-day"
+          >Total day<span class="text-xs text-red-600">*</span></label
+        >
+        <input
+          class="w-full mt-2 h-11 p-2 rounded-md outline-primary"
+          type="number"
+          id="total-day"
+          placeholder="Total day..."
+          formControlName="totalDays"
+        />
+      </div>
+    </div>
+    <div class="w-full flex">
+      <div class="w-full mr-3">
+        <label class="mt-5 text-xl flex items-start" for="min-age"
+          >Min age<span class="text-xs text-red-600">*</span></label
+        >
+        <input
+          class="w-full mt-2 h-11 p-2 rounded-md outline-primary"
+          type="number"
+          id="min-age"
+          placeholder="Min age..."
+          formControlName="minAge"
+        />
+      </div>
+      <div class="w-full">
+        <label class="mt-5 text-xl flex items-start" for="preview"
+          >Preview image<span class="text-xs text-red-600">*</span></label
+        >
+        <app-upload-file
+          placeholder="Choose your image preview"
+          formControlName="preview"
+          classNameChip="max-w-[15rem] sm:max-w-xs h-11"
+        ></app-upload-file>
+      </div>
+    </div>
+    <div class="w-full">
+      <label class="mt-5 text-xl flex items-start" for="overview"
+        >Overview Image<span class="text-xs text-red-600">*</span></label
+      >
+      <app-upload-file
+        placeholder="Choose your image preview"
+        formControlName="overview"
+        classNameChip="max-w-[15rem] sm:max-w-xs"
+        [multiFile]="true"
+      ></app-upload-file>
+    </div>
+    <label class="mt-5 text-xl flex items-start" for="tuor-plan"
+      >Location<span class="text-xs text-red-600">*</span></label
+    >
+    <app-select
+      [selectList]="selectCountry"
+      [hint]="false"
+      [readonly]="false"
+      placeholder="Location"
+      label="Location"
+      [icon]="faLocationDot"
+      classIcon="text-primary"
+      className="w-full h-11 p-2 rounded-md outline-primary"
+      [loading]="isLoading"
+      formControlName="locationId"
+    >
+    </app-select>
+
+    <div class="w-full">
+      <label class="mt-8 text-xl flex items-start" for="ticket"
+        >Ticket<span class="text-xs text-red-600">*</span></label
+      >
+      <div class="ml-5 mt-2">
+        <div class="flex mt-3 items-center">
+          <label class="w-20 text-base" for="ticket-child"
+            >1-13<span class="text-xs text-red-600">*</span></label
+          >
+          <input
+            class="h-10 p-2 rounded-md outline-primary"
+            type="number"
+            id="ticket-child"
+            #valueCr
+            placeholder="Price for age 1-13..."
+            (blur)="changePrice(Ticket.CHILDREN, valueCr.value)"
+          />
+          <fa-icon
+            class="px-4 text-lg"
+            [icon]="faNote"
+            nz-tooltip
+            nzTooltipTitle="If ticket free,
+            please type '0'"
+            nzTooltipPlacement="bottom"
+          ></fa-icon>
+        </div>
+        <div class="flex mt-3 items-center">
+          <label class="w-20 text-base" for="ticket-young"
+            >13-17<span class="text-xs text-red-600">*</span></label
+          >
+          <input
+            class="h-10 p-2 rounded-md outline-primary"
+            type="number"
+            id="ticket-young"
+            #valueY
+            placeholder="Price for age 13-17..."
+            (blur)="changePrice(Ticket.YOUNG, valueY.value)"
+          />
+        </div>
+        <div class="flex mt-3 items-center">
+          <label class="w-20 text-base" for="ticket-adolescent"
+            >17+<span class="text-xs text-red-600">*</span></label
+          >
+          <input
+            class="h-10 p-2 rounded-md outline-primary"
+            type="number"
+            #valueAd
+            placeholder="Price for age 17+..."
+            (blur)="changePrice(Ticket.ADULT, valueAd.value)"
+            id="ticket-adolescent"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="w-full mb-7 flex flex-col justify-center">
+      <div class="flex-1 flex justify-between items-center max-h-8">
+        <label class="mt-5 text-xl flex items-start" for="tuor-plan"
+          >Tour plan<span class="text-xs text-red-600">*</span></label
+        >
+        <app-button
+          (click)="addPlan()"
+          [disabled]="
+            tourPlan.length === formCreate.controls['totalDays'].value
+          "
+        >
+          <svg-icon key="plus" fontSize="14px"></svg-icon> Add plan
+        </app-button>
+      </div>
+
+      <div
+        class="w-full mt-4 flex items-center"
+        *ngFor="let item of tourPlan; let index = index"
+      >
+        <label class="w-14 text-base" for="tuor-plan"
+          >Day {{ index + 1 }}</label
+        >
+        <textarea
+          class="w-80 max-h-20 p-2 animate-display rounded-md outline-primary"
+          type="text"
+          #valuePlan
+          placeholder="Tour plan..."
+          (change)="onAddTourPlan(index, valuePlan.value)"
+        ></textarea>
+        <svg-icon
+          class="ml-4 cursor-pointer"
+          key="trash"
+          fontSize="16px"
+          (click)="removePlan(index)"
+        ></svg-icon>
+      </div>
+    </div>
+  </form>
+
+  <!-- Action -->
+  <app-button
+    submit
+    (click)="createTour()"
+    [disabled]="formCreate.invalid || isCreating"
+  >
+    <span *ngIf="!isCreating; else loadingSm">Create</span>
+    <ng-template #loadingSm>
+      <app-loading-small></app-loading-small>
+    </ng-template>
+  </app-button>
+  <!-- Cancel -->
+  <app-button cancel class="ml-3" type="secondary"> Cancel </app-button>
+</app-form-modal>

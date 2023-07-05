@@ -3,6 +3,43 @@
 
 <!-- Content -->
 <div class="bg-slate-100 pb-20">
+  <div
+    class="w-full max-w-7xl m-auto -mt-10 p-5 h-20 bg-white relative justify-evenly flex rounded-xl items-center"
+    [formGroup]="form"
+  >
+    <app-select
+      [selectList]="selectCountry"
+      [hint]="false"
+      [readonly]="false"
+      placeholder="Where are you going ?"
+      [icon]="faLocationDot"
+      label="Location"
+      classIcon="text-primary"
+      className="flex-1"
+      [loading]="isLoading"
+      formControlName="country"
+    >
+    </app-select>
+
+    <div class="flex items-center px-5 h-full relative">
+      <!-- <input
+      class="w-full h-full outline-primary border-2 border-global rounded-md px-2"
+      type="text"
+      (input)="onInput()"
+    /> -->
+      <app-search
+        className="w-full"
+        placeholder="Search by name,location,price..."
+        formControlName="search"
+      ></app-search>
+    </div>
+
+    <!-- <button
+    class="h-full bg-primary cursor-pointer flex flex-1 items-center justify-center rounded-md p-5 text-white font-bold hover:bg-primaryhover max-w-[150px]"
+  >
+    Search
+  </button> -->
+  </div>
   <ng-container *ngIf="isLoading; else tours">
     <div class="w-full m-auto h-96 flex items-center justify-center">
       <app-loading></app-loading>
@@ -10,24 +47,30 @@
   </ng-container>
   <ng-template #tours>
     <section *ngIf="tours$ | async as tours">
-      <app-searchbar></app-searchbar>
-      <div class="max-w-7xl w-full m-auto">
+      <div
+        class="max-w-7xl w-full m-auto"
+        *ngIf="tours.length; else noDataFound"
+      >
         <!-- TourItem -->
         <ul class="list-none flex pt-20 flex-wrap">
           <app-tourItem
             class="h-[500px] w-1/3 rounded-3xl bg-transparent p-4 relative cursor-pointer"
             *ngFor="let tour of tours"
-            [tourName]="tour.name"
-            tourPrice="30"
-            [tourPeople]="tour.maxPeople"
-            [imgSrc]="tour.preview"
-            [tourDays]="tour.totalDays"
-            [tourLocation]="tour.location.name"
-            [id]="tour.id"
+            [tour]="tour"
           ></app-tourItem>
         </ul>
       </div>
+      <ng-template #noDataFound>
+        <div
+          class="w-full m-auto min-h-[40vh] flex flex-col items-center justify-center"
+        >
+          <span class="text-gray-500 font-semibold text-2xl"
+            >No data found</span
+          >
+        </div>
+      </ng-template>
     </section>
   </ng-template>
 </div>
 <app-bannerBot></app-bannerBot>
+<app-footer></app-footer>

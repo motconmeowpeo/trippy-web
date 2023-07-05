@@ -1,0 +1,100 @@
+<app-banner text="Contact"></app-banner>
+<div class="flex bg-[#f6f6f6] w-full justify-center p-24">
+  <div class="flex">
+    <div class="w-96">
+      <div class="p-10 bg-white rounded-3xl shadow-md">
+        <div class="flex pb-5">
+          <div class="pr-5 flex items-center">
+            <fa-icon class="text-primary text-3xl" [icon]="faCompass"></fa-icon>
+          </div>
+          <div>
+            <h5 class="text-lg font-medium">Address</h5>
+            <p class="text-[17px] text-gray-500">
+              184 Mayfield St. Hopewell Junction, NY 12533
+            </p>
+          </div>
+        </div>
+        <hr />
+        <div class="flex py-5">
+          <div class="pr-5 flex items-center">
+            <fa-icon class="text-primary text-3xl" [icon]="faPhone"></fa-icon>
+          </div>
+          <div class="text-lg font-medium">
+            <p>+ 84 1800 - 333 55</p>
+            <p>+ 84 1800 - 444 11</p>
+          </div>
+        </div>
+        <hr />
+        <div class="flex py-5">
+          <div class="pr-5 flex items-center">
+            <fa-icon
+              class="text-primary text-3xl"
+              [icon]="faEnvelopeOpen"
+            ></fa-icon>
+          </div>
+          <div>
+            <h5 class="text-lg font-medium">Email</h5>
+            <a href="" class="text-[17px] text-primary">contact@example.com</a>
+          </div>
+        </div>
+        <hr />
+        <div class="flex pt-5">
+          <div class="pr-5 flex items-center">
+            <fa-icon class="text-primary text-3xl" [icon]="faClock"></fa-icon>
+          </div>
+          <div>
+            <h5 class="text-lg font-medium">Business Hours</h5>
+            <p class="text-[17px] text-gray-500">
+              Mon- Sat: 10:00 AM - 20:00 PM
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pl-20 w-[800px]">
+      <div>
+        <h2 class="font-bold text-4xl">Send us a message</h2>
+        <p class="mt-8 text-[17px] text-gray-500 max-w-md">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          eiusmod tempor incididunt.
+        </p>
+        <form action="" [formGroup]="form" (ngSubmit)="create()">
+          <input
+            class="mt-6 w-full border-2 border-gray-200 p-2 pl-4 outline-primary text-base"
+            placeholder="Your name *"
+            type="text"
+            formControlName="username"
+          />
+          <input
+            class="mt-4 w-full border-2 border-gray-200 p-2 pl-4 outline-primary text-base"
+            placeholder="Your email *"
+            type="text"
+            formControlName="email"
+          />
+          <textarea
+            class="mt-4 w-full border-2 border-gray-200 p-2 pl-4 outline-primary text-base"
+            placeholder="Message *"
+            id=""
+            rows="10"
+            formControlName="message"
+          ></textarea>
+
+          <button
+            [ngClass]="
+              form.invalid || isLoading
+                ? 'cursor-no-drop border-black border border-solid text-black'
+                : 'hover:bg-primaryhover bg-primary cursor-pointer text-white '
+            "
+            class="p-3 flex justify-center items-center min-w-[100px] duration-300 transition-all h-10 text-lg font-semibold rounded-lg mt-5"
+            type="primary"
+            [disabled]="form.invalid"
+          >
+            <span>Submit</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<app-bannerBot> </app-bannerBot>
+<app-footer></app-footer>

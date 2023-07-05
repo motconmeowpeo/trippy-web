@@ -20,13 +20,15 @@
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-            "src/styles.css",
-            "./node_modules/slick-carousel/slick/slick.scss",
-            "./node_modules/slick-carousel/slick/slick-theme.scss"],
+              "src/styles.css",
+              "./node_modules/slick-carousel/slick/slick.scss",
+              "./node_modules/slick-carousel/slick/slick-theme.scss"
+            ],
             "scripts": [
-            "./node_modules/aos/dist/aos.js",
-            "./node_modules/jquery/dist/jquery.min.js",
-            "./node_modules/slick-carousel/slick/slick.min.js"]
+              "./node_modules/aos/dist/aos.js",
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/slick-carousel/slick/slick.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -85,5 +87,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "8887867a-652a-4934-9279-f9bbc426e816"
   }
 }

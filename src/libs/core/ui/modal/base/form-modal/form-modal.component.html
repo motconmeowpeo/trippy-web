@@ -1,0 +1,56 @@
+<div class="modal bg-white shadow-base rounded-lg">
+  <!-- Header -->
+  <section
+    class="bg-background-1 flex items-center justify-between px-6 py-3 border-b border-b-gray-4 rounded-tr-lg rounded-tl-lg"
+  >
+    <!-- Title -->
+    <h5 class="text-primary font-bold text-lg lg:text-xl">
+      {{ data?.title }}
+    </h5>
+
+    <!-- Close -->
+    <!-- <svg-icon
+      class="cursor-pointer"
+      key="close"
+      fontSize="16px"
+      (click)="close()"
+    ></svg-icon> -->
+  </section>
+
+  <div
+    class="sm:grid"
+    [ngClass]="{ 'grid-cols-1': !split, 'sm:grid-cols-2 grid-cols-1': split }"
+  >
+    <section class="modal-form" [ngClass]="modalFormClass">
+      <!-- Body -->
+      <ng-content></ng-content>
+    </section>
+    <section
+      *ngIf="split"
+      class="h-full list border-l-2 border-grey-500 p-4 relative pb-4 max-h-full overflow-y-hidden"
+    >
+      <ng-content select="[rightContent]"></ng-content>
+    </section>
+    <!-- Footer -->
+  </div>
+  <section
+    class="bg-background-1 flex items-center px-6 py-3 border-t border-t-gray-4 rounded-br-lg rounded-b-lg"
+  >
+    <div class="w-full flex items-center">
+      <!-- Submit -->
+      <div>
+        <ng-content select="[submit]"></ng-content>
+      </div>
+
+      <!-- Cancel -->
+      <div (click)="close({ status: ModalCloseStatus.CANCEL })">
+        <ng-content select="[cancel]"></ng-content>
+      </div>
+    </div>
+
+    <!-- Footer note -->
+    <div class="sm:ml-auto ml-2 text-xs">
+      <ng-content select="[footerNote]"></ng-content>
+    </div>
+  </section>
+</div>

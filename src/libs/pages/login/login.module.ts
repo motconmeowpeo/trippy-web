@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoadingModule } from '@core/component/loading';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LoadingSmallModule } from '@core/component/loading-small';
+import { FooterModule } from '@core/component/footer';
 const routes: Routes = [
   {
     path: '',
@@ -26,6 +27,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     LoadingModule,
     LoadingSmallModule,
+    FooterModule,
   ],
   declarations: [LoginComponent],
 })

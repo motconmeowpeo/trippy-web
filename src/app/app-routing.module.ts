@@ -9,6 +9,8 @@ import {
   URL_LOGIN,
   URL_REGISTER,
   URL_MANAGER,
+  URL_PAGE,
+  URL_CONTACT,
 } from '@core/constants';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '@core/guard';
@@ -67,6 +69,17 @@ const publicRoute: Routes = [
     loadChildren: () =>
       import('@pages/manager').then((page) => page.ManagerModule),
   },
+  {
+    path: URL_PAGE,
+    // canActivate: [AuthGuard],
+    loadChildren: () => import('@pages/page').then((page) => page.PageModule),
+  },
+  {
+    path: URL_CONTACT,
+    // canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('@pages/contact').then((page) => page.ContactModule),
+  },
 ];
 const privateRoute = [];
 const routes: Routes = [...publicRoute];
@@ -75,4 +88,4 @@ const routes: Routes = [...publicRoute];
   imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' })],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

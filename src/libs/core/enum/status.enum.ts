@@ -1,8 +1,13 @@
 export enum STATUS {
-  active = 'ACTIVE',
-  inactive = 'INACTIVE',
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
 }
 export enum AUTH {
-  valid = 'VALID',
-  invalid = 'INVALID',
+  VALID = 'VALID',
+  INVALID = 'INVALID',
+}
+
+export enum ModalCloseStatus {
+  COMPLETE = 'COMPLETE',
+  CANCEL = 'CANCEL',
 }

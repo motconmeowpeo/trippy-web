@@ -1,5 +1,5 @@
 <ng-container *ngIf="!isLoading; else loading">
-  <section *ngIf="tour$ | async as tour">
+  <section class="pb-20" *ngIf="tour$ | async as tour">
     <div class="max-w-7xl w-full m-auto pt-14 flex flex-col">
       <span class="text-5xl font-extrabold">{{ tour.name }}</span>
       <span class="pt-5 text-base text-globaltext">
@@ -10,13 +10,16 @@
     <div class="h-500px mt-10">
       <nz-carousel nzEnableSwipe nzAutoPlay [nzEffect]="'fade'">
         <div nz-carousel-content *ngFor="let preview of tour.overview">
-          <img class="w-full h-full object-cover" [src]="preview" alt="" />
+          <img
+            class="w-full h-full object-cover"
+            [src]="S3_URL + preview"
+            alt=""
+          />
         </div>
       </nz-carousel>
     </div>
-    <!-- content -->
+    <!-- Head -->
     <div class="w-full max-w-7xl m-auto mt-10">
-      <!-- Head -->
       <div class="flex items-center justify-between">
         <!-- Duration -->
         <div class="flex items-center">
@@ -48,6 +51,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <!-- content -->
+    <div class="w-full flex max-w-7xl m-auto mt-10">
       <!-- Tabs -->
       <div class="card-container mt-10 pb-10 w-[70%]">
         <nz-tabset nzType="card">
@@ -64,19 +70,19 @@
                 <div class="flex flex-col text-lg">
                   <span class="flex items-center">
                     <fa-icon class="text-green-400" [icon]="faCheck"></fa-icon>
-                    <span class="ml-1">Specialized bilingual guide</span>
+                    <span class="ml-1"
+                      >Box lunch water, banana apple and chocolate</span
+                    >
                   </span>
                   <span class="flex items-center">
                     <fa-icon class="text-green-400" [icon]="faCheck"></fa-icon>
-                    <span class="ml-1">Specialized bilingual guide</span>
+                    <span class="ml-1">
+                      Entrance fees (Cable and car and Moon Valley)</span
+                    >
                   </span>
                   <span class="flex items-center">
                     <fa-icon class="text-green-400" [icon]="faCheck"></fa-icon>
-                    <span class="ml-1">Specialized bilingual guide</span>
-                  </span>
-                  <span class="flex items-center">
-                    <fa-icon class="text-green-400" [icon]="faCheck"></fa-icon>
-                    <span class="ml-1">Specialized bilingual guide</span>
+                    <span class="ml-1">Private Transport</span>
                   </span>
                   <span class="flex items-center">
                     <fa-icon class="text-green-400" [icon]="faCheck"></fa-icon>
@@ -86,44 +92,587 @@
                 <div class="flex flex-col ml-10 text-lg">
                   <span class="flex items-center">
                     <fa-icon class="text-red-500" [icon]="faClose"></fa-icon>
-                    <span class="ml-1">Specialized bilingual guide</span>
+                    <span class="ml-1">Airport Transfers</span>
                   </span>
                   <span class="flex items-center">
                     <fa-icon class="text-red-500" [icon]="faClose"></fa-icon>
-                    <span class="ml-1">Specialized bilingual guide</span>
+                    <span class="ml-1">5 Star Accommodation</span>
                   </span>
                   <span class="flex items-center">
                     <fa-icon class="text-red-500" [icon]="faClose"></fa-icon>
-                    <span class="ml-1">Specialized bilingual guide</span>
+                    <span class="ml-1"> Entry Fees</span>
                   </span>
                   <span class="flex items-center">
                     <fa-icon class="text-red-500" [icon]="faClose"></fa-icon>
-                    <span class="ml-1">Specialized bilingual guide</span>
-                  </span>
-                  <span class="flex items-center">
-                    <fa-icon class="text-red-500" [icon]="faClose"></fa-icon>
-                    <span class="ml-1">Specialized bilingual guide</span>
+                    <span class="ml-1">Departure Taxes</span>
                   </span>
                 </div>
               </div>
             </div>
           </nz-tab>
           <nz-tab nzTitle="TOUR PLAN">
-            <span>Content 2</span>
+            <nz-collapse nzAccordion>
+              <nz-collapse-panel
+                *ngFor="let panel of tour.tourPlan"
+                [nzHeader]="'Day ' + panel.day"
+              >
+                <p class="leading-9 text-lg">{{ panel.description }}</p>
+              </nz-collapse-panel>
+            </nz-collapse>
           </nz-tab>
           <nz-tab nzTitle="REVIEWS">
             <ng-template nz-tab>
-              <span>Content 3</span>
+              <!-- Review Score -->
+              <div class="review-score flex mb-20">
+                <div class="rating-value text-center w-[30%] m-auto">
+                  <div class="rating-score text-5xl font-bold">
+                    4.18<span class="text-base text-neutral-900">/5</span>
+                  </div>
+                  <div class="ratting-text text-gray-600 font-medium">
+                    Wonderful
+                  </div>
+                  <div class="rating-vote text-gray-500 font-normal">
+                    8 verified reviews
+                  </div>
+                </div>
+                <div class="review-criteria flex flex-wrap">
+                  <div class="review-item w-[43%] mt-4 mx-4">
+                    <div class="flex">
+                      <span class="post-rating-criterion text-lg font-semibold"
+                        >Location</span
+                      >
+                      <span
+                        class="post-rating-value ml-auto font-semibold text-gray-700"
+                        >4.38/5</span
+                      >
+                    </div>
+                    <div class="review-progress w-full bg-gray-200 h-2 mt-2">
+                      <div class="bg-primary h-2" style="width: 88%"></div>
+                    </div>
+                  </div>
+                  <div class="review-item w-[43%] mt-4 mx-4">
+                    <div class="flex">
+                      <span class="post-rating-criterion text-lg font-semibold"
+                        >Amenities</span
+                      >
+                      <span
+                        class="post-rating-value ml-auto font-semibold text-gray-700"
+                        >4.13/5</span
+                      >
+                    </div>
+                    <div class="review-progress w-full bg-gray-200 h-2 mt-2">
+                      <div class="bg-primary h-2" style="width: 83%"></div>
+                    </div>
+                  </div>
+                  <div class="review-item w-[43%] mt-4 mx-4">
+                    <div class="flex">
+                      <span class="post-rating-criterion text-lg font-semibold"
+                        >Services</span
+                      >
+                      <span
+                        class="post-rating-value ml-auto font-semibold text-gray-700"
+                        >3.88/5</span
+                      >
+                    </div>
+                    <div class="review-progress w-full bg-gray-200 h-2 mt-2">
+                      <div class="bg-primary h-2" style="width: 78%"></div>
+                    </div>
+                  </div>
+                  <div class="review-item w-[43%] mt-4 mx-4">
+                    <div class="flex">
+                      <span class="post-rating-criterion text-lg font-semibold"
+                        >Price</span
+                      >
+                      <span
+                        class="post-rating-value ml-auto font-semibold text-gray-700"
+                        >3.88/5</span
+                      >
+                    </div>
+                    <div class="review-progress w-full bg-gray-200 h-2 mt-2">
+                      <div class="bg-primary h-2" style="width: 78%"></div>
+                    </div>
+                  </div>
+                  <div class="review-item w-[43%] mt-4 mx-4">
+                    <div class="flex">
+                      <span class="post-rating-criterion text-lg font-semibold"
+                        >Rooms</span
+                      >
+                      <span
+                        class="post-rating-value ml-auto font-semibold text-gray-700"
+                        >4.63/5</span
+                      >
+                    </div>
+                    <div class="review-progress w-full bg-gray-200 h-2 mt-2">
+                      <div class="bg-primary h-2" style="width: 93%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <!-- Review Comments -->
+              <div
+                class="review-comments mt-3 mb-10 max-h-screen overflow-auto"
+                *ngIf="comments$ | async as comments"
+              >
+                <ng-container *ngIf="comments.length; else noComment"
+                  ><div class="comments-box shadow-lg p-4 m-auto">
+                    <div *ngFor="let comment of comments" class="comment mt-4">
+                      <hr />
+                      <div
+                        class="flex items-center justify-center p-1 cursor-pointer w-12 h-12 rounded hover:bg-background-2"
+                      >
+                        <span
+                          class="flex items-center cursor-pointer justify-center rounded-1/2 w-full h-full bg-primary text-white uppercase font-bold"
+                        >
+                          {{ comment.author.email | slice : 0 : 1 }}
+                        </span>
+                      </div>
+                      <div class="comment-meta">
+                        <div
+                          class="comment-name text-gray-900 font-semibold mt-2"
+                        >
+                          {{ comment.author.username }}
+                        </div>
+                        <div class="comment-time">
+                          {{ parseDateAndTime(comment.createAt) }}
+                        </div>
+                        <div class="comment-ratings flex mt-3">
+                          <div
+                            class="comment-rating comment-rating-location mr-6"
+                          >
+                            <div
+                              class="comment-rating-title text-gray-500 font-normal text-base"
+                            >
+                              Location
+                            </div>
+                            <div class="comment-rating-score">
+                              <app-rating
+                                [selectedStar]="comment.locationRate"
+                                [disable]="true"
+                              ></app-rating>
+                            </div>
+                          </div>
+
+                          <div
+                            class="comment-rating comment-rating-services mr-6"
+                          >
+                            <div
+                              class="comment-rating-title text-gray-500 font-normal text-base"
+                            >
+                              Services
+                            </div>
+                            <div class="comment-rating-score">
+                              <app-rating
+                                [selectedStar]="comment.servicesRate"
+                                [disable]="true"
+                              ></app-rating>
+                            </div>
+                          </div>
+                          <div class="comment-rating comment-rating-price mr-6">
+                            <div
+                              class="comment-rating-title text-gray-500 font-normal text-base"
+                            >
+                              Price
+                            </div>
+                            <div class="comment-rating-score">
+                              <app-rating
+                                [selectedStar]="comment.priceRate"
+                                [disable]="true"
+                              ></app-rating>
+                            </div>
+                          </div>
+                          <div class="comment-rating comment-rating-rooms mr-6">
+                            <div
+                              class="comment-rating-title text-gray-500 font-normal text-base"
+                            >
+                              Rooms
+                            </div>
+                            <div class="comment-rating-score">
+                              <app-rating
+                                [selectedStar]="comment.roomsRate"
+                                [disable]="true"
+                              ></app-rating>
+                            </div>
+                          </div>
+                          <svg-icon
+                            key="trash"
+                            fontSize="24px"
+                            class="cursor-pointer hover:text-primary"
+                            *permissions="[PermissionCode.ADMIN]"
+                            (click)="deleteComment(comment.id)"
+                          ></svg-icon>
+                        </div>
+                        <div
+                          class="comment-content mt-3 text-gray-500 font-normal text-lg"
+                        >
+                          {{ comment.content }}
+                        </div>
+                        <div class="comment-react mt-3 hover:text-primary">
+                          <button>Reply</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div></ng-container
+                >
+                <ng-template #noComment>
+                  <span>This tour have no comment</span>
+                </ng-template>
+              </div>
+              <hr />
+              <!-- Review Leave a Reply -->
+              <form
+                *ngIf="formComment"
+                class="review-post-comment mt-10"
+                [formGroup]="formComment"
+                (ngSubmit)="handlePostComment()"
+              >
+                <div class="post-cmt-header">
+                  <span class="text-gray-900 font-bold text-4xl"
+                    >Leave a Reply</span
+                  ><br />
+                  <span class="post-cmt-description text-blurred-lg"
+                    >Your email address will not be published. Required fields
+                    are marked *</span
+                  >
+                </div>
+                <div class="post-cmt-body mt-3">
+                  <div class="post-cmt-meta">
+                    <div class="flex mt-5">
+                      <textarea
+                        type="text"
+                        class="w-[60%] p-3 mr-3 border-2 outline-primary rounded border-gray-400 text-gray-600"
+                        placeholder="Comment"
+                        formControlName="content"
+                      ></textarea>
+                      <div class="post-cmt-ratings mt-3">
+                        <div
+                          *ngFor="let category of reportCategory"
+                          class="post-cmt-rating post-cmt-rating-location flex mr-6"
+                        >
+                          <div
+                            class="text-blurred-lg text-gray-500 font-normal text-base mr-8 min-w-[80px]"
+                          >
+                            {{ category }}
+                          </div>
+                          <div class="post-cmt-rating-score">
+                            <app-rating
+                              (handleRate)="handleRate(category, $event)"
+                            ></app-rating>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="post-comment-submit">
+                  <button
+                    [disabled]="formComment.invalid"
+                    [ngClass]="
+                      formComment.invalid || isPosting
+                        ? 'cursor-no-drop border-black border border-solid text-black'
+                        : 'hover:bg-primaryhover bg-primary cursor-pointer text-white '
+                    "
+                    class="m-auto p-3 flex justify-center items-center min-w-[100px] duration-300 transition-all h-10 text-lg font-semibold rounded-lg mt-5"
+                  >
+                    <span *ngIf="!isPosting; else loadingSm">Post Comment</span>
+                    <ng-template #loadingSm>
+                      <app-loading-small></app-loading-small>
+                    </ng-template>
+                  </button>
+                </div>
+              </form>
             </ng-template>
           </nz-tab>
         </nz-tabset>
       </div>
+
+      <!-- Form -->
+      <div class="flex-1 mt-24">
+        <!-- Book This Tour -->
+        <div
+          class="booking-form-container shadow-lg px-10 py-6 rounded-3xl bg-white"
+        >
+          <h3 class="booking-form-title relative text-lg font-bold">
+            Book This Tour
+            <div
+              class="line-top-btth absolute left-0 -top-6 w-full py-1 px-3 rounded-b-lg"
+            ></div>
+            <div
+              class="line-bottom-btth absolute -left-10 top-12 bg-gray-300"
+            ></div>
+          </h3>
+          <form
+            id="booking_form"
+            autocomplete="off"
+            name="booking_form"
+            method="post"
+            action=""
+            class="booking-form mt-12"
+            [formGroup]="formInvoice"
+            (ngSubmit)="onCreateInvoice()"
+          >
+            <div class="input-group">
+              <div class="booking-date flex flex-wrap">
+                <label class="booking-form-input-label text-lg font-medium mt-3"
+                  >From:</label
+                >
+                <input
+                  type="date"
+                  autocomplete="off"
+                  class="w-[50%] p-3 ml-auto mb-2 outline-none border-2 border-gray-100"
+                  id="booking_date_from"
+                  min="{{ today | date : 'yyyy-MM-dd' }}"
+                  name="booking_date_from"
+                  formControlName="date"
+                />
+              </div>
+              <hr />
+
+              <hr />
+              <div class="booking-guests-block my-3 flex flex-wrap">
+                <label class="booking-form-input-label text-lg font-medium"
+                  >Tickets:
+                  <span class="text-xs text-red-500">{{
+                    formInvoice.controls.adult.value +
+                      formInvoice.controls.young.value +
+                      formInvoice.controls.children.value >
+                    tour.maxPeople
+                      ? 'Max people is ' + tour.maxPeople
+                      : ''
+                  }}</span>
+                </label>
+                <div
+                  id="booking-guests-result"
+                  class="ml-auto text-base text-gray-500"
+                >
+                  <ng-container
+                    *ngIf="!formInvoice.controls.date.value; else tickets"
+                  >
+                    Please select a date first.
+                  </ng-container>
+                  <ng-template #tickets>
+                    <div
+                      class="flex mt-2 items-center"
+                      *ngFor="let item of tour.tickets"
+                    >
+                      <ng-container
+                        *ngIf="
+                          (item.age === 'CHILDREN' && tour.minAge < 13) ||
+                          (item.age === 'YOUNG' && tour.minAge < 17) ||
+                          item.age === 'ADULT'
+                        "
+                      >
+                        <label class="w-40" for="">{{
+                          (item.age | titlecase) + '( $' + item.price + '.00 )'
+                        }}</label>
+                        <input
+                          class="border border-primary rounded-sm flex-1 p-2"
+                          type="number"
+                          min="0"
+                          placeholder="Number of people"
+                          formControlName="{{ item.age | lowercase }}"
+                        />
+                      </ng-container>
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+              <hr />
+              <div class="my-3 booking-services-block">
+                <label class="my-3 booking-form-input-label text-lg font-medium"
+                  >Add Extra</label
+                >
+                <div class="my-3 booking-services-inner">
+                  <div id="list_services" class="ml-2">
+                    <div class="list-service relative">
+                      <div class="input-square my-3 flex flex-wrap">
+                        <input
+                          id="booking_services_1"
+                          type="checkbox"
+                          name="booking_services[]"
+                          value="22"
+                          formControlName="serviceBooking"
+                          class="cursor-pointer"
+                        />
+                        <label
+                          for="booking_services_1"
+                          class="label-booking_services ml-2 text-base font-medium"
+                          >Service per booking</label
+                        >
+                        <span
+                          class="service-price-line text-gray-600 font-bold ml-auto"
+                          >$30.00</span
+                        >
+                      </div>
+                      <hr />
+                      <div class="view-list-details">
+                        <div class="view-details-inner">
+                          Lorem ipsum dolor sit amet, utinam munere antiopam vel
+                          ad. Qui eros iusto te. Nec ad feugiat honestatis. Quo
+                          illum detraxit an. Ius eius quodsi molestiae at,
+                          nostrum definitiones his cu. Discere referrentur mea
+                          id, an pri novum possim deterruisset. Eum oratio
+                          reprehendunt cu. Nec te quem assum postea.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="list-service relative">
+                      <div class="input-square my-3 flex flex-wrap">
+                        <input
+                          id="booking_services_2"
+                          type="checkbox"
+                          name="booking_services[]"
+                          value="23"
+                          formControlName="servicePerson"
+                          class="cursor-pointer"
+                        />
+                        <label
+                          for="booking_services_2"
+                          class="label-booking_services ml-2 text-base font-medium"
+                          >Service per person</label
+                        >
+                        <div class="list-service-prices ml-auto">
+                          <span class="service-price-line">
+                            <span class="text-gray-600 font-bold ml-2"
+                              >$17.00</span
+                            >
+                          </span>
+                        </div>
+                      </div>
+                      <hr />
+                      <div class="view-list-details">
+                        <div class="view-details-inner">
+                          Lorem ipsum dolor sit amet, utinam munere antiopam vel
+                          ad. Qui eros iusto te. Nec ad feugiat honestatis. Quo
+                          illum detraxit an. Ius eius quodsi molestiae at,
+                          nostrum definitiones his cu. Discere referrentur mea
+                          id, an pri novum possim deterruisset. Eum oratio
+                          reprehendunt cu. Nec te quem assum postea.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="total-group">
+              <label class="text-gray-500 text-lg font-normal">Total:</label>
+              <span
+                class="text-primary font-semibold ml-5"
+                id="booking-form-total"
+                >{{ '$' + total + '.00' }}</span
+              >
+            </div>
+            <div id="error-group ">
+              <label
+                class="booking-form-error-label text-lg font-normal text-red-600 hidden"
+                >Please fill in all the data.</label
+              >
+            </div>
+            <div class="submit-group">
+              <button
+                [disabled]="
+                  formInvoice.invalid ||
+                  formInvoice.controls.adult.value +
+                    formInvoice.controls.young.value +
+                    formInvoice.controls.children.value >
+                    tour.maxPeople ||
+                  formInvoice.controls.adult.value +
+                    formInvoice.controls.young.value +
+                    formInvoice.controls.children.value ===
+                    0 ||
+                  isCreating
+                "
+                [ngClass]="
+                  formInvoice.invalid ||
+                  formInvoice.controls.adult.value +
+                    formInvoice.controls.young.value +
+                    formInvoice.controls.children.value >
+                    tour.maxPeople ||
+                  formInvoice.controls.adult.value +
+                    formInvoice.controls.young.value +
+                    formInvoice.controls.children.value ===
+                    0 ||
+                  isCreating
+                    ? 'cursor-no-drop border-black border border-solid text-black'
+                    : 'hover:bg-primaryhover bg-primary cursor-pointer text-white '
+                "
+                class="btn-submit-booking font-bold flex justify-center items-center rounded-md w-full h-12 mt-3"
+              >
+                <span *ngIf="!isCreating; else loadingSm">Book Now</span>
+                <ng-template #loadingSm>
+                  <app-loading-small></app-loading-small>
+                </ng-template>
+              </button>
+            </div>
+          </form>
+        </div>
+        <!-- Last Minute Deals -->
+        <!-- <div
+          class="last-deals shadow-lg px-10 py-6 rounded-3xl bg-white mt-10 overflow-hidden"
+        >
+          <h3 class="relative text-lg font-bold mb-12">
+            Last Minute Deals
+            <div
+              class="line-bottom-btth absolute -left-10 top-12 bg-gray-300"
+            ></div>
+          </h3>
+          <div *ngFor="let index of [0, 1, 2, 3]; let last = last" class="">
+            <div class="last-deal-item my-5 flex">
+              <div class="last-deal-item-img overflow-hidden">
+                <img
+                  class="w-28 h-20 rounded-lg"
+                  src="https://demo2.pavothemes.com/triply/wp-content/uploads/2020/11/5c486ea739c52128a578315e_DSC04947-copy-820x520.jpg"
+                  alt=""
+                />
+              </div>
+              <div class="last-deal-item-meta pl-4">
+                <div class="last-deal-item-title overflow-hidden">
+                  <a class="text-lg font-medium hover:text-primary" href="#"
+                    >Osa Peninsula to Dominical</a
+                  >
+                </div>
+                <div class="last-deal-item-rating -mt-1">
+                  <fa-icon
+                    class="text-sm text-primary"
+                    [icon]="faStar"
+                  ></fa-icon>
+                  <fa-icon
+                    class="text-sm text-primary"
+                    [icon]="faStar"
+                  ></fa-icon>
+                  <fa-icon
+                    class="text-sm text-primary"
+                    [icon]="faStar"
+                  ></fa-icon>
+                  <fa-icon
+                    class="text-sm text-primary"
+                    [icon]="faStar"
+                  ></fa-icon>
+                  <fa-icon class="text-sm" [icon]="faStar"></fa-icon>
+                </div>
+                <div
+                  class="last-deal-item-price text-2xl text-primary font-bold"
+                >
+                  $102.60<span
+                    class="ml-2 text-stone-500 text-base line-through"
+                    >$114.00</span
+                  >
+                </div>
+              </div>
+            </div>
+            <ng-container *ngIf="!last">
+              <hr />
+            </ng-container>
+          </div>
+        </div> -->
+      </div>
     </div>
-  </section>
-  <!-- Carousel -->
-</ng-container>
+  </section></ng-container
+>
 <ng-template #loading>
   <div class="w-full m-auto h-96 flex items-center justify-center">
     <app-loading></app-loading>
   </div>
 </ng-template>
+<app-footer></app-footer>

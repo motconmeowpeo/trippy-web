@@ -1,5 +1,5 @@
 <div
-  class="input relative flex flex-col text-surface-100 h-full"
+  class="input relative flex flex-col text-surface-100 h-full border-2 rounded min-h-[45px] border-primary bg-white"
   [class]="readonly ? 'cursor-not-allowed' : ''"
   [ngClass]="className"
 >
@@ -16,7 +16,7 @@
     [ngClass]="readonly ? 'pointer-events-none' : ''"
   >
     <div
-      class="flex items-center justify-between px-3 h-full relative z-1"
+      class="flex items-center justify-between px-3 h-full relative z-1 cursor-pointer"
       [ngClass]="menuClasses"
       menuTrigger
     >
@@ -28,7 +28,7 @@
         type="text"
         [value]="text | titlecase"
         [placeholder]="placeholder || ''"
-        class="border-b border-outline pr-3.5 ml-2 focus:outline-none w-full flex-1 bg-transparent text-sm cursor-pointer truncate text-primary font-semibold"
+        class="pr-3.5 ml-2 focus:outline-none w-full flex-1 bg-transparent text-sm cursor-pointer truncate text-primary font-semibold"
         [ngClass]="{ 'text-surface-50 cursor-not-allowed': !!readonly }"
         [readonly]="readonly"
         (input)="filterSelect(inputText.value)"

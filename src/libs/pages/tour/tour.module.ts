@@ -9,7 +9,12 @@ import { TourItemModule } from '@core/component/tourItem';
 import { SearchbarModule } from '@core/component/searchbar';
 import { BannerBotModule } from '@core/component/bannerBot';
 import { SvgIconsModule } from '@ngneat/svg-icon';
-import { MenuModule, SelectModule } from '@core/ui';
+import { ButtonModule, MenuModule, SearchModule, SelectModule } from '@core/ui';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { LoadingSmallModule } from '@core/component/loading-small';
+import { FooterModule } from '@core/component/footer';
 
 const routes: Routes = [
   {
@@ -30,6 +35,15 @@ const routes: Routes = [
     BannerBotModule,
     SelectModule,
     MenuModule,
+    ReactiveFormsModule,
+    FontAwesomeModule,
+    NzDropDownModule,
+    NzDatePickerModule,
+    FormsModule,
+    LoadingSmallModule,
+    SearchModule,
+    ButtonModule,
+    FooterModule,
   ],
   declarations: [TourComponent],
 })

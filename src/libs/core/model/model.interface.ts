@@ -13,6 +13,7 @@ export interface IToken {
 }
 
 export interface User {
+  id: string;
   username: string;
   email: string;
   active: boolean;

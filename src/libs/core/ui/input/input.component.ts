@@ -4,7 +4,7 @@ import { BaseControlValueAccessor } from '@core/base';
 import { capitalizeFirstLetter } from '@core/until';
 
 @Component({
-  selector: 'iworkspace-input',
+  selector: 'app-input',
   templateUrl: './input.component.html',
   providers: [
     {

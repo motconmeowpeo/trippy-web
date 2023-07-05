@@ -2,11 +2,11 @@
   class="h-24 w-full flex sticky z-50 items-center top-0 justify-between px-5 py-5 bg-white shadow-lg"
 >
   <!-- LOGO -->
-  <div>
-    <a routeLink="/" routerLinkActive="active">
+  <div class="ml-10">
+    <a routeLink="/" routerLinkActive="activeHeader">
       <img
         routeLink="/"
-        routerLinkActive="active"
+        routerLinkActive="activeHeader"
         class="w-36 object-cover cursor-pointer"
         src="assets/logo/logo.svg"
         alt="logo"
@@ -19,13 +19,24 @@
       <div
         *ngFor="let item of this.MENUS"
         routerLink="{{ item.path }}"
-        routerLinkActive="active"
+        routerLinkActive="activeHeader"
         class="text-black text-xl p-6 flex items-center cursor-pointer hover:text-primaryhover"
       >
         <li>
           {{ item.name }}
         </li>
         <fa-icon class="text-sm ml-1 text-primary" [icon]="faPlus"></fa-icon>
+      </div>
+      <div *ngIf="isAuthorized && user$">
+        <li
+          *permissions="[PermissionCode.ADMIN, PermissionCode.BUSINESS]"
+          routerLink="/manager"
+          routerLinkActive="activeHeader"
+          class="text-black text-xl p-6 flex items-center cursor-pointer hover:text-primaryhover"
+        >
+          Management
+          <fa-icon class="text-sm ml-1 text-primary" [icon]="faPlus"></fa-icon>
+        </li>
       </div>
     </ul>
   </div>
@@ -41,53 +52,64 @@
     </div> -->
     <div class="text-xl ml-5 relative">
       <fa-icon
-        *ngIf="!isAuthorized; else user"
+        *ngIf="!isAuthorized || !user$; else user"
         routerLink="login"
-        routerLinkActive="active"
+        routerLinkActive="activeHeader"
         [icon]="faUser"
         nz-tooltip
         nzTooltipTitle="Login"
         class="hover:text-primaryhover cursor-pointer"
       ></fa-icon>
-      <ng-template #user>
-        <div #menu class="w-10 h-10 relative">
-          <img
-            class="w-full h-full object-cover cursor-pointer"
-            src="assets/avatar/defaultAvt2.png"
-            alt=""
-            (click)="toggleMenu()"
-          />
-          <div
-            class="absolute animate-display shadow-md top-full right-0 w-fit min-w-[150px]"
-            *ngIf="isMenuShown"
-          >
-            <ul class="overflow-hidden bg-white rounded-md">
-              <li
-                class="text-sm cursor-pointer hover:opacity-80 border-b border-gray-200 p-2 whitespace-nowrap bg-white"
-              >
-                My Profile
-              </li>
-              <li
-                class="text-sm cursor-pointer hover:opacity-80 border-b border-gray-200 px-2 py-3 whitespace-nowrap bg-white"
-              >
-                My Invoice
-              </li>
 
-              <li
-                *permissions="[PermissionCode.ADMIN, PermissionCode.BUSINESS]"
-                routerLink="manager"
-                routerLinkActive="active"
-                class="text-sm cursor-pointer hover:opacity-80 border-b border-gray-200 px-2 py-3 whitespace-nowrap bg-white"
+      <ng-template #user>
+        <div #menu *ngIf="user$ | async as user" class="w-12 h-12 relative">
+          <div class="absolute bottom-[2px] right-2">
+            <app-menu position="right">
+              <!-- Trigger -->
+              <div
+                class="flex items-center justify-center p-1 cursor-pointer w-12 h-12 rounded hover:bg-background-2"
+                menuTrigger
               >
-                Product Management
-              </li>
-              <li
-                (click)="logOut()"
-                class="text-sm cursor-pointer hover:opacity-80 border-b border-gray-200 p-2 whitespace-nowrap bg-white"
+                <span
+                  class="flex items-center cursor-pointer justify-center rounded-1/2 w-full h-full bg-primary text-white uppercase font-bold"
+                >
+                  {{ user.email | slice : 0 : 1 }}
+                </span>
+              </div>
+
+              <!-- Menu -->
+              <ul
+                class="flex flex-col bg-white shadow-base p-1 rounded text-xs"
+                menuContent
               >
-                Log Out
-              </li>
-            </ul>
+                <ng-container>
+                  <!-- Edit -->
+                  <li
+                    class="inline-flex items-center px-3 py-2 cursor-pointer rounded hover:bg-background-2"
+                  >
+                    <svg-icon class="mr-4" key="user"></svg-icon>
+                    <span class="whitespace-nowrap"> My Profile</span>
+                  </li>
+
+                  <!-- Complete -->
+                  <li
+                    class="inline-flex items-center px-3 py-2 cursor-pointer rounded hover:bg-background-2"
+                  >
+                    <svg-icon class="mr-4" key="cart"></svg-icon>
+                    <span class="whitespace-nowrap"> My Invoice</span>
+                  </li>
+
+                  <!-- Logout -->
+                  <li
+                    class="inline-flex items-center px-3 py-2 cursor-pointer rounded hover:bg-background-2"
+                    (click)="logOut()"
+                  >
+                    <svg-icon class="mr-4" key="back"></svg-icon>
+                    <span class="whitespace-nowrap"> Log out</span>
+                  </li>
+                </ng-container>
+              </ul>
+            </app-menu>
           </div>
         </div>
       </ng-template>

@@ -4,3 +4,6 @@ export * from './role.model';
 export * from './tour.model';
 export * from './location.model';
 export * from './base.model';
+export * from './tour-comment';
+export * from './invoice.model';
+export * from './contact.model';

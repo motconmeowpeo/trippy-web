@@ -1,0 +1,79 @@
+<app-modal>
+  <ng-container *ngIf="!isUISameFormModal">
+    <div class="px-14 py-8">
+      <!-- Header notification -->
+      <section class="header pb-6">
+        <figure
+          class="absolute top-0 left-0 right-0 -translate-y-1/2 w-24 h-24 rounded-1/2 mx-auto flex items-center justify-center bg-white"
+        >
+          <svg-icon
+            class="object-cover w-full h-full rounded-full p-3 text-white"
+            [key]="MODAL_STYLE[type].icon"
+            [style.background-color]="MODAL_STYLE[type].backgroundColor"
+            fontSize="85px"
+          ></svg-icon>
+        </figure>
+
+        <!-- Title -->
+        <h5 *ngIf="data?.title" class="text-center font-bold text-xl pt-8">
+          {{ data?.title }}
+        </h5>
+      </section>
+
+      <!-- Body -->
+      <ng-content select="[content]"></ng-content>
+
+      <!-- Footer -->
+      <section class="flex justify-center pt-8">
+        <!-- Button primary -->
+        <ng-content select="[btn-primary]"></ng-content>
+
+        <!-- Button secondary -->
+        <ng-content select="[btn-secondary]"></ng-content>
+
+        <!-- Button tertiary -->
+        <ng-content select="[btn-tertiary]"></ng-content>
+      </section>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="isUISameFormModal">
+    <div class="modal bg-white shadow-base rounded-lg">
+      <!-- Header -->
+      <section
+        class="bg-background-1 flex items-center justify-between px-6 py-3 border-b border-b-gray-4 rounded-tr-lg rounded-tl-lg"
+      >
+        <!-- Title -->
+        <h5 class="text-primary font-bold text-xl">
+          {{ data?.title }}
+        </h5>
+
+        <!-- Close -->
+        <!-- <svg-icon
+          class="cursor-pointer"
+          key="close"
+          fontSize="16px"
+          (click)="close()"
+        ></svg-icon> -->
+      </section>
+
+      <div class="grid">
+        <section class="modal-form">
+          <!-- Body -->
+          <ng-content></ng-content>
+
+          <!-- Footer -->
+          <section
+            class="bg-background-1 flex items-center px-6 py-3 border-t border-t-gray-4 rounded-br-lg rounded-b-lg"
+          >
+            <!-- Submit -->
+            <ng-content select="[submit]"></ng-content>
+
+            <!-- Cancel -->
+            <ng-content select="[cancel]"></ng-content>
+          </section>
+        </section>
+      </div>
+    </div>
+  </ng-container>
+</app-modal>

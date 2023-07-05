@@ -1,0 +1,44 @@
+<div class="auto-complete" [ngClass]="className">
+  <!-- Input File -->
+  <app-input-file
+    #inputFile
+    [className]="inputClassName"
+    [label]="label"
+    [placeholder]="placeholder"
+    (valueChanges)="!disabledInput && onAdd($event)"
+    [fileFormat]="fileFormat"
+    [disabled]="!multipleSelect && !!value.length"
+    [multiple]="multiFile"
+  ></app-input-file>
+
+  <!-- Hint -->
+  <span
+    *ngIf="hint"
+    class="px-3 top-full mt-1 text-xs font-light text-surface-50"
+    [innerHTML]="hint"
+  >
+  </span>
+
+  <!-- Selected -->
+  <div
+    *ngIf="value?.length"
+    class="px-2 mt-1 flex flex-wrap items-center gap-x-2 gap-y-1"
+  >
+    <app-chip
+      *ngFor="let name of arrayName; index as i"
+      class="inline-flex"
+      [text]="name"
+      (handleRemove)="onRemove(i)"
+      [isRemovable]="true"
+      [className]="classNameChip"
+    ></app-chip>
+  </div>
+
+  <!-- Error -->
+  <span
+    *ngIf="error"
+    class="ml-[12px] px-3 top-full mt-1 text-xs font-light whitespace-nowrap text-pink-500"
+    [innerHTML]="error"
+  >
+  </span>
+</div>

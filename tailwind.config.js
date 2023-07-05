@@ -16,6 +16,8 @@ module.exports = {
         'secondaryhover': '#121D39',
         "globaltext": "#9ca2b1",
         "global": "#999999",
+        'background-1': '#F7F7F7',
+        'background-2': '#EEEEEE',
       },
       boxShadow: {
         base: '0 0 30px rgb(0 0 0 / 5%)',
@@ -27,6 +29,12 @@ module.exports = {
       },
       height: {
         '100': '400px'
+      },
+      gridTemplateRows: {
+        'auto-1fr': 'auto 1fr',
+      },
+      gridTemplateColumns: {
+        'auto-1fr': 'auto 1fr',
       },
       backgroundImage: {
 

@@ -2,7 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ManagerComponent } from './manager.component';
 
-import { URL_CUSTOMER, URL_INVOICE, URL_TOUR } from './manager.constants';
+import {
+  URL_CUSTOMER,
+  URL_INVOICE,
+  URL_TOUR,
+  URL_CONTACT,
+} from './manager.constants';
 
 const routes: Routes = [
   {
@@ -34,6 +39,12 @@ const routes: Routes = [
         loadChildren: async () =>
           (await import('./management-customer/management-customer.module'))
             .ManagementCustomerModule,
+      },
+      {
+        path: URL_CONTACT,
+        loadChildren: async () =>
+          (await import('./management-contact/management-contact.module'))
+            .ManagementContactModule,
       },
     ],
   },

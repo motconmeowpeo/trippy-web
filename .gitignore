@@ -5,7 +5,8 @@
 /tmp
 /out-tsc
 /bazel-out
-
+/KeyS3.txt
+create_tour.bmpr
 # Node
 /node_modules
 npm-debug.log
@@ -40,3 +41,5 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+/Note.txt

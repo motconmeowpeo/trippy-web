@@ -1,3 +1,67 @@
-<p>
-  management-tour works!
-</p>
+<div
+  class="w-full max-h-[87vh] min-h-[87vh] relative bg-slate-100 overflow-auto"
+>
+  <div
+    class="flex justify-end mr-6 pt-3 border-t border-t-white"
+    [formGroup]="form"
+  >
+    <app-search formControlName="search"></app-search>
+    <div class="h-12 ml-6">
+      <app-button
+        className="w-52"
+        cancel
+        type="primary"
+        (click)="openCreateTour()"
+      >
+        <span>Create</span>
+      </app-button>
+    </div>
+  </div>
+  <ng-container *ngIf="isLoading; else tours">
+    <div
+      class="w-full max-w-7xl min-h-[87vh] m-auto flex items-center justify-center"
+    >
+      <app-loading></app-loading>
+    </div>
+  </ng-container>
+  <ng-template #tours>
+    <section class="h-full" *ngIf="tours$ | async as tours">
+      <div class="w-full m-auto p-3" *ngIf="tours.length; else noDataFound">
+        <!-- TourItem -->
+        <ul class="list-none flex pt-2 flex-wrap pb-20">
+          <app-tourItem
+            class="h-[400px] w-1/5 rounded-3xl bg-transparent px-6 pb-6 relative cursor-pointer"
+            classBox="h-10"
+            [disableExplore]="true"
+            *ngFor="let tour of tours"
+            [tour]="tour"
+          ></app-tourItem>
+        </ul>
+      </div>
+      <ng-template #noDataFound>
+        <div
+          class="w-full m-auto min-h-[40vh] flex flex-col items-center justify-center"
+        >
+          <span class="text-gray-500 font-semibold text-2xl"
+            >No data found</span
+          >
+        </div>
+      </ng-template>
+    </section>
+  </ng-template>
+  <app-pagination
+    *ngIf="tours$ && false"
+    className="absolute left-0 bottom-0 right-0"
+    [pageLimitOptions]="pageLimitOptions"
+    [currentPage]="currentPage"
+    [total]="total"
+    [limit]="limit"
+    [canNext]="canNext"
+    [canPrev]="canPrev"
+    [widthOffset]="2"
+    (goTo)="onGoToPage($event)"
+    (next)="onNextPage()"
+    (previous)="onPreviousPage()"
+    (limitChange)="onLimitChange($event)"
+  ></app-pagination>
+</div>

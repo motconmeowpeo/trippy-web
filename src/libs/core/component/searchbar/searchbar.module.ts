@@ -10,6 +10,7 @@ import zh from '@angular/common/locales/zh';
 import { SelectModule, MenuModule, SearchModule, ButtonModule } from '@core/ui';
 import { SvgIconsModule } from '@ngneat/svg-icon';
 import { LoadingSmallModule } from '../loading-small';
+import { ModalModule } from '../../ui/modal/base/modal.module';
 registerLocaleData(zh);
 @NgModule({
   imports: [
@@ -24,9 +25,10 @@ registerLocaleData(zh);
     LoadingSmallModule,
     SearchModule,
     ReactiveFormsModule,
-    ButtonModule
+    ButtonModule,
+    // ModalModule,
   ],
   declarations: [SearchbarComponent],
   exports: [SearchbarComponent],
 })
-export class SearchbarModule { }
+export class SearchbarModule {}
