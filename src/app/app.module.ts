@@ -16,7 +16,19 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from '@core/guard';
 import { IconsModule } from '@core/ui';
 import { HttpService } from '@core/services/http';
-
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+const firebaseConfig = {
+  apiKey: 'AIzaSyCc4VBVIu_dvt9SE57dj8fMBYDlgPCidqg',
+  authDomain: 'trippy-3dc63.firebaseapp.com',
+  projectId: 'trippy-3dc63',
+  storageBucket: 'trippy-3dc63',
+  messagingSenderId: '414110793136',
+  appId: '1:414110793136:web:8bf17ce2e644df61a6aa75',
+  measurementId: 'G-RXCXF78T58',
+};
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -32,7 +44,10 @@ import { HttpService } from '@core/services/http';
     BrowserAnimationsModule,
     NzNotificationModule,
     IconsModule,
-
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
     JwtModule.forRoot({
       config: {
         tokenGetter: () => '',

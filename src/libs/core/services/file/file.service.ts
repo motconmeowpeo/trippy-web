@@ -1,17 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../http';
 import { API_UPLOAD } from '../../constants/url.constant';
-import { combineLatest } from 'rxjs';
+import { combineLatest, from } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
+import { Storage, ref, uploadBytesResumable } from '@angular/fire/storage';
 @Injectable({ providedIn: 'root' })
 export class FileService {
-  constructor(private http: HttpService) {}
+  constructor(private http: HttpService, private storage: Storage) {}
 
   upload(files: File[]) {
-    return combineLatest(files.map((file) => this.uploadFile(file)));
+    // return combineLatest(files.map((file) => this.uploadFile(file)));
+    files.map((file) => this.uploadFile(file));
   }
 
+  // private uploadFile(file: File) {
+  //   return this.http.put<File>(`${API_UPLOAD}${file.name}`, file);
+  // }
   private uploadFile(file: File) {
-    return this.http.put<File>(`${API_UPLOAD}${file.name}`, file);
+    const storageRef = ref(this.storage, file.name);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    uploadTask.on(
+      'state_changed',
+      (snap) => console.log('Uploading....'),
+      () => console.log('Uploaded.....')
+    );
   }
 }

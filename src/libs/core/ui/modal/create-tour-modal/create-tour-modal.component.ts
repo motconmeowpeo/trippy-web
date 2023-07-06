@@ -7,7 +7,7 @@ import {
   FileService,
 } from '@core/services';
 import { ISelectItem, ITourCommand } from '@core/model';
-import { of, switchMap, tap, map, catchError } from 'rxjs';
+import { of, switchMap, tap, map, catchError, delay } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import {
@@ -193,16 +193,17 @@ export class CreateTourModalComponent
       .pipe(
         switchMap((user) => {
           if (this.formCreate.value.preview && this.formCreate.value.overview) {
-            return this.fileService
-              .upload(
-                this.formCreate.value.preview?.concat(
-                  this.formCreate.value.overview
-                )
+            this.fileService.upload(
+              this.formCreate.value.preview?.concat(
+                this.formCreate.value.overview
               )
-              .pipe(map(() => user));
+            );
+            // .pipe(map(() => user));
+            return of(user);
           }
           return of(user);
         }),
+        delay(3000),
         switchMap((user) => {
           const payload: ITourCommand = {
             ...this.formCreate.value,
