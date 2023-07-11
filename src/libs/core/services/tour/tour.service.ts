@@ -25,6 +25,10 @@ export class TourService {
     return this.http.get<ITour>(`${API_TOUR}/${id}`);
   }
 
+  changeStatus(id: string): Observable<ITour> {
+    return this.http.put<ITour>(`${API_TOUR}/${id}`, {});
+  }
+
   create(payload: Partial<ITourCommand>): Observable<ITour> {
     return this.http.post<ITour>(`${API_TOUR}`, payload);
   }

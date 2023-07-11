@@ -97,6 +97,10 @@ export class CreateTourModalComponent
         nonNullable: true,
         validators: [Validators.required, Validators.min(1)],
       }),
+      minPeople: new FormControl(0, {
+        nonNullable: true,
+        validators: [Validators.required, Validators.min(1)],
+      }),
       minAge: new FormControl(0, {
         nonNullable: true,
         validators: [Validators.required, Validators.min(1)],

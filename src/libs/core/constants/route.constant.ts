@@ -9,6 +9,7 @@ const URL_BLOG = 'blog';
 const URL_PAGE = 'page';
 const URL_CONTACT = 'contact';
 const URL_MANAGER = 'manager';
+const URL_MYINVOICE = 'invoice';
 
 export {
   URL_HOME,
@@ -22,4 +23,5 @@ export {
   URL_REGISTER,
   URL_DESTINATIONDETAIL,
   URL_MANAGER,
+  URL_MYINVOICE,
 };

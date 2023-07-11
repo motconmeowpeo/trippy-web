@@ -3,6 +3,8 @@ import {
   faLocationDot,
   faArrowRightLong,
   faEllipsis,
+  faLockOpen,
+  faBan,
 } from '@fortawesome/free-solid-svg-icons';
 import { faCalendar, faUser } from '@fortawesome/free-regular-svg-icons';
 import { DialogService } from '@ngneat/dialog';
@@ -15,6 +17,7 @@ import { ModalCloseStatus } from '@core/enum';
 import { S3_URL } from '@core/constants';
 
 import { ToastNotificationService } from '@core/services';
+import { TourStatus } from '../../enum/tour.enum';
 
 @Component({
   selector: 'app-tourItem',
@@ -28,6 +31,9 @@ export class TourItemComponent implements OnInit {
   isRouter = false;
   faEllipsis = faEllipsis;
   isShown = false;
+  TourStatus = TourStatus;
+  faBan = faBan;
+  faLockOpen = faLockOpen;
   readonly S3_URL = S3_URL;
   @Input() imgSrc!: string;
   @Input() tourName!: string;
@@ -95,5 +101,35 @@ export class TourItemComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  openChangeStatusTour(id: string) {
+    this.dialog
+      .open(ConfirmModalComponent, {
+        data: {
+          title:
+            this.tour.status === TourStatus.ACTIVE
+              ? 'Inactive Tour'
+              : 'Inactive Tour',
+          description:
+            this.tour.status === TourStatus.ACTIVE
+              ? 'Are you sure to inactive this tour'
+              : 'Are you sure to active this tour',
+          textSubmit: 'Submit',
+          textCancel: 'Cancel',
+        },
+      })
+      .afterClosed$.pipe(
+        tap((status: any) => {
+          if (status?.status === ModalCloseStatus.COMPLETE) {
+            this.changeStatus(id);
+          }
+        })
+      )
+      .subscribe();
+  }
+
+  changeStatus(id: string) {
+    this.tourFacade.changeStatus(id).subscribe();
   }
 }

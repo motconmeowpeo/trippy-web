@@ -39,6 +39,7 @@ export class SelectComponent extends BaseControlValueAccessor<
   @Input() set selectList(selectList: ISelectItem[]) {
     this._selectList = [...selectList];
   }
+
   @Input() menuClasses!: string;
   @Input() set defaultValue(selectItem: ISelectItem) {
     this.firstRender && this.onSelect(selectItem);

@@ -3,3 +3,8 @@ export enum Ticket {
   YOUNG = 'YOUNG',
   ADULT = 'ADULT',
 }
+
+export enum TourStatus {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+}

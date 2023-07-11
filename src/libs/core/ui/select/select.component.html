@@ -20,7 +20,7 @@
       [ngClass]="menuClasses"
       menuTrigger
     >
-      <fa-icon [icon]="icon" [ngClass]="classIcon"></fa-icon>
+      <fa-icon *ngIf="icon" [icon]="icon" [ngClass]="classIcon"></fa-icon>
 
       <!-- Input -->
       <input

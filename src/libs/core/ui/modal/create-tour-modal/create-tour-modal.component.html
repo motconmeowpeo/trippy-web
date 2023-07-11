@@ -58,6 +58,18 @@
     <div class="w-full flex">
       <div class="w-full mr-3">
         <label class="mt-5 text-xl flex items-start" for="min-age"
+          >Min people<span class="text-xs text-red-600">*</span></label
+        >
+        <input
+          class="w-full mt-2 h-11 p-2 rounded-md outline-primary"
+          type="number"
+          id="min-age"
+          placeholder="Min people..."
+          formControlName="minPeople"
+        />
+      </div>
+      <div class="w-full mr-3">
+        <label class="mt-5 text-xl flex items-start" for="min-age"
           >Min age<span class="text-xs text-red-600">*</span></label
         >
         <input
@@ -68,16 +80,16 @@
           formControlName="minAge"
         />
       </div>
-      <div class="w-full">
-        <label class="mt-5 text-xl flex items-start" for="preview"
-          >Preview image<span class="text-xs text-red-600">*</span></label
-        >
-        <app-upload-file
-          placeholder="Choose your image preview"
-          formControlName="preview"
-          classNameChip="max-w-[15rem] sm:max-w-xs h-11"
-        ></app-upload-file>
-      </div>
+    </div>
+    <div class="w-full">
+      <label class="mt-5 text-xl flex items-start" for="preview"
+        >Preview image<span class="text-xs text-red-600">*</span></label
+      >
+      <app-upload-file
+        placeholder="Choose your image preview"
+        formControlName="preview"
+        classNameChip="max-w-[15rem] sm:max-w-xs h-11"
+      ></app-upload-file>
     </div>
     <div class="w-full">
       <label class="mt-5 text-xl flex items-start" for="overview"
@@ -202,8 +214,8 @@
 
   <!-- Action -->
   <app-button
-    submit
     (click)="createTour()"
+    submit
     [disabled]="formCreate.invalid || isCreating"
   >
     <span *ngIf="!isCreating; else loadingSm">Create</span>

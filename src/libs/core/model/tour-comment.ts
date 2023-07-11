@@ -12,6 +12,10 @@ export interface ITourComment {
   priceRate: number;
   roomsRate: number;
   author: IUser;
+  avgLocation: number;
+  avgService: number;
+  avgPrice: number;
+  avgRoom: number;
 }
 
 export interface ICreateTourComment {

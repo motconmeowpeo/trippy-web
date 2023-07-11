@@ -11,19 +11,22 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './destinationDetail.component.html',
 })
 export class DestinationDetailComponent implements OnInit {
-  tours$ = this.tourFacade.getAll();
-  name: string | null;
+  tours$ = this.tourFacade.tours$;
+  name!: string | null;
+  isLoading = false;
   constructor(
     private tourFacade: TourFacade,
     private activatedRoute: ActivatedRoute
-  ) {
-    this.name = this.activatedRoute.snapshot.paramMap.get('name');
-  }
+  ) {}
 
   ngOnInit() {
     AOS.init({
       duration: 1500,
       once: true,
     });
+
+    this.name = this.activatedRoute.snapshot.paramMap.get('name');
+    this.isLoading = true;
+    this.tourFacade.getAll().subscribe(() => (this.isLoading = false));
   }
 }

@@ -11,6 +11,7 @@ import {
   URL_MANAGER,
   URL_PAGE,
   URL_CONTACT,
+  URL_MYINVOICE,
 } from '@core/constants';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '@core/guard';
@@ -79,6 +80,12 @@ const publicRoute: Routes = [
     // canActivate: [AuthGuard],
     loadChildren: () =>
       import('@pages/contact').then((page) => page.ContactModule),
+  },
+  {
+    path: URL_MYINVOICE,
+    // canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('@pages/my-invoice').then((page) => page.MyInvoiceModule),
   },
 ];
 const privateRoute = [];

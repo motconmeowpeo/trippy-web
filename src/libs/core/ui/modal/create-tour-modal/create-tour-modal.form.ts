@@ -14,6 +14,7 @@ export interface ICreateTourForm {
   name: FormControl<string>;
   description: FormControl<string>;
   maxPeople: FormControl<number>;
+  minPeople: FormControl<number>;
   totalDays: FormControl<number>;
   minAge: FormControl<number>;
   tourPlan: FormControl<ITourPlan[]>;
@@ -22,5 +23,3 @@ export interface ICreateTourForm {
   preview: FormControl<File[]>;
   locationId: FormControl<string>;
 }
-
-

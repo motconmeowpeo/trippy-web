@@ -7,7 +7,7 @@
         {{ tour.location.name }}
       </span>
     </div>
-    <div class="h-500px mt-10">
+    <div class="max-h-[500px] mt-10">
       <nz-carousel nzEnableSwipe nzAutoPlay [nzEffect]="'fade'">
         <div nz-carousel-content *ngFor="let preview of tour.overview">
           <img
@@ -33,6 +33,16 @@
           </div>
         </div>
         <!-- Max people -->
+        <div class="flex items-center">
+          <fa-icon
+            class="text-3xl text-primary mr-2"
+            [icon]="faUsers"
+          ></fa-icon>
+          <div class="flex flex-col">
+            <span class="text-lg font-semibold">Min people</span>
+            <span class="text-globaltext">{{ tour.minPeople }}</span>
+          </div>
+        </div>
         <div class="flex items-center">
           <fa-icon
             class="text-3xl text-primary mr-2"
@@ -120,19 +130,20 @@
               </nz-collapse-panel>
             </nz-collapse>
           </nz-tab>
-          <nz-tab nzTitle="REVIEWS">
+          <nz-tab nzTitle="REVIEWS" *ngIf="comments$ | async as comments">
             <ng-template nz-tab>
               <!-- Review Score -->
               <div class="review-score flex mb-20">
                 <div class="rating-value text-center w-[30%] m-auto">
                   <div class="rating-score text-5xl font-bold">
-                    4.18<span class="text-base text-neutral-900">/5</span>
+                    {{
+                      ((avgLocation + avgService + avgRoom + avgPrice) / 4 ||
+                        0) + '' | slice : 0 : 4
+                    }}<span class="text-base text-neutral-900">/5</span>
                   </div>
-                  <div class="ratting-text text-gray-600 font-medium">
-                    Wonderful
-                  </div>
+
                   <div class="rating-vote text-gray-500 font-normal">
-                    8 verified reviews
+                    {{ comments.length }} verified reviews
                   </div>
                 </div>
                 <div class="review-criteria flex flex-wrap">
@@ -143,27 +154,17 @@
                       >
                       <span
                         class="post-rating-value ml-auto font-semibold text-gray-700"
-                        >4.38/5</span
+                        >{{ (avgLocation || 0) + '' | slice : 0 : 4 }}/5</span
                       >
                     </div>
                     <div class="review-progress w-full bg-gray-200 h-2 mt-2">
-                      <div class="bg-primary h-2" style="width: 88%"></div>
+                      <div
+                        class="bg-primary h-2"
+                        [style]="'width:' + (avgLocation / 5 || 0) * 100 + '%'"
+                      ></div>
                     </div>
                   </div>
-                  <div class="review-item w-[43%] mt-4 mx-4">
-                    <div class="flex">
-                      <span class="post-rating-criterion text-lg font-semibold"
-                        >Amenities</span
-                      >
-                      <span
-                        class="post-rating-value ml-auto font-semibold text-gray-700"
-                        >4.13/5</span
-                      >
-                    </div>
-                    <div class="review-progress w-full bg-gray-200 h-2 mt-2">
-                      <div class="bg-primary h-2" style="width: 83%"></div>
-                    </div>
-                  </div>
+
                   <div class="review-item w-[43%] mt-4 mx-4">
                     <div class="flex">
                       <span class="post-rating-criterion text-lg font-semibold"
@@ -171,11 +172,14 @@
                       >
                       <span
                         class="post-rating-value ml-auto font-semibold text-gray-700"
-                        >3.88/5</span
+                        >{{ (avgService || 0) + '' | slice : 0 : 4 }}/5</span
                       >
                     </div>
                     <div class="review-progress w-full bg-gray-200 h-2 mt-2">
-                      <div class="bg-primary h-2" style="width: 78%"></div>
+                      <div
+                        class="bg-primary h-2"
+                        [style]="'width:' + (avgService / 5 || 0) * 100 + '%'"
+                      ></div>
                     </div>
                   </div>
                   <div class="review-item w-[43%] mt-4 mx-4">
@@ -185,11 +189,14 @@
                       >
                       <span
                         class="post-rating-value ml-auto font-semibold text-gray-700"
-                        >3.88/5</span
+                        >{{ (avgPrice || 0) + '' | slice : 0 : 4 }}/5</span
                       >
                     </div>
                     <div class="review-progress w-full bg-gray-200 h-2 mt-2">
-                      <div class="bg-primary h-2" style="width: 78%"></div>
+                      <div
+                        class="bg-primary h-2"
+                        [style]="'width:' + (avgPrice / 5 || 0) * 100 + '%'"
+                      ></div>
                     </div>
                   </div>
                   <div class="review-item w-[43%] mt-4 mx-4">
@@ -199,11 +206,14 @@
                       >
                       <span
                         class="post-rating-value ml-auto font-semibold text-gray-700"
-                        >4.63/5</span
+                        >{{ (avgRoom || 0) + '' | slice : 0 : 4 }}/5</span
                       >
                     </div>
                     <div class="review-progress w-full bg-gray-200 h-2 mt-2">
-                      <div class="bg-primary h-2" style="width: 93%"></div>
+                      <div
+                        class="bg-primary h-2"
+                        [style]="'width:' + (avgRoom / 5 || 0) * 100 + '%'"
+                      ></div>
                     </div>
                   </div>
                 </div>
@@ -581,6 +591,10 @@
                     formInvoice.controls.young.value +
                     formInvoice.controls.children.value ===
                     0 ||
+                  formInvoice.controls.adult.value +
+                    formInvoice.controls.young.value +
+                    formInvoice.controls.children.value <
+                    tour.minPeople ||
                   isCreating
                 "
                 [ngClass]="
@@ -593,6 +607,10 @@
                     formInvoice.controls.young.value +
                     formInvoice.controls.children.value ===
                     0 ||
+                  formInvoice.controls.adult.value +
+                    formInvoice.controls.young.value +
+                    formInvoice.controls.children.value <
+                    tour.minPeople ||
                   isCreating
                     ? 'cursor-no-drop border-black border border-solid text-black'
                     : 'hover:bg-primaryhover bg-primary cursor-pointer text-white '

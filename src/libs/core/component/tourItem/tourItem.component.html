@@ -1,6 +1,10 @@
 <li class="h-full relative" *ngIf="tour">
   <!-- [routerLink]="['/tour', id]" -->
-  <div class="h-full" [routerLink]="['/tour', tour.id]">
+  <div
+    class="h-full"
+    [routerLink]="['/tour', tour.id]"
+    [ngClass]="tour.status === TourStatus.INACTIVE ? ' opacity-50' : ''"
+  >
     <img
       class="h-1/2 w-full relative -bottom-4 z-10 object-cover rounded-3xl"
       [src]="S3_URL + tour.preview"
@@ -24,6 +28,18 @@
       >
         <fa-icon [icon]="faLocationDot"></fa-icon>
         {{ tour.location.name }}
+        <div class="flex gap-2 items-center" *ngIf="disableExplore">
+          <span
+            class="h-2 w-2 rounded-1/2"
+            [ngClass]="
+              tour.status === TourStatus.ACTIVE ? 'bg-green-500' : 'bg-red-500'
+            "
+          ></span>
+
+          <span>
+            {{ tour.status === TourStatus.ACTIVE ? 'Active' : 'Inactive' }}
+          </span>
+        </div>
       </span>
       <div class="w-full">
         <div
@@ -34,6 +50,7 @@
             <fa-icon class="text-primary text-lg" [icon]="faCalendar"></fa-icon>
             <span class="text-base ml-2">{{ tour.totalDays }} days</span>
           </div>
+
           <div
             nz-tooltip
             nzTooltipTitle="Tour peoples"
@@ -85,6 +102,18 @@
           >
             <svg-icon class="mr-2" key="trash"></svg-icon>
             <span class="whitespace-nowrap"> Delete</span>
+          </li>
+          <li
+            (click)="openChangeStatusTour(tour.id)"
+            class="inline-flex items-center px-3 py-2 cursor-pointer rounded hover:bg-background-2"
+          >
+            <fa-icon
+              class="mr-[10px] ml-[2px]"
+              [icon]="tour.status === TourStatus.ACTIVE ? faBan : faLockOpen"
+            ></fa-icon>
+            <span class="whitespace-nowrap">{{
+              tour.status === TourStatus.ACTIVE ? 'Inactive' : 'Active'
+            }}</span>
           </li>
         </ng-container>
       </ul>

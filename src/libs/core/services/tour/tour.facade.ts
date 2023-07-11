@@ -5,6 +5,7 @@ import {
   setActiveId,
   addEntities,
   deleteEntities,
+  updateEntities,
 } from '@ngneat/elf-entities';
 import { filter, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -26,6 +27,12 @@ export class TourFacade {
         store.update(setEntities(tours));
       })
     );
+  }
+
+  changeStatus(id: string) {
+    return this.tourService
+      .changeStatus(id)
+      .pipe(tap((tour) => store.update(updateEntities(tour.id, tour))));
   }
 
   getTourByManager(authorId: string, params?: IBaseParams) {

@@ -27,6 +27,14 @@ export class InvoiceFacade {
       })
     );
   }
+
+  getInvoiceByMine(authorId: string, params?: IBaseParams) {
+    return this.invoiceService.getInvoiceByMine(authorId, params).pipe(
+      tap((invoice) => {
+        store.update(setEntities(invoice));
+      })
+    );
+  }
   // getTourById(id: string) {
   //   return this.invoiceService.getTourById(id).pipe(
   //     tap((tour) => {

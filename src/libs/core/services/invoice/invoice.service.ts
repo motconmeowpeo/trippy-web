@@ -19,6 +19,15 @@ export class InvoiceService {
   //   return this.http.get<IInvoice>(`${API_INVOICE}/${id}`);
   // }
 
+  getInvoiceByMine(
+    authorId: string,
+    params?: IBaseParams
+  ): Observable<IInvoice[]> {
+    return this.http.get<IInvoice[]>(`${API_INVOICE}/mine/${authorId}`, {
+      params,
+    });
+  }
+
   create(payload: Partial<IInvoiceCommand>): Observable<IInvoice> {
     return this.http.post<IInvoice>(`${API_INVOICE}`, payload);
   }

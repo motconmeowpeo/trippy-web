@@ -53,17 +53,9 @@ export class ContactComponent implements OnInit {
   }
 
   create() {
-    this.user$.subscribe((user) => {
-      if (user) {
-        this.createContact(user.id);
-      }
-    });
-  }
-
-  createContact(userId: string) {
     this.isLoading = true;
     this.contactFacade
-      .createContact({ ...this.form.value, userId })
+      .createContact({ ...this.form.value })
       .pipe(
         tap(() => {
           this.isLoading = false;

@@ -26,11 +26,12 @@ import {
   HOUR_MINUTE_FORMAT_TIME,
   S3_URL,
   SETTING_FORMAT_DATE,
+  URL_LOGIN,
 } from '@core/constants';
 import { catchError, of, tap } from 'rxjs';
 import { DialogService } from '@ngneat/dialog';
 import { ConfirmModalComponent } from '@core/ui/modal';
-import { ITour } from '@core/model';
+import { ITour, ITourComment } from '@core/model';
 import { InvoiceFacade } from '@core/services/invoice';
 
 @Component({
@@ -63,6 +64,10 @@ export class TourDetailComponent implements OnInit {
   total = 0;
   tour!: ITour;
   today = add(new Date(), { days: 7 });
+  avgLocation = 0;
+  avgService = 0;
+  avgPrice = 0;
+  avgRoom = 0;
   constructor(
     private tourFacade: TourFacade,
     private router: ActivatedRoute,
@@ -70,7 +75,8 @@ export class TourDetailComponent implements OnInit {
     private authFacade: AuthFacade,
     private dialog: DialogService,
     private invoiceFacade: InvoiceFacade,
-    private notifiService: ToastNotificationService
+    private notifiService: ToastNotificationService,
+    private navigator: Router
   ) {}
 
   ngOnInit() {
@@ -84,7 +90,9 @@ export class TourDetailComponent implements OnInit {
         this.tour = tour;
         this.isLoading = false;
       });
-      this.tourCommentFacade.getByTourId(tourId).subscribe();
+      this.tourCommentFacade
+        .getByTourId(tourId)
+        .subscribe((comments) => this.caculatorRate());
     }
   }
 
@@ -222,10 +230,19 @@ export class TourDetailComponent implements OnInit {
       authorId: id,
     };
     this.isPosting = true;
-    this.tourCommentFacade.create(payload).subscribe(() => {
-      this.formComment.reset();
-      this.isPosting = false;
-    });
+    this.tourCommentFacade
+      .create(payload)
+      .pipe(
+        tap(() => {
+          this.formComment.reset();
+          this.isPosting = false;
+        }),
+        catchError((err) => {
+          this.isPosting = false;
+          return of(err);
+        })
+      )
+      .subscribe();
   }
 
   handleRate(category: string, rateNumber: number) {
@@ -256,7 +273,11 @@ export class TourDetailComponent implements OnInit {
     this.user$
       .pipe(
         tap((user) => {
-          if (user) this.createInvoice(user?.id);
+          if (user) {
+            this.createInvoice(user.id);
+          } else {
+            this.navigator.navigate([URL_LOGIN]);
+          }
         }),
         catchError((err) => {
           this.isCreating = false;
@@ -265,6 +286,7 @@ export class TourDetailComponent implements OnInit {
       )
       .subscribe();
   }
+
   createInvoice(userId: string) {
     this.isCreating = true;
     this.invoiceFacade
@@ -281,5 +303,22 @@ export class TourDetailComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  caculatorRate() {
+    this.comments$.subscribe((comments) => {
+      this.avgLocation =
+        comments.reduce((step, value) => step + value.locationRate + 1, 0) /
+        comments.length;
+      this.avgService =
+        comments.reduce((step, value) => step + value.servicesRate + 1, 0) /
+        comments.length;
+      this.avgPrice =
+        comments.reduce((step, value) => step + value.priceRate + 1, 0) /
+        comments.length;
+      this.avgRoom =
+        comments.reduce((step, value) => step + value.roomsRate + 1, 0) /
+        comments.length;
+    });
   }
 }
