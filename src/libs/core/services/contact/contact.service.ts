@@ -25,4 +25,8 @@ export class ContactService {
   changeStatusCOntact(id: string, status: ContactStatus) {
     return this.http.put<IContact>(`${API_CONTACT}/${id}`, { status });
   }
+
+  getContactNews(userId: string) {
+    return this.http.get<IContact[]>(`${API_CONTACT}/mine/${userId}`);
+  }
 }

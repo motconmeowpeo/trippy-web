@@ -1,6 +1,6 @@
 import { ITour } from './tour.model';
 import { IUser } from './user.model';
-import { PayStatus } from '../enum/invoice.enum';
+import { InvoiceStatus, PayStatus } from '@core/enum';
 
 export interface IInvoiceCommand {
   date: string;
@@ -12,6 +12,14 @@ export interface IInvoiceCommand {
   tourId: string;
   userId: string;
   total: number;
+  paid: number;
+  payStatus: PayStatus;
+}
+
+export interface IUpdateInvoiceCommand {
+  id: string;
+  paid: number;
+  payStatus: PayStatus;
 }
 
 export interface IInvoice {
@@ -27,5 +35,8 @@ export interface IInvoice {
   tour: ITour;
   userId: string;
   total: number;
+  paid: number;
   payStatus: PayStatus;
+  createAt: string;
+  status: InvoiceStatus;
 }

@@ -12,10 +12,12 @@ import {
   URL_PAGE,
   URL_CONTACT,
   URL_MYINVOICE,
+  URL_MYCONTACT,
 } from '@core/constants';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '@core/guard';
 import { ManagerModule } from '../libs/pages/manager/manager.module';
+import { MyContactModule } from '../libs/pages/my-contact/my-contact.module';
 
 const publicRoute: Routes = [
   {
@@ -86,6 +88,12 @@ const publicRoute: Routes = [
     // canActivate: [AuthGuard],
     loadChildren: () =>
       import('@pages/my-invoice').then((page) => page.MyInvoiceModule),
+  },
+  {
+    path: URL_MYCONTACT,
+    // canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('@pages/my-contact').then((page) => page.MyContactModule),
   },
 ];
 const privateRoute = [];

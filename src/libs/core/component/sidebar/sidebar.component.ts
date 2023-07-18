@@ -1,36 +1,23 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  AfterViewInit,
-  ViewChild,
-  AfterViewChecked,
-} from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input } from '@angular/core';
 import { MENU_GROUP } from './sidebar.constant';
-import { ISidebarMenu } from './sidebar.constant';
-import {
-  asyncScheduler,
-  filter,
-  first,
-  fromEvent,
-  map,
-  Observable,
-  Subscription,
-  switchMap,
-  tap,
-} from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
-import { AuthFacade, ShellFacade } from '@core/services';
 import { BaseComponent } from '@core/base';
-import { EVENT_BROWSER_BACK_AND_FORWARD, KEYBOARD } from '@core/constants';
-import { URL_TOUR } from '@pages/manager';
+import { ContactFacade } from '@core/services/contact';
+import { IContact } from '../../model/contact.model';
+import { URL_CONTACT, URL_INVOICE } from '@pages/manager';
+import { ContactStatus } from '../../enum/contact.enum';
+import { IInvoice } from '../../model/invoice.model';
+import { PayStatus } from '../../enum/invoice.enum';
+import { Invoice } from '../../../pages/manager/management-invoice/management-invoice.component';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent extends BaseComponent {
+  @Input() contacts!: IContact[] | null;
+  @Input() invoices!: IInvoice[] | null;
   MENU_GROUP = MENU_GROUP;
 
   isSidebarExpanded$!: Observable<boolean>;
@@ -39,11 +26,9 @@ export class SidebarComponent extends BaseComponent {
   isComponentFirstLoaded = true;
   changeMenuSubscription!: Subscription;
   isSideBarShown = true;
-  constructor(
-    private router: Router,
-    private shellFacade: ShellFacade,
-    private authFacade: AuthFacade
-  ) {
+  URL_CONTACT = URL_CONTACT;
+  URL_INVOICE = URL_INVOICE;
+  constructor(private contactFacade: ContactFacade) {
     super();
   }
 
@@ -51,4 +36,14 @@ export class SidebarComponent extends BaseComponent {
     this.isSideBarShown = !this.isSideBarShown;
   }
   ngOnInit(): void {}
+
+  countContactNew(contact: IContact[]) {
+    return contact.filter((contact) => contact.status === ContactStatus.PENDING)
+      .length;
+  }
+
+  countInvoiceNew(invoices: IInvoice[]) {
+    return invoices.filter((invoice) => invoice.payStatus === PayStatus.NONE)
+      .length;
+  }
 }

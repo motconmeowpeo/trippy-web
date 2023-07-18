@@ -10,25 +10,31 @@
       <div class="mt-3">
         <label class="text-lg font-medium">Start date: </label>
         <span class="ml-1 text-base font-normal text-gray-500">{{
-          invoice.date
+          formatDate(invoice.date)
         }}</span>
       </div>
       <div class="mt-3">
         <label class="text-lg font-medium">End date: </label>
         <span class="ml-1 text-base font-normal text-gray-500">{{
-          caculatorDate(invoice.date, invoice.total)
+          caculatorDate(invoice.date, invoice.tour.totalDays)
         }}</span>
       </div>
       <div class="mt-3 flex">
         <label class="text-lg font-medium">Total day: </label>
         <span class="ml-3 leading-7 text-base font-normal text-gray-500">
-          {{ invoice.total }}</span
+          {{ invoice.tour.totalDays }}</span
         >
       </div>
       <div class="mt-3 flex">
         <label class="text-lg font-medium">Total price: </label>
         <span class="ml-3 leading-7 text-base font-normal text-gray-500">{{
           '$ ' + invoice.total + '.00'
+        }}</span>
+      </div>
+      <div class="mt-3 flex">
+        <label class="text-lg font-medium">Paid: </label>
+        <span class="ml-3 leading-7 text-base font-normal text-gray-500">{{
+          '$ ' + invoice.paid + '.00'
         }}</span>
       </div>
       <div class="mt-3 flex">

@@ -497,7 +497,6 @@
                     <div class="list-service relative">
                       <div class="input-square my-3 flex flex-wrap">
                         <input
-                          id="booking_services_1"
                           type="checkbox"
                           name="booking_services[]"
                           value="22"
@@ -559,6 +558,52 @@
                           id, an pri novum possim deterruisset. Eum oratio
                           reprehendunt cu. Nec te quem assum postea.
                         </div>
+                      </div>
+                    </div>
+                    <div class="input-square my-3 flex flex-col">
+                      <div>
+                        <input
+                          type="radio"
+                          name="payOption"
+                          [value]="PayOption.PAY_LATER"
+                          formControlName="payOption"
+                          class="cursor-pointer"
+                        />
+                        <span
+                          for="booking_services_1"
+                          class="ml-2 text-base font-medium"
+                          >Pay later</span
+                        >
+                      </div>
+
+                      <div>
+                        <input
+                          type="radio"
+                          name="payOption"
+                          [value]="PayOption.ONE_THIRD"
+                          formControlName="payOption"
+                          class="cursor-pointer"
+                        />
+                        <span
+                          for="booking_services_1"
+                          class="ml-2 text-base font-medium"
+                          >Pay one third</span
+                        >
+                      </div>
+
+                      <div>
+                        <input
+                          type="radio"
+                          name="payOption"
+                          [value]="PayOption.DONE"
+                          formControlName="payOption"
+                          class="cursor-pointer"
+                        />
+                        <span
+                          for="booking_services_1"
+                          class="ml-2 text-base font-medium"
+                          >Pay All</span
+                        >
                       </div>
                     </div>
                   </div>

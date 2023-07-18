@@ -3,6 +3,7 @@ import {
   URL_CONTACT,
   URL_CUSTOMER,
   URL_INVOICE,
+  URL_REPORT,
   URL_TOUR,
 } from '@pages/manager';
 
@@ -39,6 +40,12 @@ export const MENU_GROUP: ISidebarMenu[] = [
     url: URL_CONTACT,
     icon: 'phone',
     permissonCode: [PermissionCode.ADMIN],
+  },
+  {
+    name: 'report',
+    url: URL_REPORT,
+    icon: 'dashboard',
+    permissonCode: [PermissionCode.ADMIN, PermissionCode.BUSINESS],
   },
 
   // [

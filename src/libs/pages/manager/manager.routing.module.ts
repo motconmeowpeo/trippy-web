@@ -7,6 +7,7 @@ import {
   URL_INVOICE,
   URL_TOUR,
   URL_CONTACT,
+  URL_REPORT,
 } from './manager.constants';
 
 const routes: Routes = [
@@ -45,6 +46,12 @@ const routes: Routes = [
         loadChildren: async () =>
           (await import('./management-contact/management-contact.module'))
             .ManagementContactModule,
+      },
+      {
+        path: URL_REPORT,
+        loadChildren: async () =>
+          (await import('./management-report/management-report.module'))
+            .ManagementReportModule,
       },
     ],
   },

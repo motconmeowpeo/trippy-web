@@ -43,7 +43,7 @@ export class CreateTourModalComponent
   planDay = 0;
   selectCountry: ISelectItem[] = [];
   user$ = this.authFacade.user$;
-
+  userId = '';
   constructor(
     private locationfacade: LocationFacade,
     private tourFacade: TourFacade,
@@ -56,6 +56,8 @@ export class CreateTourModalComponent
 
   ngOnInit() {
     this.isLoading = true;
+    this.user$.subscribe((user) => (this.userId = user?.id || ''));
+
     this.locationfacade
       .getAllLocation()
       .pipe(

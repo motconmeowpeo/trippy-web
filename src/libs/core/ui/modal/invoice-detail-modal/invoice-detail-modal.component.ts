@@ -24,5 +24,9 @@ export class InvoiceDetailModalComponent
   caculatorDate(date: string | Date, number: number) {
     return format(add(new Date(date), { days: number }), DEFAULT_FORMAT_DATE);
   }
+
+  formatDate(date: string | Date) {
+    return format(new Date(date), DEFAULT_FORMAT_DATE);
+  }
   ngOnInit(): void {}
 }

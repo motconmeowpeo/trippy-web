@@ -1,4 +1,5 @@
 import { FormControl } from '@angular/forms';
+import { PayOption } from '@core/enum';
 import { ITicketTour } from 'src/libs/core/ui/modal/create-tour-modal/create-tour-modal.form';
 
 export interface ICommentForm {
@@ -17,4 +18,5 @@ export interface IInvoiceForm {
   serviceBooking: FormControl<boolean>;
   servicePerson: FormControl<boolean>;
   tourId: FormControl<string>;
+  payOption: FormControl<string>;
 }

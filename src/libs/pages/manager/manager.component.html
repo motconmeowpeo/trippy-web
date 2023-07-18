@@ -1,6 +1,10 @@
 <div class="grid relative grid-cols-auto-1fr">
   <!-- class="grid grid-cols-[50px_minmax(200px,_1fr)] grid-rows-auto-1fr relative" -->
-  <app-sidebar class=""></app-sidebar>
+  <app-sidebar
+    class=""
+    [contacts]="contacts$ | async"
+    [invoices]="invoices$ | async"
+  ></app-sidebar>
   <div class="overflow-auto">
     <router-outlet></router-outlet>
   </div>

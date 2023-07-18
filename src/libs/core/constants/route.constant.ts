@@ -10,6 +10,7 @@ const URL_PAGE = 'page';
 const URL_CONTACT = 'contact';
 const URL_MANAGER = 'manager';
 const URL_MYINVOICE = 'invoice';
+const URL_MYCONTACT = 'my-contact';
 
 export {
   URL_HOME,
@@ -24,4 +25,5 @@ export {
   URL_DESTINATIONDETAIL,
   URL_MANAGER,
   URL_MYINVOICE,
+  URL_MYCONTACT,
 };

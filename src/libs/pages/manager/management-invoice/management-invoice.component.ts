@@ -4,9 +4,12 @@ import { DialogService } from '@ngneat/dialog';
 import { InvoiceDetailModalComponent } from '@core/ui/modal/invoice-detail-modal';
 import { Observable, map, of, tap } from 'rxjs';
 import { InvoiceFacade } from '@core/services/invoice';
-import { AuthFacade } from '@core/services';
-import { PayStatus } from '@core/enum';
+import { AuthFacade, ToastNotificationService } from '@core/services';
+import { PayStatus, InvoiceStatus, ModalCloseStatus } from '@core/enum';
 import { IInvoice } from '@core/model';
+import { format, add, compareAsc } from 'date-fns';
+import { DEFAULT_FORMAT_DATE } from '@core/constants';
+import { ConfirmModalComponent } from '@core/ui/modal';
 export interface Invoice {
   name: string;
   tourName: string;
@@ -22,10 +25,12 @@ export class ManagementInvoiceComponent implements OnInit {
   invoices$ = this.invoiceFacade.invoices$;
   user$ = this.authFacade.user$;
   PayStatus = PayStatus;
+  InvoiceStatus = InvoiceStatus;
   constructor(
     private dialog: DialogService,
     private invoiceFacade: InvoiceFacade,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private toast: ToastNotificationService
   ) {}
 
   ngOnInit() {
@@ -47,5 +52,51 @@ export class ManagementInvoiceComponent implements OnInit {
       },
       size: 'lg',
     });
+  }
+
+  compareDate(date: string | Date, step: number) {
+    const today = new Date(format(new Date(), DEFAULT_FORMAT_DATE));
+    const createDate = new Date(format(new Date(date), DEFAULT_FORMAT_DATE));
+    console.log(add(createDate, { days: step }));
+    return compareAsc(add(createDate, { days: step }), today);
+  }
+
+  openCancelInvoie(id: string, invoiceStatus: InvoiceStatus) {
+    this.dialog
+      .open(ConfirmModalComponent, {
+        data: {
+          title: 'Cancel invoice',
+          description: 'This invoice will be can not revert',
+          textSubmit: 'Submit',
+          textCancel: 'Cancel',
+        },
+      })
+      .afterClosed$.pipe(
+        tap((status: any) => {
+          if (status?.status === ModalCloseStatus.COMPLETE) {
+            this.cancelInvoice(id, invoiceStatus);
+          }
+        })
+      )
+      .subscribe();
+  }
+  cancelInvoice(id: string, status: InvoiceStatus) {
+    this.invoiceFacade
+      .cancel(id, status)
+      .pipe(
+        tap(() => {
+          this.toast.success(
+            'Success',
+            status === InvoiceStatus.CANCELED
+              ? 'Canceled invoice'
+              : 'Invoice has done'
+          );
+        })
+      )
+      .subscribe();
+  }
+
+  formatDate(date: Date | string) {
+    return format(new Date(date), DEFAULT_FORMAT_DATE);
   }
 }

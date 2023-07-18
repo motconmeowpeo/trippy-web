@@ -24,6 +24,7 @@ export class ManagementTourComponent implements OnInit {
   canPrev = false;
   form!: FormGroup<ISearchForm>;
   search = '';
+  userId = '';
   constructor(
     private tourFacade: TourFacade,
     private dialog: DialogService,
@@ -38,6 +39,7 @@ export class ManagementTourComponent implements OnInit {
     this.createForm();
     this.user$.subscribe((user) => {
       if (user) {
+        this.userId = user.id;
         this.tourFacade
           .getTourByManager(user?.id)
           .subscribe(() => (this.isLoading = false));
@@ -122,13 +124,12 @@ export class ManagementTourComponent implements OnInit {
   }
 
   private searchTour(params?: IBaseParams) {
-    this.isLoading = true;
-    this.user$.subscribe((user) => {
-      if (user) {
-        this.tourFacade
-          .getTourByManager(user?.id, params)
-          .subscribe(() => (this.isLoading = false));
-      }
-    });
+    if (this.userId) {
+      this.isLoading = true;
+
+      this.tourFacade
+        .getTourByManager(this.userId, params)
+        .subscribe(() => (this.isLoading = false));
+    }
   }
 }

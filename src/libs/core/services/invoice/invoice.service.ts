@@ -2,8 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { API_INVOICE } from '../../constants/url.constant';
-import { IBaseParams, IInvoice, IInvoiceCommand } from '@core/model';
+import {
+  IBaseParams,
+  IInvoice,
+  IInvoiceCommand,
+  IUpdateInvoiceCommand,
+} from '@core/model';
 import { HttpService } from '../http';
+import { InvoiceStatus } from '@core/enum';
 
 @Injectable({ providedIn: 'root' })
 export class InvoiceService {
@@ -34,5 +40,13 @@ export class InvoiceService {
 
   delete(id: string) {
     return this.http.delete<IInvoice>(`${API_INVOICE}/${id}`);
+  }
+
+  update(id: string, payload: IUpdateInvoiceCommand) {
+    return this.http.put<IInvoice>(`${API_INVOICE}/${id}`, payload);
+  }
+
+  cancel(id: string, status: InvoiceStatus) {
+    return this.http.put<IInvoice>(`${API_INVOICE}/status/${id}`, { status });
   }
 }

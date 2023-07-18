@@ -5,12 +5,18 @@ import {
   setActiveId,
   addEntities,
   deleteEntities,
+  updateEntities,
 } from '@ngneat/elf-entities';
 import { filter, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { store } from './invoice.store';
 import { InvoiceService } from './invoice.service';
-import { IBaseParams, IInvoiceCommand } from '@core/model';
+import {
+  IBaseParams,
+  IInvoiceCommand,
+  IUpdateInvoiceCommand,
+} from '@core/model';
+import { InvoiceStatus } from '../../enum/status.enum';
 
 @Injectable({ providedIn: 'root' })
 export class InvoiceFacade {
@@ -64,6 +70,22 @@ export class InvoiceFacade {
   delete(id: string) {
     return this.invoiceService
       .delete(id)
-      .pipe(tap((tour) => store.update(deleteEntities(tour.id))));
+      .pipe(tap((invoice) => store.update(deleteEntities(invoice.id))));
+  }
+
+  update(id: string, payload: IUpdateInvoiceCommand) {
+    return this.invoiceService
+      .update(id, payload)
+      .pipe(
+        tap((invoice) => store.update(updateEntities(invoice.id, invoice)))
+      );
+  }
+
+  cancel(id: string, status: InvoiceStatus) {
+    return this.invoiceService
+      .cancel(id, status)
+      .pipe(
+        tap((invoice) => store.update(updateEntities(invoice.id, invoice)))
+      );
   }
 }

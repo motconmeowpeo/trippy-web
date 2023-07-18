@@ -11,3 +11,9 @@ export enum ModalCloseStatus {
   COMPLETE = 'COMPLETE',
   CANCEL = 'CANCEL',
 }
+
+export enum InvoiceStatus {
+  ACTIVE = 'ACTIVE',
+  CANCELED = 'CANCELED',
+  DONE = 'DONE',
+}

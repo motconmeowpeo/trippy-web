@@ -7,6 +7,7 @@ export interface IContact {
   message: string;
   createAt: string;
   status: ContactStatus;
+  new: boolean;
 }
 
 export interface ICreateContact {

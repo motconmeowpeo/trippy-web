@@ -33,20 +33,51 @@
           routerLinkActive="activeSideBar"
         >
           <ng-container *ngIf="isSideBarShown">
-            <svg-icon
-              key="{{ item.icon }}"
-              class="text-white animate-display"
-            ></svg-icon>
+            <div class="relative">
+              <svg-icon
+                key="{{ item.icon }}"
+                class="text-white animate-display"
+              ></svg-icon>
+              <ng-container *ngIf="contacts">
+                <span
+                  class="font-bold text-red-500 text-xs absolute -top-3 -right-2"
+                  *ngIf="item.url === URL_CONTACT"
+                  >{{ countContactNew(contacts) }}</span
+                >
+              </ng-container>
+              <!-- <ng-container *ngIf="invoices">
+                <span
+                  class="font-bold text-red-500 text-xs absolute -top-3 -right-2"
+                  *ngIf="item.url === URL_INVOICE"
+                  >{{ countInvoiceNew(invoices) }}</span
+                >
+              </ng-container> -->
+            </div>
+
             <span class="ml-4 animate-display">
               {{ item.name | titlecase }}
             </span>
           </ng-container>
-
-          <svg-icon
-            *ngIf="!isSideBarShown"
-            key="{{ item.icon }}"
-            class="text-white fill-white absolute right-4 animate-display"
-          ></svg-icon>
+          <div *ngIf="!isSideBarShown">
+            <svg-icon
+              key="{{ item.icon }}"
+              class="text-white fill-white absolute right-4 animate-display"
+            ></svg-icon>
+            <ng-container *ngIf="contacts">
+              <span
+                class="font-bold text-red-500 text-xs absolute top-0 right-2"
+                *ngIf="item.url === URL_CONTACT"
+                >{{ countContactNew(contacts) }}</span
+              >
+            </ng-container>
+            <!-- <ng-container *ngIf="invoices">
+              <span
+                class="font-bold text-red-500 text-xs absolute top-0 right-2"
+                *ngIf="item.url === URL_INVOICE"
+                >{{ countInvoiceNew(invoices) }}</span
+              >
+            </ng-container> -->
+          </div>
         </li>
       </ng-container>
     </ul>

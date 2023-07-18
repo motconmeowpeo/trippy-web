@@ -83,9 +83,12 @@ details summary::-webkit-details-marker {
   background-color: #dc834e;
   color: #fff;
 }
-.activeSideBar:hover {
-  background-color: #9e5d36;
+.activeSideBar > div {
+  color: #fff;
 }
+/* .activeSideBar:hover {
+  background-color: #9e5d36;
+} */
 
 .activeHeader {
   color: #dc834e;

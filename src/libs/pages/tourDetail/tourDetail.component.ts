@@ -18,7 +18,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { ICommentForm, IInvoiceForm } from './tourDetail.form';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { ModalCloseStatus, PermissionCode, ReportCategory } from '@core/enum';
+import {
+  ModalCloseStatus,
+  PayOption,
+  PayStatus,
+  PermissionCode,
+  ReportCategory,
+} from '@core/enum';
 import { TourCommentFacade } from '@core/services/tour-comment';
 import { format, add } from 'date-fns';
 import {
@@ -27,12 +33,17 @@ import {
   S3_URL,
   SETTING_FORMAT_DATE,
   URL_LOGIN,
+  URL_MYINVOICE,
 } from '@core/constants';
-import { catchError, of, tap } from 'rxjs';
+import { catchError, from, of, tap } from 'rxjs';
 import { DialogService } from '@ngneat/dialog';
 import { ConfirmModalComponent } from '@core/ui/modal';
-import { ITour, ITourComment } from '@core/model';
+import { IInvoiceCommand, ITour, ITourComment } from '@core/model';
 import { InvoiceFacade } from '@core/services/invoice';
+
+const stripe = require('stripe')(
+  'sk_test_51NUtkGGAiJ1r1jURsmHjNvvUIbAhprIBd7oHTSl1Nfu9ZOuyAJWvwylquqXszQbD1CqxdNYKSmPbWy3sQCT4x7sb00nwIX18D9'
+);
 
 @Component({
   selector: 'app-tourDetail',
@@ -68,6 +79,10 @@ export class TourDetailComponent implements OnInit {
   avgService = 0;
   avgPrice = 0;
   avgRoom = 0;
+  paymentHandler: any = null;
+  PayOption = PayOption;
+  userId!: string;
+  // stripe!: stripe.Stripe;
   constructor(
     private tourFacade: TourFacade,
     private router: ActivatedRoute,
@@ -81,6 +96,7 @@ export class TourDetailComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
+    this.user$.subscribe((user) => (this.userId = user?.id || ''));
     const tourId = this.router.snapshot.paramMap.get('id');
 
     if (tourId) {
@@ -94,7 +110,68 @@ export class TourDetailComponent implements OnInit {
         .getByTourId(tourId)
         .subscribe((comments) => this.caculatorRate());
     }
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get('success')) {
+      if (sessionStorage.getItem('invoice')) {
+        const invoice: Partial<IInvoiceCommand> = JSON.parse(
+          sessionStorage.getItem('invoice') || ''
+        );
+        this.invoiceFacade
+          .create(invoice)
+          .pipe(
+            tap(() => {
+              this.isCreating = false;
+              this.notifiService.success('Success', 'Create invoice');
+              this.formInvoice.reset();
+              this.navigator.navigate([URL_MYINVOICE]);
+            })
+          )
+          .subscribe();
+      }
+    }
+
+    if (query.get('canceled')) {
+      console.log(
+        "Order canceled -- continue to shop around and checkout when you're ready."
+      );
+    }
   }
+
+  // makePayment(userId: string) {
+  //   const paymentHandler = (<any>window).StripeCheckout.configure({
+  //     key: 'pk_test_51NUtkGGAiJ1r1jURLsEWt9pGeLUOvKcWeDqe8CtZzeYlKkAJKoYj2tf47RvEcPeRmu7UGU5you8FMHwdqeu5b1WT00RffQrfz5',
+  //     locale: 'auto',
+  //     // token: from(() => {
+  //     //   return this.create(userId);
+  //     // }),
+  //   });
+  //   paymentHandler.open({
+  //     name: 'Pay your invoice',
+  //     description: 'Choose pay method',
+  //     amount: this.total * 100,
+  //   });
+  // }
+
+  // invokeStripe() {
+  //   if (!window.document.getElementById('stripe-script')) {
+  //     const script = window.document.createElement('script');
+  //     script.id = 'stripe-script';
+  //     script.type = 'text/javascript';
+  //     script.src = 'https://checkout.stripe.com/checkout.js';
+  //     script.onload = () => {
+  //       this.paymentHandler = (<any>window).StripeCheckout.configure({
+  //         key: 'pk_test_51NUtkGGAiJ1r1jURLsEWt9pGeLUOvKcWeDqe8CtZzeYlKkAJKoYj2tf47RvEcPeRmu7UGU5you8FMHwdqeu5b1WT00RffQrfz5',
+  //         locale: 'auto',
+  //         token: function (stripeToken: any) {
+  //           console.log(stripeToken);
+  //           alert('Payment has been successfull!');
+  //         },
+  //       });
+  //     };
+  //     window.document.body.appendChild(script);
+  //   }
+  // }
 
   private createFormComment(id: string) {
     this.formComment = new FormGroup({
@@ -168,6 +245,11 @@ export class TourDetailComponent implements OnInit {
         validators: [Validators.required],
         updateOn: 'change',
       }),
+      payOption: new FormControl(PayOption.PAY_LATER as string, {
+        nonNullable: true,
+        validators: [Validators.required],
+        updateOn: 'change',
+      }),
     });
     this.caculatorTotal();
   }
@@ -188,15 +270,9 @@ export class TourDetailComponent implements OnInit {
   }
 
   handlePostComment() {
-    this.user$
-      .pipe(
-        tap((user) => {
-          if (user) {
-            this.postComment(user.id);
-          }
-        })
-      )
-      .subscribe();
+    if (this.userId) {
+      this.postComment(this.userId);
+    }
   }
 
   deleteComment(id: string) {
@@ -270,39 +346,73 @@ export class TourDetailComponent implements OnInit {
   }
 
   onCreateInvoice() {
-    this.user$
-      .pipe(
-        tap((user) => {
-          if (user) {
-            this.createInvoice(user.id);
-          } else {
-            this.navigator.navigate([URL_LOGIN]);
-          }
-        }),
-        catchError((err) => {
-          this.isCreating = false;
-          return of(err);
-        })
-      )
-      .subscribe();
+    if (this.userId) {
+      this.createInvoice(this.userId);
+    } else {
+      this.navigator.navigate([URL_LOGIN]);
+    }
+  }
+
+  async payment(userId: string, total: number, payStatus: PayStatus) {
+    const YOUR_DOMAIN = `http://localhost:4200/tour/${this.tour.id}`;
+    const session = await stripe.checkout.sessions.create({
+      line_items: [
+        {
+          // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: this.tour.name + ` Pay: $${total} / $${this.total}`,
+              description: this.tour.description,
+            },
+            unit_amount: total * 100,
+          },
+          quantity: 1,
+        },
+      ],
+      mode: 'payment',
+      success_url: `${YOUR_DOMAIN}?success=true`,
+      cancel_url: `${YOUR_DOMAIN}?canceled=true`,
+    });
+    const invoice = {
+      ...this.formInvoice.value,
+      userId,
+      total: this.total,
+      paid: total,
+      payStatus,
+    };
+    sessionStorage.setItem('invoice', JSON.stringify(invoice));
+    window.location.href = session.url;
   }
 
   createInvoice(userId: string) {
     this.isCreating = true;
-    this.invoiceFacade
-      .create({
-        ...this.formInvoice.value,
-        userId,
-        total: this.total,
-      })
-      .pipe(
-        tap(() => {
-          this.isCreating = false;
-          this.notifiService.success('Success', 'Create invoice');
-          this.formInvoice.reset();
+    if (this.formInvoice.value.payOption === PayOption.PAY_LATER) {
+      this.invoiceFacade
+        .create({
+          ...this.formInvoice.value,
+          userId,
+          total: this.total,
+          paid: 0,
         })
-      )
-      .subscribe();
+        .pipe(
+          tap(() => {
+            this.isCreating = false;
+            this.notifiService.success('Success', 'Create invoice');
+            this.formInvoice.reset();
+            this.navigator.navigate([URL_MYINVOICE]);
+          }),
+          catchError((err) => {
+            this.isCreating = false;
+            return of(err);
+          })
+        )
+        .subscribe();
+    } else if (this.formInvoice.value.payOption === PayOption.ONE_THIRD)
+      this.payment(userId, Math.floor(this.total / 3), PayStatus.ONE_THIRD);
+    else {
+      this.payment(userId, this.total, PayStatus.DONE);
+    }
   }
 
   caculatorRate() {

@@ -99,6 +99,18 @@
                     <svg-icon class="mr-4" key="cart"></svg-icon>
                     <span class="whitespace-nowrap"> My Invoice</span>
                   </li>
+                  <!-- <li
+                    routerLink="my-contact"
+                    class="inline-flex items-center px-3 py-2 cursor-pointer rounded hover:bg-background-2 relative"
+                  >
+                    <svg-icon class="mr-4" key="notification"></svg-icon>
+                    <span class="whitespace-nowrap"> My Contact</span>
+                    <span
+                      class="text-red-500 text-xs absolute top-0 left-7"
+                      *ngIf="contacts$ | async as contacts"
+                      >{{ contacts.length }}</span
+                    >
+                  </li> -->
 
                   <!-- Logout -->
                   <li

@@ -40,4 +40,10 @@ export class ContactFacade {
         tap((contact) => store.update(updateEntities(contact.id, contact)))
       );
   }
+
+  getContactNews(id: string) {
+    return this.contactService
+      .getContactNews(id)
+      .pipe(tap((contact) => store.update(setEntities(contact))));
+  }
 }
