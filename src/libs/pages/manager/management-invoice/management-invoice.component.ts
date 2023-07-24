@@ -57,7 +57,7 @@ export class ManagementInvoiceComponent implements OnInit {
   compareDate(date: string | Date, step: number) {
     const today = new Date(format(new Date(), DEFAULT_FORMAT_DATE));
     const createDate = new Date(format(new Date(date), DEFAULT_FORMAT_DATE));
-    console.log(add(createDate, { days: step }));
+
     return compareAsc(add(createDate, { days: step }), today);
   }
 

@@ -74,11 +74,11 @@ export class InvoiceFacade {
   }
 
   update(id: string, payload: IUpdateInvoiceCommand) {
-    return this.invoiceService
-      .update(id, payload)
-      .pipe(
-        tap((invoice) => store.update(updateEntities(invoice.id, invoice)))
-      );
+    return this.invoiceService.update(id, payload).pipe(
+      tap((invoice) => {
+        store.update(updateEntities(id, invoice));
+      })
+    );
   }
 
   cancel(id: string, status: InvoiceStatus) {

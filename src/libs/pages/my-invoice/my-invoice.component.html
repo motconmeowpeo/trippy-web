@@ -47,7 +47,7 @@
                 (click)="openInvoiceDetail(invoice)"
               >
                 <td class="px-4 py-2">{{ invoice.user.username }}</td>
-                <td class="px-4 py-2">{{ invoice.tour.name }}</td>
+                <td class="px-4 py-2 truncate">{{ invoice.tour.name }}</td>
                 <td class="px-4 py-2">{{ formatDate(invoice.createAt) }}</td>
                 <td class="px-4 py-2">{{ formatDate(invoice.date) }}</td>
                 <td class="px-4 py-2">{{ '$' + invoice.total + '.00' }}</td>

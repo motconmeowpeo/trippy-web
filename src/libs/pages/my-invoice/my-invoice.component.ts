@@ -146,7 +146,9 @@ export class MyInvoiceComponent implements OnInit {
       id: invoice.id,
       payStatus,
       paid:
-        payStatus === PayStatus.ONE_THIRD ? Math.floor(invoice.total / 3) : 0,
+        payStatus === PayStatus.ONE_THIRD
+          ? Math.floor(invoice.total / 3)
+          : invoice.total,
     };
     sessionStorage.setItem('invoiceDto', JSON.stringify(invoiceDto));
     window.location.href = session.url;
