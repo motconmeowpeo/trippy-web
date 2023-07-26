@@ -6,7 +6,7 @@ import { Observable, map, of, tap } from 'rxjs';
 import { InvoiceFacade } from '@core/services/invoice';
 import { AuthFacade, ToastNotificationService } from '@core/services';
 import { PayStatus, InvoiceStatus, ModalCloseStatus } from '@core/enum';
-import { IInvoice } from '@core/model';
+import { IInvoice, IUpdateInvoiceCommand } from '@core/model';
 import { format, add, compareAsc } from 'date-fns';
 import { DEFAULT_FORMAT_DATE } from '@core/constants';
 import { ConfirmModalComponent } from '@core/ui/modal';
@@ -57,7 +57,6 @@ export class ManagementInvoiceComponent implements OnInit {
   compareDate(date: string | Date, step: number) {
     const today = new Date(format(new Date(), DEFAULT_FORMAT_DATE));
     const createDate = new Date(format(new Date(date), DEFAULT_FORMAT_DATE));
-
     return compareAsc(add(createDate, { days: step }), today);
   }
 
@@ -91,6 +90,49 @@ export class ManagementInvoiceComponent implements OnInit {
               ? 'Canceled invoice'
               : 'Invoice has done'
           );
+        })
+      )
+      .subscribe();
+  }
+
+  changePayStatusInvoice(invoice: IInvoice, payStatus: PayStatus) {
+    this.dialog
+      .open(ConfirmModalComponent, {
+        data: {
+          title: 'Update invoice',
+          description: `This invoice paid $${
+            payStatus === PayStatus.ONE_THIRD
+              ? Math.floor(invoice.total / 3)
+              : invoice.total
+          } and can't revert this change`,
+          textSubmit: 'Submit',
+          textCancel: 'Cancel',
+        },
+      })
+      .afterClosed$.pipe(
+        tap((status: any) => {
+          if (status?.status === ModalCloseStatus.COMPLETE) {
+            const invoiceDto: IUpdateInvoiceCommand = {
+              id: invoice.id,
+              payStatus,
+              paid:
+                payStatus === PayStatus.ONE_THIRD
+                  ? Math.floor(invoice.total / 3)
+                  : invoice.total,
+            };
+            this.update(invoiceDto);
+          }
+        })
+      )
+      .subscribe();
+  }
+
+  update(invoice: IUpdateInvoiceCommand) {
+    this.invoiceFacade
+      .update(invoice.id, invoice)
+      .pipe(
+        tap(() => {
+          this.toast.success('Success', 'Updated invoice');
         })
       )
       .subscribe();

@@ -36,13 +36,16 @@ export class ManagementReportComponent implements OnInit, AfterViewInit {
         datasets: [
           {
             label: '# Revenue',
-            data: [12, 19, 3, 5, 2, 3, 6, 2, 1, 8, 19, 2, 10],
+            data: [
+              1200, 1900, 3000, 5123, 2531, 3673, 6928, 2182, 1129, 8829, 1919,
+              2201, 1092,
+            ],
             borderColor: ['#9E5D36'],
             borderWidth: 2,
           },
           {
             label: '# Visit',
-            data: [7, 1, 6, 3, 10, 26, 9, 21, 13, 10, 9, 12, 6],
+            data: [92, 129, 68, 328, 109, 261, 99, 212, 133, 929, 109, 142, 6],
             borderColor: ['#121D39'],
             borderWidth: 2,
           },
