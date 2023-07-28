@@ -1,21 +1,17 @@
 <div class="w-full max-h-[87vh] min-h-[87vh] bg-slate-100">
-  <div
-    class="flex w-full max-w-7xl m-auto justify-end pt-6 border-t border-t-white p-3"
-  >
+  <div class="flex w-full m-auto justify-end pt-6 border-t border-t-white p-3">
     <app-search placeholder="Search by tour, price,..."></app-search>
   </div>
   <ng-container *ngIf="isLoading; else invoices">
     <div
-      class="w-full max-w-7xl h-full min-h-[87vh] m-auto flex items-center justify-center"
+      class="w-full h-full min-h-[87vh] m-auto flex items-center justify-center"
     >
       <app-loading></app-loading>
     </div>
   </ng-container>
   <ng-template #invoices>
-    <div
-      class="max-h-[87vh] m-auto w-full max-w-7xl min-h-[87vh] overflow-auto"
-    >
-      <section class="w-full h-full" *ngIf="invoices$ | async as invoices">
+    <div class="max-h-[87vh] m-auto w-full min-h-[87vh] overflow-auto">
+      <section class="w-full h-full m-5" *ngIf="invoices$ | async as invoices">
         <div
           class="w-full m-auto p-3"
           *ngIf="invoices.length; else noDataFound"

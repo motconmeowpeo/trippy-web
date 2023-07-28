@@ -21,14 +21,14 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 const firebaseConfig = {
-  apiKey: 'AIzaSyCc4VBVIu_dvt9SE57dj8fMBYDlgPCidqg',
-  authDomain: 'trippy-3dc63.firebaseapp.com',
-  projectId: 'trippy-3dc63',
-  storageBucket: 'trippy-3dc63',
-  messagingSenderId: '414110793136',
-  appId: '1:414110793136:web:8bf17ce2e644df61a6aa75',
-  measurementId: 'G-RXCXF78T58',
+  apiKey: 'AIzaSyBLmyT1VQYsb-Wo8GV_dUp1evDd_cvXy7M',
+  authDomain: 'portfolio-403709.firebaseapp.com',
+  projectId: 'portfolio-403709',
+  storageBucket: 'portfolio-403709.appspot.com',
+  messagingSenderId: '778215680092',
+  appId: '1:778215680092:web:9aa50668733282508bde99',
 };
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -70,4 +70,4 @@ const firebaseConfig = {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

@@ -40,6 +40,7 @@ import { DialogService } from '@ngneat/dialog';
 import { ConfirmModalComponent } from '@core/ui/modal';
 import { IInvoiceCommand, ITour, ITourComment } from '@core/model';
 import { InvoiceFacade } from '@core/services/invoice';
+import { environment } from 'src/environments/environment';
 
 const stripe = require('stripe')(
   'sk_test_51NUtkGGAiJ1r1jURsmHjNvvUIbAhprIBd7oHTSl1Nfu9ZOuyAJWvwylquqXszQbD1CqxdNYKSmPbWy3sQCT4x7sb00nwIX18D9'
@@ -92,7 +93,7 @@ export class TourDetailComponent implements OnInit {
     private invoiceFacade: InvoiceFacade,
     private notifiService: ToastNotificationService,
     private navigator: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.isLoading = true;
@@ -354,7 +355,7 @@ export class TourDetailComponent implements OnInit {
   }
 
   async payment(userId: string, total: number, payStatus: PayStatus) {
-    const YOUR_DOMAIN = `http://localhost:4200/tour/${this.tour.id}`;
+    const YOUR_DOMAIN = `${environment.currentUrl}${this.tour.id}`;
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {

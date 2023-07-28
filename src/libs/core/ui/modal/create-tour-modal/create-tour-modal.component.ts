@@ -31,8 +31,7 @@ import { head } from 'lodash';
 })
 export class CreateTourModalComponent
   extends FormModalComponent<any>
-  implements OnInit
-{
+  implements OnInit {
   faNote = faCircleExclamation;
   faPlus = faCirclePlus;
   faMinus = faCircleMinus;
@@ -197,19 +196,18 @@ export class CreateTourModalComponent
     this.isCreating = true;
     this.user$
       .pipe(
-        switchMap((user) => {
+        switchMap(async (user) => {
           if (this.formCreate.value.preview && this.formCreate.value.overview) {
-            this.fileService.upload(
+            await this.fileService.upload(
               this.formCreate.value.preview?.concat(
                 this.formCreate.value.overview
               )
             );
             // .pipe(map(() => user));
-            return of(user);
+            return (user);
           }
-          return of(user);
+          return (user);
         }),
-        delay(3000),
         switchMap((user) => {
           const payload: ITourCommand = {
             ...this.formCreate.value,
